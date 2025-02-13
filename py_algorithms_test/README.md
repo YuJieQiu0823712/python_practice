@@ -4,8 +4,9 @@
 ```$ pip install pytest```
 
 ## Usage
-run test which show "PASSED" OR "FAILED"
+Run test which show "PASSED" OR "FAILED"
+
 ```pytest your_test_file_name.py -v```
 
-run interactive console
+Run interactive console
 ```pytest your_test_file_name.py --pdb```

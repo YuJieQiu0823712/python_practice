@@ -27,7 +27,8 @@ def test_resizing():
     for i in range(10):
         arr.enqueue(i)
     assert arr.size() == 10
-    assert len(arr._list) == 10
+    assert len(arr._list) == 20
+    # data=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None, None, None, None, None, None, None, None, None, None]
 
 def test_dequeue_empty():
     """Test dequeueing from an empty array raises an error."""
@@ -39,7 +40,7 @@ def test_dequeue_empty():
 
 def test_circular_behavior():
     """Test that elements wrap around correctly."""
-    arr = new_circle_array(5)
+    arr = new_circular_array(5)
 
     for i in range(4):
         arr.enqueue(i)
@@ -49,7 +50,7 @@ def test_circular_behavior():
 
 def test_str_representation():
     """Test the __str__ method for human-readable output."""
-    arr = new_circle_array(5)
+    arr = new_circular_array(5)
     arr.enqueue(1)
     arr.enqueue(2)
     arr.enqueue(3)

@@ -1,3 +1,5 @@
+from .node import Node
+
 class MergeTwoSorted:
     @staticmethod
     def apply(a:Node, b:Node) -> Node:

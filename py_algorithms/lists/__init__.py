@@ -1,4 +1,5 @@
 __all__ = [
+    'Node',
     'new_singly_linked_node',
     'merge_linked_lists'
 

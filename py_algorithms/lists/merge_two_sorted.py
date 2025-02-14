@@ -22,15 +22,14 @@ class MergeTwoSorted:
             head.next = b
         return ptr.next # Return the head of the merged linked list, skipping the dummy node
 
+
         # a = [1,3,5]
         # b = [2,4,6]
-
 
         ## Step 1: Initialize ptr (Dummy Node)
         #
         # ptr (-1) → None
         # head (points to ptr)
-
 
         ## Step 2: Compare a.data and b.data
         ## 1 < 2 → Attach a

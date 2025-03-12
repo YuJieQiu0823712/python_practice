@@ -20,7 +20,7 @@ class EasySolution(object):
     # SC: O(1) We did inplace modification, no extra space.
 
    
-    def MergSortedArray88(self, num1: array, num2: array) -> array:
+    def mergSortedArray88(self, num1: array, num2: array) -> array:
         # compare A to B 
         # if A>B => A put in C
         # else => B put in C
@@ -57,6 +57,25 @@ class EasySolution(object):
     # TC: O(n) => O(m)+O(n) => m is length of num1, n is length of num2
     # SC: O(1) We did inplace modification, no extra space.
 
+    def twoSum(self, nums: array, target: int) -> array:
+        # We use a "Hash Map" to store numbers we have seen so far along with their indices.
+        # For each number in the array, we calculate its complement "target - current_number".
+        # If the complement exists in our map, we return the indices of both numbers.
+        # Otherwise, we store the current number along with its index in the map.
+        numMap = {}
+        n = len(nums)
+
+        for i in range(n):
+            complement = target - nums[i]
+            if complement in numMap:
+                return [numMap[complement],i]
+            numMap[nums[i]] = i
+        return [] # No solution found
+    # Input: nums=[3,2,4]
+    #        target=6
+    # Output: [1,2] => Because nums[1] + nums[2] == 6
+    # TC: O(n^2) 
+    # SC: O(n)
 
 
 
@@ -65,11 +84,12 @@ class EasySolution(object):
 
 e = EasySolution()
 sol1 = e.duplicateZeros1089([1,0,2,3,0,4,5,0]) 
-sol2 = e.MergSortedArray88([1,2,3,0,0,0],[2,5,6])
-
+sol2 = e.mergSortedArray88([1,2,3,0,0,0],[2,5,6])
+sol3 = e.twoSum([3,2,4],6)
 
 
 print(sol1)
 print(sol2)
+print(sol3)
 
 

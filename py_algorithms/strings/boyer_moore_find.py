@@ -1,5 +1,6 @@
 class BoyerMooreFind:
     def __call__(self, string, substring) -> int:
+        # __call__ => meaning an instance of this class can be used as a function.
         """
         :param string: a string to perform search in.
         :param substring: a string to find in a target.

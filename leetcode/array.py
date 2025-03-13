@@ -57,6 +57,22 @@ class EasySolution(object):
     # TC: O(n) => O(m)+O(n) => m is length of num1, n is length of num2
     # SC: O(1) We did inplace modification, no extra space.
 
+
+    def removeElement27(self, nums: array, val: int) -> int:
+        # strategy: not remove the val, instead iterate the array and not add val
+        ptr = 0
+        for num in nums:
+            if num != val:
+                nums[ptr] = num
+                ptr += 1
+        return ptr
+    # Input: nums=[0,1,2,2,3,0,4,2]
+    #        val=2
+    # Output: 5 => Because nums = [0,1,3,0,4]
+    # TC: O(n), n is length nums
+    # SC: O(1), no extra memory
+
+
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
         # For each number in the array, we calculate its complement "target - current_number".
@@ -77,32 +93,18 @@ class EasySolution(object):
     # TC: O(n^2) 
     # SC: O(n)
 
-    def removeElement(self, nums: array, val: int) -> int:
-        # strategy: not remove the val, instead iterate the array and not add val
-        ptr = 0
-        for num in nums:
-            if num != val:
-                num[ptr] = num
-                ptr += 1
-        return ptr
-    # Input: nums=[0,1,2,2,3,0,4,2]
-    #        val=2
-    # Output: 5 => Because nums = [0,1,3,0,4]
-    # TC: O(n), n is length nums
-    # SC: O(1), no extra memory
-
-
-   
-
 
 e = EasySolution()
 sol1 = e.duplicateZeros1089([1,0,2,3,0,4,5,0]) 
 sol2 = e.mergSortedArray88([1,2,3,0,0,0],[2,5,6])
-sol3 = e.twoSum([3,2,4],6)
+sol3 = e.removeElement27([0,1,2,2,3,0,4,2],2)
+sol = e.twoSum1([3,2,4],6)
+
 
 
 print(sol1)
 print(sol2)
 print(sol3)
+print(sol)
 
 

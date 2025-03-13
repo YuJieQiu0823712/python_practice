@@ -57,7 +57,7 @@ class EasySolution(object):
     # TC: O(n) => O(m)+O(n) => m is length of num1, n is length of num2
     # SC: O(1) We did inplace modification, no extra space.
 
-    def twoSum(self, nums: array, target: int) -> array:
+    def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
         # For each number in the array, we calculate its complement "target - current_number".
         # If the complement exists in our map, we return the indices of both numbers.
@@ -77,6 +77,19 @@ class EasySolution(object):
     # TC: O(n^2) 
     # SC: O(n)
 
+    def removeElement(self, nums: array, val: int) -> int:
+        # strategy: not remove the val, instead iterate the array and not add val
+        ptr = 0
+        for num in nums:
+            if num != val:
+                num[ptr] = num
+                ptr += 1
+        return ptr
+    # Input: nums=[0,1,2,2,3,0,4,2]
+    #        val=2
+    # Output: 5 => Because nums = [0,1,3,0,4]
+    # TC: O(n), n is length nums
+    # SC: O(1), no extra memory
 
 
    

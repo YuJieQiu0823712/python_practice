@@ -73,6 +73,21 @@ class EasySolution(object):
     # SC: O(1), no extra memory
 
 
+    def removeDuplicatesFromSortedArray26(self, nums: array):
+        pre = None
+        ptr = 0
+        for num in nums:
+            if num != pre:
+                pre = num
+                nums[ptr] = num
+                ptr +=1
+        return ptr
+    # Input: nums=[0,0,1,1,1,2,2,3,3,4]
+    # Output: 5 => Because nums = [0,1,2,3,4]
+    # TC: O(n)
+    # SC: O(1)
+
+
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
         # For each number in the array, we calculate its complement "target - current_number".
@@ -98,6 +113,7 @@ e = EasySolution()
 sol1 = e.duplicateZeros1089([1,0,2,3,0,4,5,0]) 
 sol2 = e.mergSortedArray88([1,2,3,0,0,0],[2,5,6])
 sol3 = e.removeElement27([0,1,2,2,3,0,4,2],2)
+sol4 = e.removeDuplicatesFromSortedArray26([0,0,1,1,1,2,2,3,3,4])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -105,6 +121,7 @@ sol = e.twoSum1([3,2,4],6)
 print(sol1)
 print(sol2)
 print(sol3)
+print(sol4)
 print(sol)
 
 

@@ -87,6 +87,22 @@ class EasySolution(object):
     # TC: O(n)
     # SC: O(1)
 
+    def checkIfNAndItsDoubleExist1346(self, nums: array) -> bool:
+        # First index i multiply or divide by index j
+        # If this result is in the set(), then return True
+        # Otherwise, add this result to set()
+        seen = set()
+        for num in nums:
+            if (num * 2) in seen or (num / 2) in seen:
+                return True
+            else:
+                seen.add(num)
+        return False
+    # Input: nums=[10,2,5,3]
+    # Output: True => Because nums[0] == 10 == 2 * 5 == 2 * arr[2]
+    # TC: O(n), n is length of array
+    # SC: O(n), n is the length of set
+
 
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
@@ -114,6 +130,7 @@ sol1 = e.duplicateZeros1089([1,0,2,3,0,4,5,0])
 sol2 = e.mergSortedArray88([1,2,3,0,0,0],[2,5,6])
 sol3 = e.removeElement27([0,1,2,2,3,0,4,2],2)
 sol4 = e.removeDuplicatesFromSortedArray26([0,0,1,1,1,2,2,3,3,4])
+sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -122,6 +139,7 @@ print(sol1)
 print(sol2)
 print(sol3)
 print(sol4)
+print(sol5)
 print(sol)
 
 

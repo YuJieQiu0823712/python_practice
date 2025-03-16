@@ -103,6 +103,19 @@ class EasySolution(object):
     # TC: O(n), n is length of array
     # SC: O(n), n is the length of set
 
+    def BestTimeToBuyAndSellStock121(self, input: array) -> int:
+        # find which one earn the largest and keep that
+        min_price = float('inf')
+        max_profit = 0
+        for price in input:
+            min_price = min(price, min_price)
+            max_profit = max(price-min_price, max_profit)
+        return max_profit
+    # Input: nums=[7,1,5,3,6,4]
+    # Output: 5 => Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+    # TC: O(n)
+    # SC: O(1)
+
 
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
@@ -131,6 +144,7 @@ sol2 = e.mergSortedArray88([1,2,3,0,0,0],[2,5,6])
 sol3 = e.removeElement27([0,1,2,2,3,0,4,2],2)
 sol4 = e.removeDuplicatesFromSortedArray26([0,0,1,1,1,2,2,3,3,4])
 sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
+sol6 = e.BestTimeToBuyAndSellStock121([7,1,5,3,6,4])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -140,6 +154,7 @@ print(sol2)
 print(sol3)
 print(sol4)
 print(sol5)
+print(sol6)
 print(sol)
 
 

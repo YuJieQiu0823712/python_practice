@@ -104,7 +104,7 @@ class EasySolution(object):
     # SC: O(n), n is the length of set
 
     def BestTimeToBuyAndSellStock121(self, input: array) -> int:
-        # find which one earn the largest and keep that
+        # Renew the minimum price and keep which one earns the largest profit
         min_price = float('inf')
         max_profit = 0
         for price in input:
@@ -113,6 +113,34 @@ class EasySolution(object):
         return max_profit
     # Input: nums=[7,1,5,3,6,4]
     # Output: 5 => Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+    # TC: O(n)
+    # SC: O(1)
+
+    def ReplaceElementsWithGreatestElementsOnRightSide1299(self, input: array) -> array:
+        # 1. Initialize current_max: 
+        #   Start from the last element, which has no elements to its right. 
+        #   Set it to -1 and store its original value as current_max.
+        # 2. Traverse the array in reverse:
+        #   For each element, update it to current_max (the greatest element seen so far on its right).
+        # 3. Update current_max:
+        #   Compare the original value of the current element with current_max and update current_max if necessary.
+        max_seen = 0
+        current_max = input[-1]
+        input[-1] = -1
+        for i in range(len(input)-2, -1, -1):
+            max_seen = max(input[i], current_max)
+            input[i] = current_max
+            current_max = max_seen
+        return input
+    # Input: arr = [17,18,5,4,6,1]
+    # Output: [18,6,6,6,1,-1]
+    # Explanation: 
+    # - index 0 --> the greatest element to the right of index 0 is index 1 (18).
+    # - index 1 --> the greatest element to the right of index 1 is index 4 (6).
+    # - index 2 --> the greatest element to the right of index 2 is index 4 (6).
+    # - index 3 --> the greatest element to the right of index 3 is index 4 (6).
+    # - index 4 --> the greatest element to the right of index 4 is index 5 (1).
+    # - index 5 --> there are no elements to the right of index 5, so we put -1.
     # TC: O(n)
     # SC: O(1)
 
@@ -145,6 +173,7 @@ sol3 = e.removeElement27([0,1,2,2,3,0,4,2],2)
 sol4 = e.removeDuplicatesFromSortedArray26([0,0,1,1,1,2,2,3,3,4])
 sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
 sol6 = e.BestTimeToBuyAndSellStock121([7,1,5,3,6,4])
+sol7 = e.ReplaceElementsWithGreatestElementsOnRightSide1299([17,18,5,4,6,1])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -155,6 +184,7 @@ print(sol3)
 print(sol4)
 print(sol5)
 print(sol6)
+print(sol7)
 print(sol)
 
 

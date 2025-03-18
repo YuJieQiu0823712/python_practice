@@ -145,6 +145,22 @@ class EasySolution(object):
     # SC: O(1)
 
 
+    def sortArrayByParity905(self, input: array) -> array:
+        # if the current value is an even number, then swap its position with the indicator.
+        if not input:
+            return []
+        ptr=0
+        for i in range(len(input)):
+            if input[i] %2 == 0:
+                input[ptr], input[i] = input[i], input[ptr]
+                ptr += 1
+        return input
+    # Input: arr = [3,1,2,4]
+    # Output: [2,4,3,1]
+    # TC: O(n)
+    # SC: O(1)
+
+
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
         # For each number in the array, we calculate its complement "target - current_number".
@@ -174,6 +190,7 @@ sol4 = e.removeDuplicatesFromSortedArray26([0,0,1,1,1,2,2,3,3,4])
 sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
 sol6 = e.BestTimeToBuyAndSellStock121([7,1,5,3,6,4])
 sol7 = e.ReplaceElementsWithGreatestElementsOnRightSide1299([17,18,5,4,6,1])
+sol8 = e.sortArrayByParity905([3,1,2,4])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -185,6 +202,12 @@ print(sol4)
 print(sol5)
 print(sol6)
 print(sol7)
+print(sol8)
 print(sol)
 
+class MediumSolution(object):
+    """
+    A class used to represent medium level solutions.
+    """
 
+    

@@ -161,6 +161,29 @@ class EasySolution(object):
     # SC: O(1)
 
 
+    def SquaresOfASortedArray977(self,input: array) -> array:
+        # square the value in the position of the left pointer
+        # square the value in the position of the right pointer
+        # compare the value which one is larger then add it to a new list
+        # iterate the input array
+        left_ptr = 0
+        right_ptr = len(input) - 1
+        newArray = []
+        while left_ptr <= right_ptr:
+            if input[left_ptr]**2 > input[right_ptr]**2:
+                newArray.append(input[left_ptr]**2)
+                left_ptr += 1
+            else:
+                newArray.append(input[right_ptr]**2)
+                right_ptr -= 1
+        reversed_Array = reversed(newArray)        
+        return list(reversed_Array)
+    # Input: nums = [-4,-1,0,3,10]
+    # Output: [0,1,9,16,100]
+    # TC: O(n)
+    # SC: O(n)
+
+
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
         # For each number in the array, we calculate its complement "target - current_number".
@@ -191,8 +214,8 @@ sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
 sol6 = e.BestTimeToBuyAndSellStock121([7,1,5,3,6,4])
 sol7 = e.ReplaceElementsWithGreatestElementsOnRightSide1299([17,18,5,4,6,1])
 sol8 = e.sortArrayByParity905([3,1,2,4])
+sol9 = e.SquaresOfASortedArray977([-4,-1,0,3,10])
 sol = e.twoSum1([3,2,4],6)
-
 
 
 print(sol1)
@@ -203,11 +226,8 @@ print(sol5)
 print(sol6)
 print(sol7)
 print(sol8)
+print(sol9)
 print(sol)
 
-class MediumSolution(object):
-    """
-    A class used to represent medium level solutions.
-    """
 
-    
+

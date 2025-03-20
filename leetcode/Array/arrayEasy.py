@@ -161,7 +161,7 @@ class EasySolution(object):
     # SC: O(1)
 
 
-    def SquaresOfASortedArray977(self,input: array) -> array:
+    def squaresOfASortedArray977(self,input: array) -> array:
         # square the value in the position of the left pointer
         # square the value in the position of the right pointer
         # compare the value which one is larger then add it to a new list
@@ -183,6 +183,23 @@ class EasySolution(object):
     # TC: O(n)
     # SC: O(n)
 
+
+    def highestChecker1051(self, input: array) -> int:
+        sorted_input = sorted(input)
+        count = 0
+        for i in range(len(input)):
+            if sorted_input[i] != input[i]:
+                count += 1
+        return count
+
+    # Input: heights = [1,1,4,2,1,3]
+    # Output: 3
+    # Explanation: 
+    # heights:  [1,1,4,2,1,3]
+    # expected: [1,1,1,2,3,4]
+    # Indices 2, 4, and 5 do not match.
+    # TC: O(n log n) => Sorting a list of length n takes O(n log n) time.
+    # SC: O(n) => The sorted() function creates a new sorted list, requiring O(n) additional space.
 
     def twoSum1(self, nums: array, target: int) -> array:
         # We use a "Hash Map" to store numbers we have seen so far along with their indices.
@@ -214,7 +231,8 @@ sol5 = e.checkIfNAndItsDoubleExist1346([10,2,5,3])
 sol6 = e.BestTimeToBuyAndSellStock121([7,1,5,3,6,4])
 sol7 = e.ReplaceElementsWithGreatestElementsOnRightSide1299([17,18,5,4,6,1])
 sol8 = e.sortArrayByParity905([3,1,2,4])
-sol9 = e.SquaresOfASortedArray977([-4,-1,0,3,10])
+sol9 = e.squaresOfASortedArray977([-4,-1,0,3,10])
+sol10 = e.highestChecker1051([1,1,4,2,1,3])
 sol = e.twoSum1([3,2,4],6)
 
 
@@ -227,6 +245,7 @@ print(sol6)
 print(sol7)
 print(sol8)
 print(sol9)
+print(sol10)
 print(sol)
 
 

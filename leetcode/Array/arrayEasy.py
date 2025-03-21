@@ -201,25 +201,7 @@ class EasySolution(object):
     # TC: O(n log n) => Sorting a list of length n takes O(n log n) time.
     # SC: O(n) => The sorted() function creates a new sorted list, requiring O(n) additional space.
 
-    def twoSum1(self, nums: array, target: int) -> array:
-        # We use a "Hash Map" to store numbers we have seen so far along with their indices.
-        # For each number in the array, we calculate its complement "target - current_number".
-        # If the complement exists in our map, we return the indices of both numbers.
-        # Otherwise, we store the current number along with its index in the map.
-        numMap = {}
-        n = len(nums)
 
-        for i in range(n):
-            complement = target - nums[i]
-            if complement in numMap:
-                return [numMap[complement],i]
-            numMap[nums[i]] = i
-        return [] # No solution found
-    # Input: nums=[3,2,4]
-    #        target=6
-    # Output: [1,2] => Because nums[1] + nums[2] == 6
-    # TC: O(n^2) 
-    # SC: O(n)
 
 
 e = EasySolution()
@@ -233,7 +215,7 @@ sol7 = e.ReplaceElementsWithGreatestElementsOnRightSide1299([17,18,5,4,6,1])
 sol8 = e.sortArrayByParity905([3,1,2,4])
 sol9 = e.squaresOfASortedArray977([-4,-1,0,3,10])
 sol10 = e.highestChecker1051([1,1,4,2,1,3])
-sol = e.twoSum1([3,2,4],6)
+
 
 
 print(sol1)
@@ -246,7 +228,6 @@ print(sol7)
 print(sol8)
 print(sol9)
 print(sol10)
-print(sol)
 
 
 

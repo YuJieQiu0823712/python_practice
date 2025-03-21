@@ -6,6 +6,12 @@ class MediumSolution(object):
     """
 
     def mergeIntervals56(self, input: array) -> array:
+        # Sort the intervals
+        # Iterate through the list
+        # Check for overlap
+        # Merge overlapping intervals (.pop() the overlapped one)
+        # Move forward when no overlap
+        # Return the modified input list
         input.sort()
         i=1
         while i < len(input):

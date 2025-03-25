@@ -62,12 +62,43 @@ class MediumSolution(object):
     # TC: O(n)
     # SC: O(1)
 
+
+    def findAllDuplicatesInAnArray442(self, input: array) -> array:
+        # seen = set()
+        # ans = []
+        # for num in input:
+        #     if num in seen:
+        #         ans.append(num)
+        #     else:
+        #         seen.add(num)
+        # return ans
+        # # TC: O(n)
+        # # SC: O(n)
+
+        ### 1 <= input[i] <= n (n=size of array) ###
+        # if the numbers are repeated, the (number - 1) = indexes are the same.
+        # use Flag => mark every (number - 1)'s corresponding index to be negative.
+        # iterate, if the input[idx] is negative, it means we have already seen that one (added to output array)
+        output = []
+        for i in range(len(input)):
+            idx = abs(input[i]) - 1
+            if input[idx] < 0:
+                output.append(idx + 1)
+            input[idx] = -input[idx]
+        return output
+    # Input: nums = [4,3,2,7,8,2,3,1]
+    # Output: [2,3]
+    # TC: O(n)
+    # SC: O(1)
+
     
 m = MediumSolution()
 sol1 = m.mergeIntervals56([[1,3],[2,6],[8,10],[15,18]])
 sol2 = m.bestTimeToBuyAndSellStockII122([7,1,5,3,6,4])
 sol3 = m.maximumSubarray53([-2,1,-3,4,-1,2,1,-5,4])
+sol4 = m.findAllDuplicatesInAnArray442([4,3,2,7,8,2,3,1])
 
 print(sol1)
 print(sol2)
 print(sol3)
+print(sol4)

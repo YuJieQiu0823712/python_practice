@@ -92,13 +92,32 @@ class MediumSolution(object):
     # SC: O(1)
 
     
+    def rotateMatrix48(self, input: list[list[int]]) -> list[list[int]]:    
+        # nested loop => swap
+        # reverse each row   
+        for row in range(len(input)):
+            for col in range(row, len(input)):
+                input[row][col], input[col][row] = input[col][row], input[row][col]
+        for i in range(len(input)):
+            input[i].reverse()
+        return input
+    # Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    # Output: [[7,4,1],[8,5,2],[9,6,3]]
+    # TC: O(n^2)
+    # SC: O(1)
+
+
+
+    
 m = MediumSolution()
 sol1 = m.mergeIntervals56([[1,3],[2,6],[8,10],[15,18]])
 sol2 = m.bestTimeToBuyAndSellStockII122([7,1,5,3,6,4])
 sol3 = m.maximumSubarray53([-2,1,-3,4,-1,2,1,-5,4])
 sol4 = m.findAllDuplicatesInAnArray442([4,3,2,7,8,2,3,1])
+sol5 = m.rotateMatrix48([[1,2,3],[4,5,6],[7,8,9]])
 
 print(sol1)
 print(sol2)
 print(sol3)
 print(sol4)
+print(sol5)

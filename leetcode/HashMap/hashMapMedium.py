@@ -1,7 +1,46 @@
 import array
+from collections import defaultdict
 
-# class mediumSolution(object):
-    
+class mediumSolution(object):
+    def groupStrings249(self,strings: list[str]) -> list[list[str]]:
+        # 1. A string like "abc" and "bcd" share a common shift pattern:
+        #   "abc" → (0, 1, 2)
+        #   "bcd" → (0, 1, 2)
+        #   Both should be grouped together.
+        # 2. Use a Dictionary for Grouping:
+        #   Use a defaultdict(list) to store words with the same shift pattern.
+        # 3. Generate a Unique Key (Tuple) for Each Word:
+        #   Compute the shift sequence as a tuple of differences between characters.
+        # 4. Efficient Iteration Over Strings:
+        #   Iterate over the list and compute the shift sequence.
+        #   Store strings in the dictionary based on their computed sequence.
+        output = defaultdict(list)
+
+        for string in strings:
+            shift_sequence = ()
+            for char in string:
+                shift_sequence += (ord(char) - ord(string[0])) % 26,
+            output[shift_sequence].append(string)
+
+        return list(output.values())
+    # Given a string, we can "shift" each of its letter to its successive letter, for example: "abc" -> "bcd". 
+    # We can keep "shifting" which forms the sequence: "abc" -> "bcd" -> ... -> "xyz"
+
+    # Input: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"],
+    # Output:
+    # [
+    # ["abc","bcd","xyz"],
+    # ["az","ba"],
+    # ["acef"],
+    # ["a","z"]
+    # ]
+
+    # TC: O(n) 
+    # SC: O(n) 
+
+m = mediumSolution()
+sol1 = m.groupStrings249(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
+print(sol1)
 
 class WordDictionary211:
     def __init__(self):
@@ -93,6 +132,8 @@ class SparseVector1570:
     # Explanation: v1 = SparseVector(nums1) , v2 = SparseVector(nums2)
     # v1.dotProduct(v2) = 1*0 + 0*3 + 0*0 + 2*4 + 3*0 = 8
 
+
 vec1 = SparseVector1570([1,0,0,2,3])
 vec2 = SparseVector1570([0,3,0,4,0])
 print(vec1.dotProduct(vec2)) 
+

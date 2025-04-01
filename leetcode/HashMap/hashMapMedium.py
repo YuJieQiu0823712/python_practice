@@ -9,22 +9,25 @@ class mediumSolution(object):
         #   Both should be grouped together.
         # 2. Use a Dictionary for Grouping:
         #   Use a defaultdict(list) to store words with the same shift pattern.
-        # 3. Generate a Unique Key (Tuple) for Each Word:
-        #   Compute the shift sequence as a tuple of differences between characters.
+        # 3. Generate a Unique Key (Tuple is immutable) for Each Word:
+        #   Compute the shift sequence as a tuple of differences between characters. 
         # 4. Efficient Iteration Over Strings:
         #   Iterate over the list and compute the shift sequence.
         #   Store strings in the dictionary based on their computed sequence.
-        output = defaultdict(list)
+        output = defaultdict(list) # If shift_sequence does not exist, defaultdict(list) creates an empty list automatically
+                                   # You don't need to check if the key exists before adding values.
 
         for string in strings:
             shift_sequence = ()
             for char in string:
-                shift_sequence += (ord(char) - ord(string[0])) % 26,
+                shift_sequence += (ord(char) - ord(string[0])) % 26, # With the comma, it becomes a single-element tuple
+                                # ord() => convert str to int (a=97, z=122)
             output[shift_sequence].append(string)
 
         return list(output.values())
     # Given a string, we can "shift" each of its letter to its successive letter, for example: "abc" -> "bcd". 
     # We can keep "shifting" which forms the sequence: "abc" -> "bcd" -> ... -> "xyz"
+    # Given a list of strings which contains only lowercase alphabets, group all strings that belong to the same shifting sequence.
 
     # Input: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"],
     # Output:
@@ -131,9 +134,91 @@ class SparseVector1570:
     # Output: 8
     # Explanation: v1 = SparseVector(nums1) , v2 = SparseVector(nums2)
     # v1.dotProduct(v2) = 1*0 + 0*3 + 0*0 + 2*4 + 3*0 = 8
+    # TC: O(n)
+    # SC: O(n) 
 
 
 vec1 = SparseVector1570([1,0,0,2,3])
 vec2 = SparseVector1570([0,3,0,4,0])
 print(vec1.dotProduct(vec2)) 
 
+
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache146:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.lookup = {}
+        self.head = Node(None, None)
+        self.tail = Node(None, None)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    def _add_node(self, node):
+        previous_node = self.tail.prev
+        previous_node.next = node
+        node.prev = previous_node
+        node.next = self.tail
+        self.tail.prev = node
+    def _remove_node(self, node):
+        previous_node = node.prev
+        previous_node.next = node.next
+        node.next.prev = previous_node
+    def get(self, key: int) -> int:
+        if key not in self.lookup:
+            return -1
+        node = self.lookup[key]
+        self._remove_node(node)
+        self._add_node(node)
+        return node.val
+    def put(self, key: int, value: int) -> None:
+        if key in self.lookup:
+            self._remove_node(self.lookup[key])
+        elif self.capacity == len(self.lookup):
+            lru = self.head.next
+            self._remove_node(lru)
+            del self.lookup[lru.key]
+        new_node = Node(key, value)
+        self._add_node(new_node)
+        self.lookup[new_node.key] = new_node
+# Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+# Implement the LRUCache class:
+# LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+# int get(int key) Return the value of the key if the key exists, otherwise return -1.
+# void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+# The functions get and put must each run in O(1) average time complexity.
+
+# Input
+# ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+# [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+# Output
+# [null, null, null, 1, null, -1, null, -1, 3, 4]
+
+# Explanation
+# LRUCache lRUCache = new LRUCache(2);
+# lRUCache.put(1, 1); // cache is {1=1}
+# lRUCache.put(2, 2); // cache is {1=1, 2=2}
+# lRUCache.get(1);    // return 1
+# lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+# lRUCache.get(2);    // returns -1 (not found)
+# lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+# lRUCache.get(1);    // return -1 (not found)
+# lRUCache.get(3);    // return 3
+# lRUCache.get(4);    // return 4
+
+
+lRUCache = LRUCache146(2)
+lRUCache.put(1, 1)
+lRUCache.put(2, 2) 
+print(lRUCache.get(1)) 
+lRUCache.put(3, 3)
+print(lRUCache.get(2))
+lRUCache.put(4, 4) 
+print(lRUCache.get(1)) 
+print(lRUCache.get(3))  
+print(lRUCache.get(4))

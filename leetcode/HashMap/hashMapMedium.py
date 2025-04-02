@@ -41,9 +41,40 @@ class mediumSolution(object):
     # TC: O(n) 
     # SC: O(n) 
 
+    def ContinuousSubarraySum523(self, nums: list[int], k: int) -> bool:
+        lookup = {0: -1}
+        curr_sum = 0
+        for i in range(len(nums)):
+            curr_sum += nums[i]
+            mod = curr_sum % k
+            if mod in lookup:
+                if i - lookup[mod] >= 2:
+                    return True
+                else:
+                    lookup[mod] = i
+        return False
+        # Given an integer array nums and an integer k, return true if nums has a good subarray or false otherwise.
+        # A good subarray is a subarray where:
+        # its length is at least two, and
+        # the sum of the elements of the subarray is a multiple of k.
+        # Note that:
+        # A subarray is a contiguous part of the array.
+        # An integer x is a multiple of k if there exists an integer n such that x = n * k. 0 is always a multiple of k.
+
+        # Input: nums = [23,2,4,6,7], k = 6
+        # Output: true
+        # Explanation: [2, 4] is a continuous subarray of size 2 whose elements sum up to 6.
+        
+        # TC: O(n) 
+        # SC: O(n) 
+
+
 m = mediumSolution()
 sol1 = m.groupStrings249(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
+sol2 = m.ContinuousSubarraySum523([23,2,4,6,7],6)
 print(sol1)
+print(sol2)
+
 
 class WordDictionary211:
     def __init__(self):

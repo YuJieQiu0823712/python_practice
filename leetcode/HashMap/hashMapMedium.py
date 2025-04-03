@@ -1,5 +1,13 @@
 import array
 from collections import defaultdict
+from collections import deque
+from typing import Optional
+
+class TreeNode:
+    def __init__(self,val=0,left=None,right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 class mediumSolution(object):
     def groupStrings249(self,strings: list[str]) -> list[list[str]]:
@@ -42,7 +50,11 @@ class mediumSolution(object):
     # SC: O(n) 
 
     def ContinuousSubarraySum523(self, nums: list[int], k: int) -> bool:
-        lookup = {0: -1}
+        # use sum and modulo to calculate a multiple of k:
+        # (s(n)-s(m)) % k = 0 => s(n)%k = s(m)%k
+        # record modulo and index in hashmap to see if subarray length is at least 2:
+        # {modulo:index}
+        lookup = {0: -1} # ex: nums=[2,4], k=6, index 1-(-1)=2 >= 2 => return True
         curr_sum = 0
         for i in range(len(nums)):
             curr_sum += nums[i]
@@ -50,8 +62,8 @@ class mediumSolution(object):
             if mod in lookup:
                 if i - lookup[mod] >= 2:
                     return True
-                else:
-                    lookup[mod] = i
+            else:
+                lookup[mod] = i
         return False
         # Given an integer array nums and an integer k, return true if nums has a good subarray or false otherwise.
         # A good subarray is a subarray where:
@@ -69,11 +81,59 @@ class mediumSolution(object):
         # SC: O(n) 
 
 
+    def binaryTreeVerticalOrderTraversal314(self, root: Optional[TreeNode]) -> list[list[int]]:
+        # Optional => indicate a variable, function parameter, or return value can either be of a specific type or None.
+        # queue-based Breadth-First Search (BFS) traversal
+        if not root:
+            return []
+
+        queue = deque()
+        queue.append((root,0)) # Store (node, column index)
+        lookup = defaultdict(list)
+        res = []
+
+        while queue: # The length of queue keeps changing. 
+            #Using while queue, we keep processing nodes until the queue is empty. 
+            node, column = queue.popleft() # FIFO
+            lookup[column].append(node.val)
+            if node.left:
+                queue.append((node.left, column-1))
+            if node.right:
+                queue.append((node.right, column+1))
+        left = min(lookup.keys())
+        right = max(lookup.keys())
+        for i in range(left, right+1):
+            res.append(lookup[i])
+        return res
+    # Given the root of a binary tree, return the vertical order traversal of its nodes' values. (i.e., from top to bottom, column by column).
+    # If two nodes are in the same row and column, the order should be from left to right.
+    # Input: root = [3,9,20,null,null,15,7]
+    # Output: [[9],[3,15],[20],[7]]
+    # -1  0   1  2 (col)
+    #     3
+    #   /   \  
+    #  9    20
+    #     /    \ 
+    #    15     7
+    # TC: O(n) 
+    # SC: O(n) 
+
+
+
 m = mediumSolution()
 sol1 = m.groupStrings249(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
-sol2 = m.ContinuousSubarraySum523([23,2,4,6,7],6)
-print(sol1)
+sol2 = m.ContinuousSubarraySum523([23,2,6,4,7],6)
+
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(15)
+root.right.right = TreeNode(7)
+sol3 = m.binaryTreeVerticalOrderTraversal314(root)
+
+print(sol1) 
 print(sol2)
+print(sol3)
 
 
 class WordDictionary211:
@@ -175,6 +235,8 @@ print(vec1.dotProduct(vec2))
 
 
 class Node:
+    # use hashmap and double linkedlist
+    # a Least Recently Used Node next to Head, a Most Commonly Used Node previous to Tail 
     def __init__(self, key, val):
         self.key = key
         self.val = val
@@ -203,12 +265,12 @@ class LRUCache146:
         if key not in self.lookup:
             return -1
         node = self.lookup[key]
-        self._remove_node(node)
+        self._remove_node(node) # change a Most Commonly Used Node to the position that previous to Tail
         self._add_node(node)
         return node.val
     def put(self, key: int, value: int) -> None:
         if key in self.lookup:
-            self._remove_node(self.lookup[key])
+            self._remove_node(self.lookup[key]) # Avoid duplicate nodes in the linked list
         elif self.capacity == len(self.lookup):
             lru = self.head.next
             self._remove_node(lru)

@@ -2,7 +2,7 @@ import array
 from collections import defaultdict
 from collections import deque
 from typing import Optional
-
+from random import randint
 class TreeNode:
     def __init__(self,val=0,left=None,right=None):
         self.val = val
@@ -315,3 +315,80 @@ lRUCache.put(4, 4)
 print(lRUCache.get(1)) 
 print(lRUCache.get(3))  
 print(lRUCache.get(4))
+
+
+# Insert Delete GetRandom O(1)
+class RandomizedSet380:
+    # def __init__(self):
+    #     self.set = set()
+    # def insert(self, val:int) -> bool:
+    #     if val in self.set:
+    #         return False
+    #     else:
+    #         self.set.add(val)
+    #         return True
+    # def remove(self, val:int) -> bool:
+    #     if val in self.set:
+    #         self.set.remove(val)
+    #         return True
+    #     else:
+    #         return False
+    # def getRandom(self) -> int:
+    #     return random.choice(list(self.set))
+    # TC: O(log n) where n is the number of elements in the list => Python random.choice
+    #              Set doesn’t support direct random access => iterate over the set or convert it into a list
+    # SC: O(n)
+
+    ## Optimized Approach for O(1) ##
+    # Use Array + Hashmap mimic Set
+    def __init__(self):
+        self.lookup = {}
+        self.list = []
+    def insert(self, val: int) -> bool:
+        if val not in self.lookup:
+            self.lookup[val] = len(self.list)
+            self.list.append(val)
+            return True
+        return False
+    def remove(self, val: int) -> bool:
+        if val in self.lookup:
+            last_item_value = self.list[-1]
+            remove_idx= self.lookup[val]
+            self.list[remove_idx] = last_item_value
+            self.lookup[self.list[-1]] = remove_idx
+            self.list.pop()
+            del self.lookup[val]
+            return True
+        return False
+    def getRandom(self) -> int:
+        randIdx = randint(0, len(self.list)-1)
+        return self.list[randIdx]
+    # TC: O(1)
+    # SC: O(n) 
+
+
+
+# Input
+# ["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]
+# [[], [1], [2], [2], [], [1], [2], []]
+# Output
+# [null, true, false, true, 2, true, false, 2]
+
+# Explanation
+# RandomizedSet randomizedSet = new RandomizedSet();
+# randomizedSet.insert(1); // Inserts 1 to the set. Returns true as 1 was inserted successfully.
+# randomizedSet.remove(2); // Returns false as 2 does not exist in the set.
+# randomizedSet.insert(2); // Inserts 2 to the set, returns true. Set now contains [1,2].
+# randomizedSet.getRandom(); // getRandom() should return either 1 or 2 randomly.
+# randomizedSet.remove(1); // Removes 1 from the set, returns true. Set now contains [2].
+# randomizedSet.insert(2); // 2 was already in the set, so return false.
+# randomizedSet.getRandom(); // Since 2 is the only number in the set, getRandom() will always return 2.
+
+randomizedSet = RandomizedSet380()
+print(randomizedSet.insert(1)) # return True
+print(randomizedSet.remove(2)) # return false
+print(randomizedSet.insert(2)) # return True
+print(randomizedSet.getRandom()) # return 1 or 2
+print(randomizedSet.remove(1)) # return True
+print(randomizedSet.insert(2)) # return false
+print(randomizedSet.getRandom()) #return 2

@@ -119,6 +119,34 @@ class mediumSolution(object):
     # SC: O(n) 
 
 
+    def topKFrequent347(self, nums: list[int], k: int) -> list[int]:
+        # 1 initialize hashmap, array (bucket length + 1), and result array
+        # 2 count frequency of each num appears, store them in hashmap {num: count}
+        # 3 use a list of lists where index i holds all numbers that appear exactly i times
+        # 4 traverse bucket from the end to the beginning and collect numbers until you have k of them
+        lookup = {}
+        bucket = [[] for i in range(len(nums)+1)]
+        res = []
+        
+        for num in nums:
+            lookup[num]  = lookup.get(num,0) + 1 # if num is [], give 0, otherwise + 1
+        # lookup = collection.Counter(nums)
+
+        for num, count in lookup.items():
+            bucket[count].append(num)
+
+        for i in range((len(bucket)-1), -1, -1):
+            for num in bucket[i]:
+                res.append(num)  
+                if len(res) == k:
+                    return res
+
+    # Given an integer array nums and an integer k, return the k most frequent elements. 
+    # You may return the answer in any order.
+    # Input: nums = [1,1,1,2,2,3], k = 2
+    # Output: [1,2]
+
+
 
 m = mediumSolution()
 sol1 = m.groupStrings249(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
@@ -130,10 +158,12 @@ root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 sol3 = m.binaryTreeVerticalOrderTraversal314(root)
+sol4 = m.topKFrequent347([1,1,1,2,2,3], 2)
 
 print(sol1) 
 print(sol2)
 print(sol3)
+print(sol4)
 
 
 class WordDictionary211:
@@ -365,9 +395,6 @@ class RandomizedSet380:
         return self.list[randIdx]
     # TC: O(1)
     # SC: O(n) 
-
-
-
 # Input
 # ["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]
 # [[], [1], [2], [2], [], [1], [2], []]

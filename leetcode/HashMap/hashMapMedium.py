@@ -145,6 +145,9 @@ class mediumSolution(object):
     # You may return the answer in any order.
     # Input: nums = [1,1,1,2,2,3], k = 2
     # Output: [1,2]
+    # TC: O(n) 
+    # SC: O(n) 
+
 
 
 
@@ -164,6 +167,7 @@ print(sol1)
 print(sol2)
 print(sol3)
 print(sol4)
+
 
 
 class WordDictionary211:

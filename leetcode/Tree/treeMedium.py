@@ -50,7 +50,7 @@ class mediumSolution:
             if root.val <= lowest or root.val >= highest:
                 return False
             stack.append((root.left, lowest, root.val))
-            stack.append((root.right, root.val, hightst))
+            stack.append((root.right, root.val, highest))
         return True
         # TC: O(n) 
         # SC: O(n) stack
@@ -87,5 +87,8 @@ root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
 sol1 = m.BinaryTreeLevelOrderTraversal102(root)
+sol2 = m.ValidateBinarySearchTree98(root)
+
 print(sol1)
+print(sol2)
 

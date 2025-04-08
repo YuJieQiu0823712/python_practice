@@ -6,6 +6,13 @@ class TreeNode:
         self.left = left
         self.right = right
 
+class Node:
+    def __init__(self, val: int=0, left: 'Node'=None, right: 'Node'=None, next: 'Node'=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+
 class mediumSolution:
     def BinaryTreeLevelOrderTraversal102(self, root: TreeNode) -> list[list[int]]:
         if not root:
@@ -36,6 +43,7 @@ class mediumSolution:
     # TC: O(n) 
     # SC: O(n) 
 
+   
 
     # 1. Iterative
     def ValidateBinarySearchTree98(self, root: TreeNode) -> bool:
@@ -78,6 +86,27 @@ class mediumSolution:
     # Output: false
     # Explanation: The root node's value is 5 but its right child's value is 4.
 
+    # PopulatingNextRightPointersInEachNode116
+    def connect(self, root: 'Node') -> 'Node':
+        if not root or not rrot.left:
+            return root
+        
+        root.left.next = root.right
+        
+        if root.next:
+            root.right.next = root.next.left
+        self.connect(root.left)
+        self.connect(root.right)
+        return root
+    # Input: root = [1,2,3,4,5,6,7]
+    # Output: [1,#,2,3,#,4,5,6,7,#]
+    # Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, 
+    # just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+    #         1 ---> Null   (Figure B)
+    #       /    \
+    #     2  -->  3 --> Null
+    #   /  \     /  \
+    #  4 -> 5 -> 6 -> 7 --> Null
 
 m = mediumSolution()
 

@@ -12,6 +12,22 @@ class Node:
         self.left = left
         self.right = right
         self.next = next
+    
+    def __repr__(self):
+        return f"{self.val}"
+        
+def print_tree_with_next(root: 'Node'):
+        result = []
+        start = root
+        while start:
+            curr_node = start
+            while curr_node:
+                result.append(curr_node.val)
+                curr_node = curr_node.next
+            result.append('#')
+            start = start.left
+        return result
+    
 
 class mediumSolution:
     def BinaryTreeLevelOrderTraversal102(self, root: TreeNode) -> list[list[int]]:
@@ -86,27 +102,51 @@ class mediumSolution:
     # Output: false
     # Explanation: The root node's value is 5 but its right child's value is 4.
 
-    # PopulatingNextRightPointersInEachNode116
-    def connect(self, root: 'Node') -> 'Node':
-        if not root or not rrot.left:
+    def PopulatingNextRightPointersInEachNode116(self, root: 'Node') -> 'Node': 
+        # TreeNode => Refers to the actual class object TreeNode. It must already be defined before it’s used in type hints.
+        #            Works when the class you're referring to has already been parsed by Python.
+        # 'Node' => It's a forward reference — a string that delays the evaluation of the type. Useful when a class refers to itself or a class defined later.
+        #            Recommended when writing recursive data structures (like trees, linked lists).
+        # Base case
+        if not root or not root.left:
             return root
         
         root.left.next = root.right
-        
         if root.next:
             root.right.next = root.next.left
-        self.connect(root.left)
-        self.connect(root.right)
+        self.PopulatingNextRightPointersInEachNode116(root.left)
+        self.PopulatingNextRightPointersInEachNode116(root.right)
         return root
     # Input: root = [1,2,3,4,5,6,7]
     # Output: [1,#,2,3,#,4,5,6,7,#]
-    # Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, 
+    # Explanation: Given the above perfect binary tree, your function should populate each next pointer to point to its next right node, 
     # just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
     #         1 ---> Null   (Figure B)
     #       /    \
     #     2  -->  3 --> Null
     #   /  \     /  \
     #  4 -> 5 -> 6 -> 7 --> Null
+    # TC: O(log(n)), n is the number of nodes, recursion
+    # SC: O(n), n is the number of nodes
+    
+    def PopulatingNextRightPointersInEachNodeII117(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
+
+        queue = collections.deque()
+        queue.append(root)
+        while queue:
+            size_queue = len(queue)
+            for i in range(size_queue):
+                node = queue.popleft()
+                if i < size_queue - 1: 
+                    node.next = queue[0]
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return root
+    
 
 m = mediumSolution()
 
@@ -118,6 +158,40 @@ root.right.right = TreeNode(7)
 sol1 = m.BinaryTreeLevelOrderTraversal102(root)
 sol2 = m.ValidateBinarySearchTree98(root)
 
+n1 = Node(1)
+n2 = Node(2)
+n3 = Node(3)
+n4 = Node(4)
+n5 = Node(5)
+n6 = Node(6)
+n7 = Node(7)
+
+n1.left = n2
+n1.right = n3
+n2.left = n4
+n2.right = n5
+n3.left = n6
+n3.right = n7
+output3 = m.PopulatingNextRightPointersInEachNode116(n1)
+sol3 = print_tree_with_next(n1)
+
+nn1 = Node(1)
+nn2 = Node(2)
+nn3 = Node(3)
+nn4 = Node(4)
+nn5 = Node(5)
+nn7 = Node(7)
+nn1.left = nn2
+nn1.right = nn3
+nn2.left = nn4
+nn2.right = nn5
+nn3.right = nn7
+output4 = m.PopulatingNextRightPointersInEachNodeII117(nn1)
+sol4 = print_tree_with_next(nn1)
+
+
 print(sol1)
 print(sol2)
+print(sol3)
+print(sol4)
 

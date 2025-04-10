@@ -30,7 +30,9 @@ def print_tree_with_next(root: 'Node'):
     
 
 class mediumSolution:
-    def BinaryTreeLevelOrderTraversal102(self, root: TreeNode) -> list[list[int]]:
+    def binaryTreeLevelOrderTraversal102(self, root: TreeNode) -> list[list[int]]:
+        # use queue to do pop the first element in the queue and append the left and right child to the queue (if there are any)
+        # and append the value of the current node to the list
         if not root:
             return []
             
@@ -62,7 +64,11 @@ class mediumSolution:
    
 
     # 1. Iterative
-    def ValidateBinarySearchTree98(self, root: TreeNode) -> bool:
+    def validateBinarySearchTree98(self, root: TreeNode) -> bool:
+        # Initialize the stack with the root node and its allowed value range
+        # Check if the node's value is within the valid range (lowest < node.val < highest). If not, return False.
+        # append the left child with updated range (lowest, node.val) and right child with updated range (node.val, highest).
+        # Continue until the stack is empty. If all nodes are valid, return True.
         if not root:
             return True
         
@@ -102,7 +108,7 @@ class mediumSolution:
     # Output: false
     # Explanation: The root node's value is 5 but its right child's value is 4.
 
-    def PopulatingNextRightPointersInEachNode116(self, root: 'Node') -> 'Node': 
+    def populatingNextRightPointersInEachNode116(self, root: 'Node') -> 'Node': 
         # TreeNode => Refers to the actual class object TreeNode. It must already be defined before it’s used in type hints.
         #            Works when the class you're referring to has already been parsed by Python.
         # 'Node' => It's a forward reference — a string that delays the evaluation of the type. Useful when a class refers to itself or a class defined later.
@@ -114,14 +120,14 @@ class mediumSolution:
         root.left.next = root.right
         if root.next:
             root.right.next = root.next.left
-        self.PopulatingNextRightPointersInEachNode116(root.left)
-        self.PopulatingNextRightPointersInEachNode116(root.right)
+        self.populatingNextRightPointersInEachNode116(root.left)
+        self.populatingNextRightPointersInEachNode116(root.right)
         return root
     # Input: root = [1,2,3,4,5,6,7]
     # Output: [1,#,2,3,#,4,5,6,7,#]
     # Explanation: Given the above perfect binary tree, your function should populate each next pointer to point to its next right node, 
-    # just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
-    #         1 ---> Null   (Figure B)
+    # just like in Figure. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level
+    #         1 ---> Null   
     #       /    \
     #     2  -->  3 --> Null
     #   /  \     /  \
@@ -129,7 +135,13 @@ class mediumSolution:
     # TC: O(log(n)), n is the number of nodes, recursion
     # SC: O(n), n is the number of nodes
     
-    def PopulatingNextRightPointersInEachNodeII117(self, root: 'Node') -> 'Node':
+    def populatingNextRightPointersInEachNodeII117(self, root: 'Node') -> 'Node': #
+        # initialize queue with root node 
+        # Get the number of nodes at the current level
+        # For each node in this level:
+        #   Pop the node from the queue
+        #   If it's not the last node in the level, set node.next = queue[0]
+        #   Append the node’s left and right children (if they exist)
         if not root:
             return root
 
@@ -146,7 +158,17 @@ class mediumSolution:
                 if node.right:
                     queue.append(node.right)
         return root
-    
+    # Input: root = [1,2,3,4,5,null,7]
+    # Output: [1,#,2,3,#,4,5,7,#]
+    # Explanation: Given the above binary tree, your function should populate each next pointer to point to its next right node, just like in Figure. 
+    # The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.    
+    #         1 ---> Null   
+    #       /    \
+    #     2  -->  3 --> Null
+    #   /  \        \
+    #  4 -> 5 -----> 7 --> Null
+    # TC: O(n), n is the number of nodes
+    # SC: O(n), n is the number of nodes
 
 m = mediumSolution()
 
@@ -155,8 +177,8 @@ root.left = TreeNode(9)
 root.right = TreeNode(20)
 root.right.left = TreeNode(15)
 root.right.right = TreeNode(7)
-sol1 = m.BinaryTreeLevelOrderTraversal102(root)
-sol2 = m.ValidateBinarySearchTree98(root)
+sol1 = m.binaryTreeLevelOrderTraversal102(root)
+sol2 = m.validateBinarySearchTree98(root)
 
 n1 = Node(1)
 n2 = Node(2)
@@ -172,7 +194,7 @@ n2.left = n4
 n2.right = n5
 n3.left = n6
 n3.right = n7
-output3 = m.PopulatingNextRightPointersInEachNode116(n1)
+output3 = m.populatingNextRightPointersInEachNode116(n1)
 sol3 = print_tree_with_next(n1)
 
 nn1 = Node(1)
@@ -186,7 +208,7 @@ nn1.right = nn3
 nn2.left = nn4
 nn2.right = nn5
 nn3.right = nn7
-output4 = m.PopulatingNextRightPointersInEachNodeII117(nn1)
+output4 = m.populatingNextRightPointersInEachNodeII117(nn1)
 sol4 = print_tree_with_next(nn1)
 
 

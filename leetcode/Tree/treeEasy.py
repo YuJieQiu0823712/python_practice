@@ -20,6 +20,7 @@ class easySolution:
 
     def binaryTreePreorderTraversal144(self, root: TreeNode) -> list[int]:
         # DFS
+        # Preorder traversal: node, left, right
 
         # 1 Iterative
         # if not root:
@@ -68,19 +69,20 @@ class easySolution:
     #     6   7   9
 
     def binaryTreeInorderTraversal94(self, root: TreeNode) -> list[int]:
+        # DFS
         # Inorder traversal: left, node, right
         # 1 Iterative
-        res = []
-        stack = []
-        curr_node = root
-        while curr_node or stack:
-            while curr_node:
-                    stack.append(curr_node)
-                    curr_node = curr_node.left
-            curr_node = stack.pop()
-            res.append(curr_node.val)
-            curr_node = curr_node.right
-        return res
+        # res = []
+        # stack = []
+        # curr_node = root
+        # while curr_node or stack:
+        #     while curr_node:
+        #             stack.append(curr_node)
+        #             curr_node = curr_node.left
+        #     curr_node = stack.pop()
+        #     res.append(curr_node.val)
+        #     curr_node = curr_node.right
+        # return res
         # TC: O(n)
         # SC: O(n)      
                 
@@ -110,6 +112,53 @@ class easySolution:
     #     6   7   9
 
 
+    def rangeSumofBST938(self, root: TreeNode, low: int, high: int) -> int:
+        # BST binary search tree => left < node < right
+        # 1 Iterative
+        # stack = [root]
+        # res = 0
+        
+        # while stack:
+        #     curr_node = stack.pop()
+        #     if curr_node:
+        #         if curr_node.val >= low and curr_node.val <= high:
+        #             res += curr_node.val
+        #         if curr_node.val > low:
+        #             stack.append(curr_node.left)
+        #         if curr_node.val < high:
+        #             stack.append(curr_node.right)
+        # return res
+
+        # res = 0
+        # 2 Recursive
+      
+        def helper(node):
+            
+            if not node:
+                return 0
+            else:
+                if node.val >= low and node.val <= high:
+                    self.res += node.val
+                if node.val > low:
+                    helper(node.left)
+                if node.val < high:
+                    helper(node.right)
+                
+        self.res = 0 # global variable
+        helper(root)
+        return self.res
+        # TC: O(n)
+        # SC: O(n)
+
+    # Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
+    # Output: 32
+    # Explanation: Nodes 7, 10, and 15 are in the range [7, 15]. 7 + 10 + 15 = 32.
+    #     10
+    #    /  \
+    #   5    15
+    #  / \     \
+    # 3   7     18
+
 
 
 e = easySolution()
@@ -126,5 +175,15 @@ node1 = TreeNode(1, node2, node3)
 
 sol1 = e.binaryTreePreorderTraversal144(node1)
 sol2 = e.binaryTreeInorderTraversal94(node1)
+
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(15)
+root.left.left = TreeNode(3)
+root.left.right = TreeNode(7)
+root.right.right = TreeNode(18)
+
+sol3 = e.rangeSumofBST938(root, 7, 15)
 print(sol1)
 print(sol2)
+print(sol3)

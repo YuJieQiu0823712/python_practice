@@ -67,6 +67,51 @@ class easySolution:
     #      / \     /
     #     6   7   9
 
+    def binaryTreeInorderTraversal94(self, root: TreeNode) -> list[int]:
+        # Inorder traversal: left, node, right
+        # 1 Iterative
+        res = []
+        stack = []
+        curr_node = root
+        while curr_node or stack:
+            while curr_node:
+                    stack.append(curr_node)
+                    curr_node = curr_node.left
+            curr_node = stack.pop()
+            res.append(curr_node.val)
+            curr_node = curr_node.right
+        return res
+        # TC: O(n)
+        # SC: O(n)      
+                
+        # 2 Recursive
+        res = []
+        def helper(node):
+            if not node:
+                return #
+            helper(node.left)
+            res.append(node.val)
+            helper(node.right)
+        helper(root)
+        return res
+        # TC: O(n)
+        # SC: O(n)  
+
+    # Given the root of a binary tree, return the inorder traversal of its nodes' values.
+    # Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+    # Output: [4,2,6,5,7,1,3,9,8]
+    # Explanation:
+    #         1
+    #       /   \
+    #     2       3
+    #    / \       \
+    #   4   5       8
+    #      / \     /
+    #     6   7   9
+
+
+
+
 e = easySolution()
 
 node6 = TreeNode(6)
@@ -80,5 +125,6 @@ node3 = TreeNode(3, None, node8)
 node1 = TreeNode(1, node2, node3)
 
 sol1 = e.binaryTreePreorderTraversal144(node1)
-
+sol2 = e.binaryTreeInorderTraversal94(node1)
 print(sol1)
+print(sol2)

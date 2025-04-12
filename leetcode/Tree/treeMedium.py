@@ -170,6 +170,51 @@ class mediumSolution:
     # TC: O(n), n is the number of nodes
     # SC: O(n), n is the number of nodes
 
+
+class binarySearchTreeIterator173:
+    def __init__(self, root: TreeNode):
+        self.stack = []
+        while root:
+            self.stack.append(root)
+            root = root.left
+    
+    def next(self) -> int:
+        return_node = self.stack.pop()
+        node = return_node.right
+        while node:
+            self.stack.append(node)
+            node = node.left
+        return return_node.val
+
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
+
+    # Input
+    # ["BSTIterator", "next", "next", "hasNext", "next", "hasNext", "next", "hasNext", "next", "hasNext"]
+    # [[[7, 3, 15, null, null, 9, 20]], [], [], [], [], [], [], [], [], []]
+    # Output
+    # [null, 3, 7, true, 9, true, 15, true, 20, false]
+
+    # Explanation
+    # BSTIterator bSTIterator = new BSTIterator([7, 3, 15, null, null, 9, 20]);
+    # bSTIterator.next();    // return 3
+    # bSTIterator.next();    // return 7
+    # bSTIterator.hasNext(); // return True
+    # bSTIterator.next();    // return 9
+    # bSTIterator.hasNext(); // return True
+    # bSTIterator.next();    // return 15
+    # bSTIterator.hasNext(); // return True
+    # bSTIterator.next();    // return 20
+    # bSTIterator.hasNext(); // return False
+    #    7
+    #   / \
+    #  3   15
+    #     /  \
+    #    9    20
+
+
+
+
 m = mediumSolution()
 
 root = TreeNode(3)
@@ -187,7 +232,6 @@ n4 = Node(4)
 n5 = Node(5)
 n6 = Node(6)
 n7 = Node(7)
-
 n1.left = n2
 n1.right = n3
 n2.left = n4
@@ -211,9 +255,30 @@ nn3.right = nn7
 output4 = m.populatingNextRightPointersInEachNodeII117(nn1)
 sol4 = print_tree_with_next(nn1)
 
+nnn7 = Node(7)
+nnn3 = Node(3)
+nnn15 = Node(15)
+nnn9 = Node(9)
+nnn20 = Node(20)
+nnn7.left = nnn3
+nnn7.right = nnn15
+nnn15.left = nnn9
+nnn15.right = nnn20
+obj = binarySearchTreeIterator173(nnn7)
+print(obj.next()) # return 3
+print(obj.next()) # return 7
+print(obj.hasNext())# return True
+print(obj.next()) # return 9
+print(obj.hasNext()) # return True 
+print(obj.next()) # return 15
+print(obj.hasNext()) # return True
+print(obj.next()) # return 20
+print(obj.hasNext()) # return False
+
 
 print(sol1)
 print(sol2)
 print(sol3)
 print(sol4)
+
 

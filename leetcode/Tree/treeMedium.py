@@ -170,6 +170,36 @@ class mediumSolution:
     # TC: O(n), n is the number of nodes
     # SC: O(n), n is the number of nodes
 
+    def lowestCommonAncestorOfABinaryTree236(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root:
+            return
+        if root == p or root == q:
+            return root
+        
+        left = self.lowestCommonAncestorOfABinaryTree236(root.left, p, q)
+        right = self.lowestCommonAncestorOfABinaryTree236(root.right, p, q)
+
+        if left and right:
+            return root
+        if left:
+            return left
+        if right:
+            return right
+    # Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+    # According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants 
+    # (where we allow a node to be a descendant of itself).”
+    
+    # Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+    # Output: 5
+    # Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+    #     3
+    #    / \
+    #   5   1
+    #  / \ / \
+    # 6  2 0  8
+    #   / \
+    #  7   4
+
 
 class binarySearchTreeIterator173:
     def __init__(self, root: TreeNode):
@@ -275,10 +305,23 @@ print(obj.hasNext()) # return True
 print(obj.next()) # return 20
 print(obj.hasNext()) # return False
 
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+p = root.left        # Node with value 5
+q = root.left.right.right     # Node with value 4
+sol5 = m.lowestCommonAncestorOfABinaryTree236(root, p, q)
 
 print(sol1)
 print(sol2)
 print(sol3)
 print(sol4)
+print(sol5.val)
 
 

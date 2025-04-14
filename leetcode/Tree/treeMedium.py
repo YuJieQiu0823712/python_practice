@@ -242,6 +242,26 @@ class binarySearchTreeIterator173:
     #     /  \
     #    9    20
 
+nnn7 = Node(7)
+nnn3 = Node(3)
+nnn15 = Node(15)
+nnn9 = Node(9)
+nnn20 = Node(20)
+nnn7.left = nnn3
+nnn7.right = nnn15
+nnn15.left = nnn9
+nnn15.right = nnn20
+obj = binarySearchTreeIterator173(nnn7)
+print(obj.next()) # return 3
+print(obj.next()) # return 7
+print(obj.hasNext())# return True
+print(obj.next()) # return 9
+print(obj.hasNext()) # return True 
+print(obj.next()) # return 15
+print(obj.hasNext()) # return True
+print(obj.next()) # return 20
+print(obj.hasNext()) # return False
+
 
 
 
@@ -285,25 +305,7 @@ nn3.right = nn7
 output4 = m.populatingNextRightPointersInEachNodeII117(nn1)
 sol4 = print_tree_with_next(nn1)
 
-nnn7 = Node(7)
-nnn3 = Node(3)
-nnn15 = Node(15)
-nnn9 = Node(9)
-nnn20 = Node(20)
-nnn7.left = nnn3
-nnn7.right = nnn15
-nnn15.left = nnn9
-nnn15.right = nnn20
-obj = binarySearchTreeIterator173(nnn7)
-print(obj.next()) # return 3
-print(obj.next()) # return 7
-print(obj.hasNext())# return True
-print(obj.next()) # return 9
-print(obj.hasNext()) # return True 
-print(obj.next()) # return 15
-print(obj.hasNext()) # return True
-print(obj.next()) # return 20
-print(obj.hasNext()) # return False
+
 
 root = TreeNode(3)
 root.left = TreeNode(5)

@@ -159,6 +159,29 @@ class easySolution:
     #  / \     \
     # 3   7     18
 
+    def closestBinarySearchTreeValue270(self,root: TreeNode, target: float) -> int:
+        res = root.val
+        while root:
+            if abs(target - root.val) < abs(target - res):
+                res = root.val
+            if root.val < target:
+                root = root.right
+            else:
+                root = root.left
+        return res
+
+    # Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+    # Given target value is a floating point.
+    # You are guaranteed to have only one unique value in the BST that is closest to the target.
+    # Input: root = [10,5,15,3,7,null,18], target = 4.71
+    # Output: 5
+    #     10
+    #    /  \
+    #   5    15
+    #  / \     \
+    # 3   7     18
+      
+
 
 
 e = easySolution()
@@ -182,8 +205,13 @@ root.right = TreeNode(15)
 root.left.left = TreeNode(3)
 root.left.right = TreeNode(7)
 root.right.right = TreeNode(18)
-
 sol3 = e.rangeSumofBST938(root, 7, 15)
+
+
+sol4 = e.closestBinarySearchTreeValue270(root, 4.71)
+
+
 print(sol1)
 print(sol2)
 print(sol3)
+print(sol4)

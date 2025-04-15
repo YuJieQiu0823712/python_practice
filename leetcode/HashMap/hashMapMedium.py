@@ -149,8 +149,6 @@ class mediumSolution(object):
     # SC: O(n) 
 
 
-
-
 m = mediumSolution()
 sol1 = m.groupStrings249(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
 sol2 = m.ContinuousSubarraySum523([23,2,6,4,7],6)
@@ -423,3 +421,52 @@ print(randomizedSet.getRandom()) # return 1 or 2
 print(randomizedSet.remove(1)) # return True
 print(randomizedSet.insert(2)) # return false
 print(randomizedSet.getRandom()) #return 2
+
+
+
+class RandomNode:
+    def __init__(self, x: int, next: 'RandomNode' = None, random: 'RandomNode' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
+
+    def copyListWithRandomPointer138(self, head: RandomNode) -> RandomNode:
+        lookup = {None: None}
+        curr = head
+        while curr:
+            copy_node = Node(curr.val)
+            lookup[curr] = copy_node
+            curr = curr.next
+        curr = head
+        while curr:
+            curr_node = lookup[curr]
+            curr_node.next = lookup[curr.next]
+            curr_node.random = lookup[curr.random]
+            curr = curr.next
+        return lookup[head]
+    # A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.
+
+    # Construct a deep copy of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. 
+    # Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. 
+    # None of the pointers in the new list should point to nodes in the original list.
+    
+    # Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+    # Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+
+    # Explanation: The original linked list is represented as a 2D array where each element corresponds to a node in the list.
+    # +------+     +------+     +------+     +------+     +------+
+    # |  7   | --> | 13   | --> | 11   | --> | 10   | --> |  1   | --> null
+    # | null |     |  0   |     |  4   |     |  2   |     |  0   | (random pointer)
+    # +------+     +------+     +------+     +------+     +------+
+
+    # Random pointers:
+    # 7  -> null
+    # 13 -> 7
+    # 11 -> 1
+    # 10 -> 11
+    # 1  -> 7
+
+            
+
+

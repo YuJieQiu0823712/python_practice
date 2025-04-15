@@ -170,7 +170,7 @@ class easySolution:
                 root = root.left
         return res
 
-    # Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+    # Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target (-10^9 ~ 10^9).
     # Given target value is a floating point.
     # You are guaranteed to have only one unique value in the BST that is closest to the target.
     # Input: root = [10,5,15,3,7,null,18], target = 4.71

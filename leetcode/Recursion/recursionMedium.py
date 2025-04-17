@@ -26,7 +26,33 @@ class MediumSolution(object):
     # SC: O(n!) - space for the result list (curr_list shallow copy), n is the length of nums
 
 
+    def combinationSum(self, candidate: list[int], target: int) -> list[list[int]]:
+        self.res = []
+        def backtracking(candicate, temp_list, remainder, index):
+            # base case
+            if remainder == 0:
+                self.res.append(temp_list[:]) # shallow copy, otherwise the temp_list will be modified
+                return
+            if remainder < 0:
+                return
+            for i in range(index,len(candicate)): # previous candidates are not re-selected, avoiding permutations
+                temp_list.append(candidate[i])
+                backtracking(candidate, temp_list, remainder - candidate[i], i)
+                temp_list.pop()
+        backtracking(candidate, [], target, 0)
+        return self.res     
+
+  
+    # Input: candidates = [2,3,6,7], target = 7
+    # Output: [[2,2,3],[7]]
+    # Explanation:
+    # 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+    # 7 is a candidate, and 7 = 7.
+    # These are the only two combinations. 
+
 m = MediumSolution()
 sol1 = m.Permutations46([1,2,3])
+sol2 = m.combinationSum([2,3,6,7], 7)
 
 print(sol1)
+print(sol2)

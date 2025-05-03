@@ -40,9 +40,6 @@ class EasySolutions:
         # if stack is empty, all brackets are closed and matched, otherwise return False
 
 
-    
-
-
 
     def addStrings415(self, num1: str, num2: str) -> str:
         """
@@ -74,6 +71,7 @@ class EasySolutions:
         while num1_ptr >= 0 or num2_ptr >= 0 or carry > 0:
             if num1_ptr >= 0:
                 carry += (ord(num1[num1_ptr]) - ord('0'))
+                # '0' = 48
                 num1_ptr -= 1
             if num2_ptr >= 0:
                 carry += (ord(num2[num2_ptr]) - ord('0'))
@@ -106,5 +104,41 @@ class EasySolutions:
         # TC: O(max(num1,num2))
         # SC: O(max(num1,num2))
 
-    
 
+    def ValidPalindrome125(self,s: str) -> bool:
+        """
+        Check if the given string is a valid palindrome, considering only alphanumeric characters and ignoring cases.
+
+        A string is considered a palindrome if it reads the same forward and backward after:
+        - Converting all uppercase letters to lowercase
+        - Removing all non-alphanumeric characters (i.e., ignoring punctuation, spaces, and symbols)
+
+        Parameters:
+        ----------
+        s : str
+            The input string to evaluate
+
+        Returns:
+        -------
+        bool
+            True if the string is a valid palindrome, False otherwise
+        """
+        if not s:
+            return True
+        left = 0
+        right = len(s) -1
+        s = s.lower()
+        # valid_strings = 'abcdefghijklmnopurstuvwxyz0123456789'
+
+        while left < right:
+            # while left < right and s[left] not in valid_strings: 
+            while left < right and not s[left].isalnum(): 
+                # isalnum => check the char is character or number
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True 

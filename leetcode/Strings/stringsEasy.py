@@ -122,6 +122,10 @@ class EasySolutions:
         -------
         bool
             True if the string is a valid palindrome, False otherwise
+
+        TC: O(n)
+        SC: O(1)
+
         """
         if not s:
             return True
@@ -142,3 +146,42 @@ class EasySolutions:
             left += 1
             right -= 1
         return True 
+    
+    def validPalindromeII680(self, s:str) -> bool:
+        """
+        Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+        Parameters
+        -------
+        s : str
+            The input string to evaluate
+
+        Returns:
+        -------
+        bool
+            True if the string is a valid palindrome, False otherwise
+
+        TC: O(n)
+        SC: O(1)
+        """
+        def is_palindrome(s, left, right):
+            while left < right:
+                if s[left] != s[right]:
+                    return False
+                left += 1
+                right -= 1
+            return True
+
+        if not s:
+            return True
+
+        left = 0
+        right = len(s)-1 
+        while left < right:
+            if s[left] != s[right]:
+                return is_palindrome(s, left+1, right) or is_palindrome(s, left, right-1)
+            left += 1
+            right -= 1
+        return True
+    
+

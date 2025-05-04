@@ -19,3 +19,9 @@ def test_ValidPalindrome125():
     assert e.ValidPalindrome125("A man, a plan, a canal: Panama") == True
     assert e.ValidPalindrome125("race a car") == False
     assert e.ValidPalindrome125(" ") == True
+
+def test_validPalindromeII680():
+    e = EasySolutions()
+    assert e.validPalindromeII680("aba") == True
+    assert e.validPalindromeII680("abcbda") == True
+    assert e.validPalindromeII680("abc") == False

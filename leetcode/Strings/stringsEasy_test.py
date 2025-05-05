@@ -1,6 +1,6 @@
 from stringsEasy import EasySolutions
 
-def test_validParentheses20() :
+def test_validParentheses20():
     e = EasySolutions()
     assert e.validParentheses20("()[]{}") == True
     assert e.validParentheses20("(]") == False

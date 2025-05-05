@@ -1,5 +1,30 @@
 class MediumSolution(object):
     def longestPalindromicSubstring5(self, s: str) -> str:
+        """
+        Finds the longest palindromic substring in a given string `s`.
+
+        A palindrome is a string that reads the same backward as forward.
+        This function uses the "expand around center" technique to check for palindromes
+        by considering each character (and each pair of characters) as potential centers.
+
+        Parameters
+        ----------
+        s : str
+            The input string consisting of digits and/or English letters.
+
+        Returns
+        -------
+        str
+            The longest palindromic substring found in `s`.
+
+        Constraints
+        -----------
+        - 1 <= len(s) <= 1000
+        - s consists only of digits and English letters.
+
+        # TC: O(n^2) - n is the length of s, for each character, we expand around it to find the longest palindrome
+        # SC: O(1) - no extra space used, only variables for the longest palindrome and the left and right pointers
+        """
         longest = ""
         def helper(s,left,right):
             while left >= 0 and right < len(s) and s[left] == s[right]:
@@ -16,18 +41,25 @@ class MediumSolution(object):
                 longest = word2
         return longest 
 
-    # Given a string s, return the longest palindromic substring in s.
-    # Input: s = "babad"
-    # Output: "bab"
-    # Explanation: "aba" is also a valid answer.
+    def minimumRemoveToMakeValidParentheses1249(self, s: str) -> str:
+        s_list = list(s)
+        flag = 0
+        for i in range(len(s_list)):
+            if s_list[i] == "(":
+                flag += 1
+            elif s_list[i] == ")":
+                if flag > 0:
+                    flag -= 1
+                else:
+                    s_list[i] = ""
+        flag = 0
+        for i in range(len(s_list)-1,-1,-1):
+            if s_list[i] == ")":
+                flag += 1
+            elif s_list[i] == "(":
+                if flag > 0:
+                    flag -= 1 
+                else:
+                    s_list[i] = ""
+        return "".join(s_list)
 
-    # Constraints:
-    # 1 <= s.length <= 1000
-    # s consist of only digits and English letters.
-
-    # TC: O(n^2) - n is the length of s, for each character, we expand around it to find the longest palindrome
-    # SC: O(1) - no extra space used, only variables for the longest palindrome and the left and right pointers
-
-m = MediumSolution()
-sol1 = m.longestPalindromicSubstring5("babad")
-print(sol1)

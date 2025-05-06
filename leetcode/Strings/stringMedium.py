@@ -62,4 +62,44 @@ class MediumSolution(object):
                 else:
                     s_list[i] = ""
         return "".join(s_list)
+    
+class DesignAddAndSearchWordsDataStructure211():
+    """
+    Your WordDictionary object will be instantiated and called as such:
+    obj = WordDictionary()
+    obj.addWord(word)
+    param_2 = obj.search(word)
+    """
+    def __init__(self):
+        self.lookup = {} 
+
+
+    def addWord(self, word: str) -> None:
+        length = len(word)
+
+        if length not in self.lookup:
+            self.lookup[length] = [word]
+        else:
+            self.lookup[length].append(word)
+
+
+    def search(self, word: str) -> bool:
+        length = len(word)
+        if length not in self.lookup:
+            return False
+
+        for item in self.lookup[length]: 
+            matched = False   
+            for i in range(length):
+                if word[i] == item[i] or word[i] == "." :
+                    matched = True
+                else:
+                    matched = False
+                    break
+            if matched:
+                return True
+        return False
+         
+
+                
 

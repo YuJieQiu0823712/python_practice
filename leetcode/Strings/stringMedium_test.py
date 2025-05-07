@@ -22,3 +22,8 @@ def test_DesignAddAndSearchWordsDataStructure211():
     assert lookup.search("bad") == True
     assert lookup.search(".ad") == True
     assert lookup.search("b..") == True
+
+def test_minimumAddToMakeParenthesesValid921():
+    m = MediumSolution()
+    assert m.minimumAddToMakeParenthesesValid921("())") == 1
+    assert m.minimumAddToMakeParenthesesValid921("(((") == 3

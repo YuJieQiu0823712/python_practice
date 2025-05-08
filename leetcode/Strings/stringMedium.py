@@ -52,11 +52,13 @@ class MediumSolution(object):
 
         Parameters
         ----------
-            s (str): The input string containing letters and parentheses.
+        s : str
+            The input string containing letters and parentheses.
 
         Returns
         -------
-            str: A valid string with the minimum number of parentheses removed.
+        str
+            A valid string with the minimum number of parentheses removed.
        
         TC: O(n)
         SC: O(n) 
@@ -86,13 +88,15 @@ class MediumSolution(object):
         """
         Returns the minimum number of parentheses insertions needed to make the input string valid.
         
-        Parameters:
+        Parameters
         -----------
-            s (str): A string consisting of '(' and ')' characters.
+        s : str
+            A string consisting of '(' and ')' characters.
 
         Returns:
         -----------
-            int: The minimum number of insertions required to make the string valid.
+        int
+            The minimum number of insertions required to make the string valid.
 
         Constraints
         -----------
@@ -111,6 +115,54 @@ class MediumSolution(object):
             elif char == ")":
                 close += 1
         return open + close
+
+    def basicCalculatorII227(self, s: str) -> int:
+        """
+        Evaluates a basic arithmetic expression given as a string `s` containing non-negative integers,
+        operators ('+', '-', '*', '/'), and optional whitespace. The expression is always valid.
+
+        Parameters
+        -----------
+        s: str
+            A valid arithmetic expression string
+    
+        Returns
+        -----------
+        int
+            The result of evaluating the expression
+
+        TC: O(n)
+        SC: O(n) 
+        """
+        if not s:
+            return 0
+        
+        stack = []
+        curr_num = 0
+        operator = "+" # s is a valid expression, so the first number in s should be "positive"
+        operators = {"+","-","*","/"}
+        nums = set(str(x) for x in range(10))
+
+        for idx, char in enumerate(s):
+            if char in nums:
+                curr_num = curr_num * 10 + (ord(char) - ord("0"))
+            if char in operators or idx == len(s)-1:
+                if operator == "+":
+                    stack.append(curr_num)
+                elif operator == "-":
+                    stack.append(-curr_num)
+                elif operator == "*":
+                    temp_num = stack.pop()
+                    stack.append(temp_num * curr_num)
+                else:
+                    temp_num = stack.pop()
+                    stack.append(int(temp_num / curr_num))
+                operator = char
+                curr_num = 0
+        return sum(stack)
+
+
+
 
     
 class DesignAddAndSearchWordsDataStructure211():

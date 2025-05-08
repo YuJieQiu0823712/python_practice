@@ -27,3 +27,8 @@ def test_minimumAddToMakeParenthesesValid921():
     m = MediumSolution()
     assert m.minimumAddToMakeParenthesesValid921("())") == 1
     assert m.minimumAddToMakeParenthesesValid921("(((") == 3
+
+def test_basicCalculatorII227():
+    m = MediumSolution()
+    assert m.basicCalculatorII227("3/2") == 1
+    assert m.basicCalculatorII227("14-3 /2+5*2") == 23

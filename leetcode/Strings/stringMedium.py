@@ -161,7 +161,23 @@ class MediumSolution(object):
                 curr_num = 0
         return sum(stack)
 
+    def groupShiftedStrings249(self, strings: List[str]) -> List[List[str]]:
+        output = collections.defaultdict(list)
 
+        for string in strings:
+            shift_sequence = ()
+            for char in string:
+                shift_sequence += (ord(char) - ord(string[0])) % 26,
+            output[shift_sequence].append(string)
+            return output.values()
+
+
+    # Input: arr[] = [“acd”, “dfg”, “wyz”, “yab”, “mop”, “bdfh”, “a”, “x”, “moqs”]
+    # Output: [ [“acd”, “dfg”, “wyz”, “yab”, “mop”], [“bdfh”, “moqs”], [“a”, “x”] ]
+    # Explanation: All shifted strings are grouped together.
+
+    # Input: arr = [“geek”, “for”, “geeks”]
+    # Output: [[“for”], [“geek”], [“geeks”]]
 
 
     

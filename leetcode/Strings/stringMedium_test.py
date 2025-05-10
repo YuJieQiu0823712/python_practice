@@ -32,3 +32,11 @@ def test_basicCalculatorII227():
     m = MediumSolution()
     assert m.basicCalculatorII227("3/2") == 1
     assert m.basicCalculatorII227("14-3 /2+5*2") == 23
+
+def test_groupShiftedStrings249():
+    m = MediumSolution()
+    result = m.groupShiftedStrings249(["acd", "dfg", "wyz", "yab", "mop", "bdfh", "a", "x", "moqs"])
+    expected = [ ["acd", "dfg", "wyz", "yab", "mop"], ["bdfh", "moqs"], ["a", "x"] ]
+    
+    # Normalize to avoid order issues
+    assert sorted([sorted(group) for group in result]) == sorted([sorted(group) for group in expected])

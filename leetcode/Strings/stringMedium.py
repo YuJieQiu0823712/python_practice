@@ -1,3 +1,5 @@
+import collections
+
 class MediumSolution(object):
     def longestPalindromicSubstring5(self, s: str) -> str:
         """
@@ -161,23 +163,38 @@ class MediumSolution(object):
                 curr_num = 0
         return sum(stack)
 
-    def groupShiftedStrings249(self, strings: List[str]) -> List[List[str]]:
+    def groupShiftedStrings249(self, strings: list[str]) -> list[list[str]]:
+        """
+        Groups shifted strings from the input list.
+
+        Two strings are considered shifted versions of each other if:
+            1. They are the same length.
+            2. Each character in one string can be shifted by a constant number (modulo 26)
+            to get the corresponding character in the other string.
+            The shift is cyclic, i.e., after 'z' comes 'a'.
+            
+        Parameters
+        -----------
+        strings: List[str]
+            A list of lowercase alphabetic strings.
+
+        Returns
+        -----------
+        List[List[str]]
+            A list of grouped lists, where each sublist contains strings that are shifted versions of each other.
+
+
+        TC: O(n)
+        SC: O(n) 
+        """
         output = collections.defaultdict(list)
 
         for string in strings:
             shift_sequence = ()
             for char in string:
-                shift_sequence += (ord(char) - ord(string[0])) % 26,
+                shift_sequence += (ord(char) - ord(string[0])) % 26, # tuple, immutable
             output[shift_sequence].append(string)
-            return output.values()
-
-
-    # Input: arr[] = [“acd”, “dfg”, “wyz”, “yab”, “mop”, “bdfh”, “a”, “x”, “moqs”]
-    # Output: [ [“acd”, “dfg”, “wyz”, “yab”, “mop”], [“bdfh”, “moqs”], [“a”, “x”] ]
-    # Explanation: All shifted strings are grouped together.
-
-    # Input: arr = [“geek”, “for”, “geeks”]
-    # Output: [[“for”], [“geek”], [“geeks”]]
+        return output.values()
 
 
     

@@ -21,7 +21,7 @@ def linked_list_to_list(node):
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
     ([2,4,3],[5,6,4],[7,0,8]),
     ([9,9,9],[1],[0,0,0,1])
-    # ([1,8],[0],[1,8])
+    ([1,8],[0],[1,8])
 ])
 
 def test_addTwoNumbers2(l1_vals, l2_vals, expected):

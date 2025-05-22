@@ -1,5 +1,5 @@
 import pytest
-from linkedListMedium import MediumSolution, ListNode
+from linkedListEasy import EasySolution, ListNode
 
 # Helper to convert list to linked list
 def list_to_linked_list(lst):
@@ -18,15 +18,17 @@ def linked_list_to_list(node):
         node = node.next
     return result
 
+
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
-    ([2,4,3],[5,6,4],[7,0,8]),
-    ([9,9,9],[1],[0,0,0,1]),
-    ([1,8],[0],[1,8])
+    ([1,2,5], [2,4,6], [1,2,2,4,5,6]),
+    ([], [], []),
+    ([], [0], [0])
 ])
 
-def test_addTwoNumbers2(l1_vals, l2_vals, expected):
-    m = MediumSolution()
+def test_mergeTwoSortedLists2(l1_vals, l2_vals, expected):
+    e = EasySolution()
     l1 = list_to_linked_list(l1_vals)
     l2 = list_to_linked_list(l2_vals)
-    result = linked_list_to_list(m.addTwoNumbers2(l1,l2))
+    result = linked_list_to_list(e.mergeTwoSortedLists2(l1, l2))
     assert result == expected
+

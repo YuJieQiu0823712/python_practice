@@ -25,7 +25,7 @@ def linked_list_to_list(node):
     ([], [0], [0])
 ])
 
-def test_mergeTwoSortedLists2(l1_vals, l2_vals, expected):
+def test_mergeTwoSortedLists21(l1_vals, l2_vals, expected):
     e = EasySolution()
     l1 = list_to_linked_list(l1_vals)
     l2 = list_to_linked_list(l2_vals)

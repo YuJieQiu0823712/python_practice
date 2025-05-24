@@ -29,6 +29,9 @@ class MediumSolution:
 
         Returns:
             Optional[ListNode]: The head of the linked list representing the sum
+
+        TC: O(n)
+        SC: O(1)    
         """
         if not l1:
             return l2
@@ -62,19 +65,54 @@ class MediumSolution:
         
         return dummy.next
 
-# class DesignLinkedList:
-#     def __init__(self):
+class DesignLinkedList:
+    def __init__(self):
+        self.head = ListNode(-1)
+        self.length = 0
 
-#     def get(self, index: int) -> int:
-        
+    def get(self, index: int) -> int:
+        if index < 0 or index >= self.length:
+            return -1
+        dummy_head = self.head
 
-#     def addAtHead(self, val: int) -> None:
-        
+        for _ in range(index + 1):
+            dummy_head = dummy_head.next
 
-#     def addAtTail(self, val: int) -> None:
-        
+        return dummy_head.val
 
-#     def addAtIndex(self, index: int, val: int) -> None:
-        
+    def addAtHead(self, val: int) -> None:
+        new_node = ListNode(val)
+        new_node.next = self.head.next
+        self.head.next = new_node
+        self.length += 1
 
-#     def deleteAtIndex(self, index: int) -> None:
+    def addAtTail(self, val: int) -> None:
+        dummy_head = self.head
+        new_node = ListNode(val)
+
+        for _ in range(self.length):
+            dummy_head = dummy_head.next
+
+        dummy_head.next = new_node
+        self.length += 1
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        dummy_head = self.head
+        new_node = ListNode(val)
+
+        for _ in range(index):
+            dummy_head = dummy_head.next
+
+        new_node.next = dummy_head.next
+        dummy_head.next = new_node
+        self.length += 1
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.length:
+            return
+
+        dummy_head = self.head
+        for _ in range(index):
+            dummy_head = dummy_head.next
+        dummy_head.next = dummy_head.next.next
+        self.length -= 1

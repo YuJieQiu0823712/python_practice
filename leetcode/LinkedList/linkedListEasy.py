@@ -18,7 +18,7 @@ class EasySolution:
         
         return False
 
-    def mergeTwoSortedLists2(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    def mergeTwoSortedLists21(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         """
         Merge two sorted singly linked lists into one sorted linked list.
 

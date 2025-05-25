@@ -65,12 +65,20 @@ class MediumSolution:
         
         return dummy.next
 
-class DesignLinkedList:
+class DesignLinkedList707:
     def __init__(self):
+        """
+        Initialize your data structure here.
+        """
         self.head = ListNode(-1)
         self.length = 0
 
     def get(self, index: int) -> int:
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, retrun -1.
+        TC: O(n)
+        SC: O(1)
+        """
         if index < 0 or index >= self.length:
             return -1
         dummy_head = self.head
@@ -81,12 +89,23 @@ class DesignLinkedList:
         return dummy_head.val
 
     def addAtHead(self, val: int) -> None:
+        """
+        Add a node of value val before the first element of the linked list. 
+        After the insertion, the new node will be the head of the linked list.
+        TC: O(1)
+        SC: O(1) 
+        """
         new_node = ListNode(val)
         new_node.next = self.head.next
         self.head.next = new_node
         self.length += 1
 
     def addAtTail(self, val: int) -> None:
+        """
+        Append a node of value val to the last element of the linked list.
+        TC: O(n)
+        SC: O(1) 
+        """
         dummy_head = self.head
         new_node = ListNode(val)
 
@@ -97,6 +116,13 @@ class DesignLinkedList:
         self.length += 1
 
     def addAtIndex(self, index: int, val: int) -> None:
+        """
+        Add a node of value val before the index-th node in the linked list. 
+        If index equals to the length of linked list will be appended to the end of linked list.
+        If index is greater than the length, the node will not be inserted.
+        TC: O(n)
+        SC: O(1) 
+        """
         dummy_head = self.head
         new_node = ListNode(val)
 
@@ -108,6 +134,11 @@ class DesignLinkedList:
         self.length += 1
 
     def deleteAtIndex(self, index: int) -> None:
+        """
+        Delete the index-th node in the linked list, if the index is valid.
+        TC: O(n)
+        SC: O(1) 
+        """
         if index < 0 or index >= self.length:
             return
 

@@ -7,6 +7,23 @@ class ListNode:
 
 class EasySolution:
     def linkedListCycle141(self, head: Optional[ListNode]) -> bool:
+        """
+        Detects if a linked list has a cycle using Floyd's Tortoise and Hare algorithm.
+
+        Args:
+            head (Optional[ListNode]): The head of the singly linked list.
+
+        Returns:
+            bool: True if there is a cycle in the linked list, False otherwise.
+
+        Approach:
+            - Uses two pointers: 'slow' moves one step at a time, 'fast' moves two steps.
+            - If there is a cycle, the fast pointer will eventually meet the slow pointer.
+            - If the fast pointer reaches the end (null), there is no cycle.
+
+        TC: O(n)
+        SC: O(1)
+        """
         slow = fast = head
         
         while fast and fast.next:
@@ -22,7 +39,7 @@ class EasySolution:
         """
         Merge two sorted singly linked lists into one sorted linked list.
 
-        args:
+        Args:
             list1 (Optional[ListNode]): The head of the first sorted linked list.
             list2 (Optional[ListNode]): The head of the second sorted linked list.
 

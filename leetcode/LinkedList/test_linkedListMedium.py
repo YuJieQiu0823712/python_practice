@@ -1,5 +1,6 @@
 import pytest
-from linkedListMedium import MediumSolution, ListNode
+from linkedListMedium import MediumSolution, ListNode, DesignLinkedList707
+
 
 # Helper to convert list to linked list
 def list_to_linked_list(lst):
@@ -30,3 +31,12 @@ def test_addTwoNumbers2(l1_vals, l2_vals, expected):
     l2 = list_to_linked_list(l2_vals)
     result = linked_list_to_list(m.addTwoNumbers2(l1,l2))
     assert result == expected
+
+def test_DesignLinkedList707():
+    myLinkedList = DesignLinkedList707()
+    assert myLinkedList.addAtHead(1) is None
+    assert myLinkedList.addAtTail(3) is None
+    assert myLinkedList.addAtIndex(1, 2) is None  # List: 1->2->3
+    assert myLinkedList.get(1) == 2
+    assert myLinkedList.deleteAtIndex(1) is None  # List becomes: 1->3
+    assert myLinkedList.get(1) == 3

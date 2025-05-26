@@ -14,6 +14,11 @@ class ListNode:
     def __repr__(self):
         return f"{self.val} -> {self.next}"
 
+class Node:
+    def __init__(self, val, left=None, right =None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 class MediumSolution:
     def addTwoNumbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -64,6 +69,35 @@ class MediumSolution:
             head.next = ListNode(1)
         
         return dummy.next
+
+    def convertBinarySearchTreeToSortedDoublyLinkedList426(self, root: 'Node') -> 'Node':
+        if not root:
+            return
+        
+        prev = None
+        head = None
+        stack = [] # LIFO  (< 987)
+        curr = root
+
+        while stack or cuur:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            if not prev:
+                head = curr
+            else:
+                prev.right = curr
+                curr.left = prev
+            prev = curr
+            curr = curr.right
+        head.left = prev
+        prev.right = head
+        return head
+
+
+
+
 
 class DesignLinkedList707:
     def __init__(self):

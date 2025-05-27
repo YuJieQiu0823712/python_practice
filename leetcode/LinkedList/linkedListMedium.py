@@ -71,29 +71,78 @@ class MediumSolution:
         return dummy.next
 
     def convertBinarySearchTreeToSortedDoublyLinkedList426(self, root: 'Node') -> 'Node':
+        """
+        Converts a Binary Search Tree (BST) to a circular, sorted, doubly linked list in-place.
+
+        Each node's left and right pointers are used as the previous and next pointers in the resulting doubly linked list.
+        The in-order traversal of the BST is used to maintain the ascending order in the list.
+
+        If the BST is empty (i.e., root is None), the function returns None.
+
+        Args:
+            root (Node): The root of the binary search tree.
+
+        Returns:
+            Node: The head of the circular, sorted, doubly linked list.
+            
+        TC: O(n)
+        SC: O(n)  
+        """
+        # 1 recursive
+        # edge case
         if not root:
             return
-        
-        prev = None
-        head = None
-        stack = [] # LIFO  (< 987)
-        curr = root
 
-        while stack or cuur:
-            while curr:
-                stack.append(curr)
-                curr = curr.left
-            curr = stack.pop()
-            if not prev:
-                head = curr
+        self.prev = None
+        self.head = None
+
+        def in_order(curr):
+            # base case
+            if not curr:
+                return
+
+            in_order(curr.left)
+            if not self.prev:
+                self.head = curr
             else:
-                prev.right = curr
-                curr.left = prev
-            prev = curr
-            curr = curr.right
-        head.left = prev
-        prev.right = head
-        return head
+                self.prev.right = curr
+                curr.left = self.prev
+            self.prev = curr
+            in_order(curr.right)
+
+        in_order(root)
+        self.prev.right = self.head
+        self.head.left = self.prev
+        return self.head
+
+        # 2 iterative (if tree is really big use this strategy, otherwise it may has stack overflow)
+        # if not root:
+        #     return
+        
+        # prev = None
+        # head = None
+
+        # stack = [] 
+        # # LIFO => Python has a default recursion limit of around 1000 
+        # # (often 996–998 or 987, depending on your system and version).
+        
+        # curr = root
+
+        # while stack or cuur:
+        #     while curr:
+        #         stack.append(curr)
+        #         curr = curr.left
+        #     curr = stack.pop()
+        #     if not prev:
+        #         head = curr
+        #     else:
+        #         prev.right = curr
+        #         curr.left = prev
+        #     prev = curr
+        #     curr = curr.right
+        # head.left = prev
+        # prev.right = head
+        # return head
 
 
 

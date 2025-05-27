@@ -1,5 +1,5 @@
 import pytest
-from linkedListMedium import MediumSolution, ListNode, DesignLinkedList707
+from linkedListMedium import MediumSolution, ListNode, Node, DesignLinkedList707
 
 
 # Helper to convert list to linked list
@@ -12,11 +12,24 @@ def list_to_linked_list(lst):
     return dummy.next
 
 # Helper to convert linked list to list
-def linked_list_to_list(node):
+def linked_list_to_list(ListNode):
     result = []
-    while node:
-        result.append(node.val)
-        node = node.next
+    while ListNode:
+        result.append(ListNode.val)
+        ListNode = ListNode.next
+    return result
+
+# Helper to convert doubly linked list to list
+def doubly_linked_list_to_list(head: Node, count=100):
+    if not head:
+        return []
+    result = []
+    curr = head
+    for _ in range(count):
+        result.append(curr.val)
+        curr = curr.right
+        if curr == head:
+            break
     return result
 
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
@@ -31,6 +44,18 @@ def test_addTwoNumbers2(l1_vals, l2_vals, expected):
     l2 = list_to_linked_list(l2_vals)
     result = linked_list_to_list(m.addTwoNumbers2(l1,l2))
     assert result == expected
+
+@pytest.mark.parametrize("tree_nodes, expected",[
+    (Node(4, Node(2, Node(1), Node(3)), Node(5)),  [1, 2, 3, 4, 5]),
+    (Node(10, None, Node(20, None, Node(30))), [10, 20, 30])
+])
+
+def test_convertBinarySearchTreeToSortedDoublyLinkedList426(tree_nodes, expected):
+    m = MediumSolution()
+    head = m.convertBinarySearchTreeToSortedDoublyLinkedList426(tree_nodes)
+    result = doubly_linked_list_to_list(head)
+    assert result == expected
+
 
 def test_DesignLinkedList707():
     myLinkedList = DesignLinkedList707()

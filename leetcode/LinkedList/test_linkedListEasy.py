@@ -18,6 +18,34 @@ def linked_list_to_list(node):
         node = node.next
     return result
 
+# Helper function to create a linked list with a cycle
+def create_cyclic_linked_list(values, pos):
+    """
+    Create a cyclic linked list from values.
+    If pos >= 0, the last node will link to the node at index pos to form a cycle.
+    """
+    if not values:
+        return None
+
+    nodes = [ListNode(val) for val in values]
+    for i in range(len(nodes) - 1):
+        nodes[i].next = nodes[i+1]
+    
+    if pos != -1:
+        nodes[-1].next = nodes[pos]
+    
+    return nodes[0]
+
+@pytest.mark.parametrize("values, pos, expected", [
+    ([3,2,0,4], 1, True), # cycle at node with value 2
+    ([1,2,3], -1, False),  # no cycle
+    ([1], -1, False) # single node, no cycle
+])
+
+def test_linkedListCycle141(values, pos, expected):
+    e = EasySolution()
+    head = create_cyclic_linked_list(values, pos)
+    assert e.linkedListCycle141(head) == expected
 
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
     ([1,2,5], [2,4,6], [1,2,2,4,5,6]),

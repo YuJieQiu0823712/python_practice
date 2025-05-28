@@ -25,6 +25,8 @@ class EasySolution:
         SC: O(1)
         """
         slow = fast = head
+        # slow = head
+        # fast = head
         
         while fast and fast.next:
             fast = fast.next.next
@@ -49,6 +51,8 @@ class EasySolution:
         TC: O(n)
         SC: O(1)
         """
+
+        # method 1
         dummy = ListNode()
         tail = dummy
 
@@ -65,7 +69,7 @@ class EasySolution:
         tail.next = list1 if list1 else list2
         return dummy.next
 
-
+        # method 2
         # i = 0
         # j = 0
         # while i < len(list1) and j < len(list2):

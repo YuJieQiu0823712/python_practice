@@ -1,5 +1,5 @@
 import pytest
-from linkedListMedium import MediumSolution, ListNode, Node, DesignLinkedList707
+from linkedListMedium import MediumSolution, ListNode, Node, DesignLinkedList707, LRUCache146
 
 
 # Helper to convert list to linked list
@@ -32,6 +32,7 @@ def doubly_linked_list_to_list(head: Node, count=100):
             break
     return result
 
+
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
     ([2,4,3],[5,6,4],[7,0,8]),
     ([9,9,9],[1],[0,0,0,1]),
@@ -44,6 +45,7 @@ def test_addTwoNumbers2(l1_vals, l2_vals, expected):
     l2 = list_to_linked_list(l2_vals)
     result = linked_list_to_list(m.addTwoNumbers2(l1,l2))
     assert result == expected
+
 
 @pytest.mark.parametrize("tree_nodes, expected",[
     (Node(4, Node(2, Node(1), Node(3)), Node(5)),  [1, 2, 3, 4, 5]),
@@ -65,3 +67,16 @@ def test_DesignLinkedList707():
     assert myLinkedList.get(1) == 2
     assert myLinkedList.deleteAtIndex(1) is None  # List becomes: 1->3
     assert myLinkedList.get(1) == 3
+
+
+def test_LRUCache146():
+    lru = LRUCache146(2)
+    lru.put(1, 1)                     # cache: {1=1}
+    lru.put(2, 2)                     # cache: {1=1, 2=2}
+    assert lru.get(1) == 1           # cache: {2=2, 1=1}
+    lru.put(3, 3)                     # evicts key 2, cache: {1=1, 3=3}
+    assert lru.get(2) == -1
+    lru.put(4, 4)                     # evicts key 1, cache: {3=3, 4=4}
+    assert lru.get(1) == -1
+    assert lru.get(3) == 3
+    assert lru.get(4) == 4

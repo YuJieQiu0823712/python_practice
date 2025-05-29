@@ -20,6 +20,13 @@ class Node:
         self.left = left
         self.right = right
 
+class MapNode:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
 class MediumSolution:
     def addTwoNumbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         """
@@ -146,8 +153,6 @@ class MediumSolution:
 
 
 
-
-
 class DesignLinkedList707:
     def __init__(self):
         """
@@ -224,9 +229,82 @@ class DesignLinkedList707:
         """
         if index < 0 or index >= self.length:
             return
-
+            
         dummy_head = self.head
         for _ in range(index):
             dummy_head = dummy_head.next
         dummy_head.next = dummy_head.next.next
         self.length -= 1
+
+
+
+class LRUCache146:
+    """
+    Implements an LRU (Least Recently Used) Cache with a fixed capacity.
+
+    It supports O(1) get and put operations by using:
+    - A hashmap (dictionary) for fast key lookup.
+    - A doubly linked list to track the order of usage (most recently used to least recently used).
+
+    Methods:
+        get (key): Return the value if key exists, else -1.
+        put (key, value): Add or update the value; evicts least recently used if over capacity.
+    """
+    def __init__(self, capacity: int):
+        """
+        Initialize the cache with a fixed capacity.
+        """
+        self.capacity = capacity
+        self.lookup = {}
+        self.head = MapNode(None,None)
+        self.tail = MapNode(None,None)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def _add_node(self, node):
+        """
+        Add a node right before the tail (most recently used).
+        """
+        prev_node = self.tail.prev
+        prev_node.next = node
+        node.prev = prev_node
+        node.next = self.tail
+        self.tail.prev = node
+    
+    def _remove_node(self, node):
+        """
+        Remove a node from the doubly linked list.
+        """
+        prev_node = node.prev
+        prev_node.next = node.next
+        node.next.prev = prev_node
+    
+    def get(self, key: int) -> int:
+        """
+        Return the value of the key if present, else return -1.
+        Also moves the accessed node to the most recently used position.
+        TC: O(1)
+        """
+        if key not in self.lookup:
+            return -1
+        node = self.lookup[key]
+        self._remove_node(node)
+        self._add_node(node)
+        return node.val
+
+    def put(self, key: int, value: int) -> None:
+        """
+        Add a key-value pair to the cache. If the key already exists, update its value and move to most recent.
+        If the cache exceeds capacity, evict the least recently used entry.
+        TC: O(1)
+        """
+        if key in self.lookup:
+            self._remove_node(self.lookup[key])
+        elif self.capacity == len(self.lookup):
+            lru = self.head.next
+            self._remove_node(lru)
+            del self.lookup[lru.key]
+        new_node = MapNode(key,value)
+        self._add_node(new_node)
+        self.lookup[new_node.key] = new_node
+

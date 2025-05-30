@@ -151,6 +151,30 @@ class MediumSolution:
         # prev.right = head
         # return head
 
+    def insertIntoASortedCircularLinkedList708(self, head:'ListNode', insertVal: int) -> 'ListNode':
+        if not head:
+            head = ListNode(insertVal)
+            head.next = head
+            return head
+        
+        prev = head
+        next_node = head.next
+        while True:
+            if prev.val <= inserVal <= next_node.val:
+                break
+            elif prev.val > next_node.val and (inserVal > prev.val or insertVal < next_node.val):
+                break
+                
+            prev = next_node
+            next_node = next_node.next
+
+            if prev == head:
+                break
+        new_node = ListNode(insertVal)
+        prev.next = new_node
+        new_node.next = next_node
+        return head
+
 
 
 class DesignLinkedList707:

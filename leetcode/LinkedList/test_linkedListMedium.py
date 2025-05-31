@@ -28,7 +28,31 @@ def doubly_linked_list_to_list(head: Node, count=100):
     for _ in range(count):
         result.append(curr.val)
         curr = curr.right
-        if curr == head:
+        if curr is head:
+            break
+    return result
+
+# Helper to build circular list
+def build_circular_list(values):
+    if not values:
+        return None
+    head = ListNode(values[0])
+    curr = head
+    for val in values[1:]:
+        node = ListNode(val)
+        curr.next = node
+        curr = node
+    curr.next = head # make it circular
+    return head
+
+# Helper to onvert circular linked list to list
+def to_list(head, limit=100):
+    result = []
+    curr = head
+    for _ in range(limit):
+        result.append(curr.val)
+        curr = curr.next
+        if curr is head: # not curr == head, this causes recursion
             break
     return result
 
@@ -59,6 +83,19 @@ def test_convertBinarySearchTreeToSortedDoublyLinkedList426(tree_nodes, expected
     assert result == expected
 
 
+@pytest.mark.parametrize("input_list, insert_val, expected_sorted", [
+    ([5, 6, 2], 1, [1, 2, 5, 6]),
+    ([5, 6, 2], 7, [2, 5, 6, 7])    
+])
+
+def test_insertIntoASortedCircularLinkedList708(input_list, insert_val, expected_sorted):
+    m = MediumSolution()
+    head = build_circular_list(input_list)
+    new_head = m.insertIntoASortedCircularLinkedList708(head, insert_val)
+    result = sorted(to_list(new_head))
+    assert result == sorted(expected_sorted)
+
+
 def test_DesignLinkedList707():
     myLinkedList = DesignLinkedList707()
     assert myLinkedList.addAtHead(1) is None
@@ -71,12 +108,12 @@ def test_DesignLinkedList707():
 
 def test_LRUCache146():
     lru = LRUCache146(2)
-    lru.put(1, 1)                     # cache: {1=1}
-    lru.put(2, 2)                     # cache: {1=1, 2=2}
-    assert lru.get(1) == 1           # cache: {2=2, 1=1}
-    lru.put(3, 3)                     # evicts key 2, cache: {1=1, 3=3}
+    lru.put(1, 1)              # cache: {1=1}
+    lru.put(2, 2)              # cache: {1=1, 2=2}
+    assert lru.get(1) == 1     # cache: {2=2, 1=1}
+    lru.put(3, 3)              # evicts key 2, cache: {1=1, 3=3}
     assert lru.get(2) == -1
-    lru.put(4, 4)                     # evicts key 1, cache: {3=3, 4=4}
+    lru.put(4, 4)              # evicts key 1, cache: {3=3, 4=4}
     assert lru.get(1) == -1
     assert lru.get(3) == 3
     assert lru.get(4) == 4

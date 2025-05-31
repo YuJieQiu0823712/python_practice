@@ -152,6 +152,23 @@ class MediumSolution:
         # return head
 
     def insertIntoASortedCircularLinkedList708(self, head:'ListNode', insertVal: int) -> 'ListNode':
+        """
+        Inserts a value into a sorted circular singly linked list and returns the head of the updated list.
+
+        The list is sorted in ascending order and circular in nature, meaning the tail connects back to the head.
+        This function handles:
+        - Insertion into an empty list.
+        - Insertion into the correct place in a sorted circular list.
+        - Insertion when all nodes have the same value.
+        - Insertion at the rotation point where max value connects to min value.
+
+        Parameters:
+            head (ListNode): A reference to any node in the circular linked list.
+            insertVal (int): The value to insert into the list.
+
+        Returns:
+            ListNode: The head node of the updated circular linked list.
+        """
         if not head:
             head = ListNode(insertVal)
             head.next = head
@@ -159,10 +176,11 @@ class MediumSolution:
         
         prev = head
         next_node = head.next
+        
         while True:
-            if prev.val <= inserVal <= next_node.val:
+            if prev.val <= insertVal <= next_node.val:
                 break
-            elif prev.val > next_node.val and (inserVal > prev.val or insertVal < next_node.val):
+            elif prev.val > next_node.val and (insertVal > prev.val or insertVal < next_node.val):
                 break
                 
             prev = next_node
@@ -170,6 +188,7 @@ class MediumSolution:
 
             if prev == head:
                 break
+
         new_node = ListNode(insertVal)
         prev.next = new_node
         new_node.next = next_node

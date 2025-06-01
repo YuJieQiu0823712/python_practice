@@ -27,6 +27,13 @@ class MapNode:
         self.prev = None
         self.next = None
 
+class RandomNode:
+    def __init__(self, x: int, next: 'RandomNode' = None, random: 'RandomNode' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
+
 class MediumSolution:
     def addTwoNumbers2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         """
@@ -168,6 +175,9 @@ class MediumSolution:
 
         Returns:
             ListNode: The head node of the updated circular linked list.
+
+        TC: O(n)
+        SC: O(1)  
         """
         if not head:
             head = ListNode(insertVal)
@@ -193,6 +203,9 @@ class MediumSolution:
         prev.next = new_node
         new_node.next = next_node
         return head
+
+    def copyListWithRandomPointer138(self, head: 'Optional[RandomNode]') -> 'Optional[RandomNode]':
+
 
 
 

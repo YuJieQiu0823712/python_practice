@@ -1,6 +1,6 @@
 import pytest
-from linkedListMedium import MediumSolution, ListNode, Node, DesignLinkedList707, LRUCache146
-
+from linkedListMedium import MediumSolution, ListNode, Node, RandomNode
+from linkedListMedium import DesignLinkedList707, LRUCache146
 
 # Helper to convert list to linked list
 def list_to_linked_list(lst):
@@ -45,7 +45,7 @@ def build_circular_list(values):
     curr.next = head # make it circular
     return head
 
-# Helper to onvert circular linked list to list
+# Helper to convert circular linked list to list
 def to_list(head, limit=100):
     result = []
     curr = head
@@ -54,6 +54,43 @@ def to_list(head, limit=100):
         curr = curr.next
         if curr is head: # not curr == head, this causes recursion
             break
+    return result
+
+# Helper to build random linked list
+def build_random_list(node_data):
+
+    if not node_data:
+        return None
+
+    nodes = [RandomNode(val) for val, _ in node_data]
+
+    for i, (val, rand_idx) in enumerate(node_data):
+        if i + 1 < len(nodes):
+            nodes[i].next = nodes[i + 1]
+        if rand_idx is not None:
+            nodes[i].random = nodes[rand_idx]
+    return nodes[0]
+
+# Helper to convert to linked list with random pointer
+def to_list_with_random(head):
+
+    node_to_index = {}
+    result = []
+    curr = head
+    index = 0
+
+    # First pass: map nodes to indices
+    while curr:
+        node_to_index[curr] = index
+        curr = curr.next
+        index += 1
+
+    # Second pass: build result list
+    curr = head
+    while curr:
+        rand_idx = node_to_index[curr.random] if curr.random else None
+        result.append([curr.val, rand_idx])
+        curr = curr.next
     return result
 
 
@@ -94,6 +131,25 @@ def test_insertIntoASortedCircularLinkedList708(input_list, insert_val, expected
     new_head = m.insertIntoASortedCircularLinkedList708(head, insert_val)
     result = sorted(to_list(new_head))
     assert result == sorted(expected_sorted)
+
+
+@pytest.mark.parametrize("input_list, expected_output", [
+    (
+        [[7, None], [13, 0], [11, 4], [10, 2], [1, 0]],
+        [[7, None], [13, 0], [11, 4], [10, 2], [1, 0]]
+    ),
+    (
+        [[1, 1], [2, 1]],
+        [[1, 1], [2, 1]]
+    ),
+])
+
+def test_copyListWithRandomPointer138(input_list, expected_output):
+    m = MediumSolution()
+    head = build_random_list(input_list)
+    copied_head = m.copyListWithRandomPointer138(head)
+    result = to_list_with_random(copied_head)
+    assert result == expected_output, f"Expected {expected_output}, but got {result}"
 
 
 def test_DesignLinkedList707():

@@ -205,6 +205,34 @@ class MediumSolution:
         return head
 
     def copyListWithRandomPointer138(self, head: 'Optional[RandomNode]') -> 'Optional[RandomNode]':
+        """
+        Creates a deep copy of a linked list where each node has a `next` pointer and a `random` pointer.
+
+        Args:
+            head (Optional[RandomNode]): The head of the original linked list.
+
+        Returns:
+            Optional[RandomNode]: The head of the deep-copied linked list.
+
+        TC: O(n)
+        SC: O(n)  
+        """
+        curr = head
+        lookup = {None:None}
+
+        while curr:
+            copy_node = RandomNode(curr.val)
+            lookup[curr] = copy_node
+            curr = curr.next
+        
+        curr = head
+        while curr:
+            copy_node = lookup[curr]
+            copy_node.next = lookup[curr.next]
+            copy_node.random = lookup[curr.random]
+            curr = curr.next
+        return lookup[head]
+
 
 
 

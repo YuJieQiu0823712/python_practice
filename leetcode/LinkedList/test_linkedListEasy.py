@@ -47,6 +47,7 @@ def test_linkedListCycle141(values, pos, expected):
     head = create_cyclic_linked_list(values, pos)
     assert e.linkedListCycle141(head) == expected
 
+
 @pytest.mark.parametrize("l1_vals, l2_vals, expected", [
     ([1,2,5], [2,4,6], [1,2,2,4,5,6]),
     ([], [], []),
@@ -60,3 +61,16 @@ def test_mergeTwoSortedLists21(l1_vals, l2_vals, expected):
     result = linked_list_to_list(e.mergeTwoSortedLists21(l1, l2))
     assert result == expected
 
+
+@pytest.mark.parametrize("input_list, val, expected_list", [
+    ([1,2,6,3,4,5,6], 6, [1,2,3,4,5]),
+    ([7,7,7,7], 7, []),
+    ([], 1, [])
+])
+
+def test_removeLinkedListElements203(input_list, val, expected_list):
+    e = EasySolution()
+    head = list_to_linked_list(input_list)
+    expected = list_to_linked_list(expected_list)
+    result = e.removeLinkedListElements203(head, val)
+    assert linked_list_to_list(result) == linked_list_to_list(expected)

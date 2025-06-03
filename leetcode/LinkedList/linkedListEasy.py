@@ -86,5 +86,30 @@ class EasySolution:
         # TC: O(n)
         # SC: O(n)
 
+    def removeLinkedListElements203(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        """
+        Removes all elements from a linked list that have the given value.
+
+        Args:
+            head (Optional[ListNode]): The head of the singly-linked list.
+            val (int): The value to be removed from the list.
+
+        Returns:
+            Optional[ListNode]: The head of the modified linked list with all nodes having value `val` removed.
+
+        TC: O(n)
+        SC: O(1)
+        """
+        dummy_head = ListNode(None)
+        dummy_head.next = head 
+        prev = dummy_head
+        
+        while prev.next:
+            if prev.next.val == val:
+                prev.next = prev.next.next
+            else:
+                prev = prev.next
+        return dummy_head.next
+
 
     

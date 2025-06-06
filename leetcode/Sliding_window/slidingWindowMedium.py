@@ -1,4 +1,7 @@
+import math
+
 class MediumSolution:
+    
     def basic1(self, k: int, arr: list[int]) -> list[int]:
         """
         Return the average of every contiguous subarray of size k in the given array.
@@ -48,6 +51,43 @@ class MediumSolution:
                 start += 1
         return max_sum
    
+    def minSubArrayLen209(self, target: int, nums: list[int]) -> int:
+        """
+        Finds the minimal length of a contiguous subarray of which the sum is 
+        greater than or equal to the given target value.
+
+        This implementation uses the sliding window technique for optimal performance.
+
+        Args:
+            target (int): The target sum that the subarray needs to reach or exceed.
+            nums (list[int]): A list of positive integers.
+
+        Returns:
+            int: The length of the smallest contiguous subarray with a sum >= target.
+                Returns 0 if no such subarray exists.
+                
+        TC: O(n)
+        SC: O(1)
+        """
+        curr_sum = 0
+        start = 0
+        curr_length = 0
+        output = math.inf
+
+        for end in range(len(nums)):
+            curr_sum += nums[end]
+            curr_length += 1
+            while curr_sum >= target:
+                output = min(output, curr_length)
+                curr_sum -= nums[start]
+                curr_length -= 1
+                start += 1   
+        if output == math.inf:
+            return 0
+        return output             
+
+
+
 
 
     def fruitIntoBaskets904(self, tree: list[int]) -> int:
@@ -57,16 +97,12 @@ class MediumSolution:
         types of fruits. This simulates the process of collecting fruits using two baskets,
         where each basket can hold only one type of fruit.
 
-        Parameters:
-        -----------
-        tree : list[int]
-            A list of integers where each integer represents a type of fruit.
+        Args::
+            tree (list[int]): A list of integers where each integer represents a type of fruit.
 
         Returns:
-        --------
-        int
-            The maximum number of fruits that can be collected in two baskets from a
-            contiguous section of the tree row.
+            int: The maximum number of fruits that can be collected in two baskets from a
+                contiguous section of the tree row.
         TC: O(n)
         SC: O(1)
         """

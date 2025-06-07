@@ -84,7 +84,39 @@ class MediumSolution:
                 start += 1   
         if output == math.inf:
             return 0
-        return output             
+        return output       
+
+    def longestSubstringWithAtMostKDistinctCharacters340(self, string: str, k: int) -> int: 
+        """
+        Given a string, find the longest substring with no more than k distinct characters.
+
+        args:
+            string (str): The input string.
+            k (int): The maximum number of distinct characters allowed in the substring.
+
+        Returns:
+            int: The length of the longest substring with at most k distinct characters.
+        
+        TC: O(n)
+        SC: O(k)
+        """
+        start = 0
+        length = 0
+        max_length = 0
+        lookup = {}
+        for end in range(len(string)):
+            right_char = string[end]
+            lookup[right_char] = lookup.get(right_char, 0) + 1
+            length += 1
+            while len(lookup) > k:
+                left_char = string[start]
+                lookup[left_char] -= 1
+                if lookup[left_char] == 0:
+                    del lookup[left_char]
+                start += 1
+                length -= 1
+            max_length = max(max_length, length)
+        return max_length     
 
 
 
@@ -97,7 +129,7 @@ class MediumSolution:
         types of fruits. This simulates the process of collecting fruits using two baskets,
         where each basket can hold only one type of fruit.
 
-        Args::
+        Args:
             tree (list[int]): A list of integers where each integer represents a type of fruit.
 
         Returns:

@@ -11,3 +11,15 @@ def test_minSubArrayLen209(target, nums, expected):
     m = MediumSolution()
     result = m.minSubArrayLen209(target, nums)
     assert result == expected
+
+@pytest.mark.parametrize("string, k, expected", [
+    ("araaci", 2, 4),
+    ("aa", 1, 2),
+    ("a", 1, 1),
+    ("", 2, 0)
+])
+
+def test_longestSubstringWithAtMostKDistinctCharacters340(string, k, expected):
+    m = MediumSolution()
+    result = m.longestSubstringWithAtMostKDistinctCharacters340(string, k)
+    assert result == expected

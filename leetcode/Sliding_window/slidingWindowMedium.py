@@ -107,6 +107,7 @@ class MediumSolution:
         for end in range(len(string)):
             right_char = string[end]
             lookup[right_char] = lookup.get(right_char, 0) + 1
+            # 0 if the key wasn't there
             length += 1
             while len(lookup) > k:
                 left_char = string[start]
@@ -119,22 +120,20 @@ class MediumSolution:
         return max_length     
 
 
-
-
-
-    def fruitIntoBaskets904(self, tree: list[int]) -> int:
+    def fruitIntoBaskets904(self, fruits: list[int]) -> int:
         """
-        Given a list of integers representing types of fruits on trees arranged in a row,
+        Given a list of integers representing types of fruits arranged in a row,
         this function returns the length of the longest subarray with at most two distinct
         types of fruits. This simulates the process of collecting fruits using two baskets,
         where each basket can hold only one type of fruit.
 
         Args:
-            tree (list[int]): A list of integers where each integer represents a type of fruit.
+            fruits (list[int]): A list of integers where each integer represents a type of fruit.
 
         Returns:
             int: The maximum number of fruits that can be collected in two baskets from a
-                contiguous section of the tree row.
+                contiguous section of the fruits row.
+
         TC: O(n)
         SC: O(1)
         """
@@ -143,15 +142,40 @@ class MediumSolution:
         max_fruits = 0
         basket = {}
 
-        for end in range(len(tree)):
+        for end in range(len(fruits)):
             curr_fruits += 1
-            basket[tree[end]] = basket.get(tree[end], 0) + 1
+            basket[fruits[end]] = basket.get(fruits[end], 0) + 1
 
             while len(basket) > 2:
                 curr_fruits -= 1
-                basket[tree[start]] -= 1
-                if basket[tree[start]] == 0:
-                    del basket[tree[start]]
+                basket[fruits[start]] -= 1
+                if basket[fruits[start]] == 0:
+                    del basket[fruits[start]]
                 start += 1
             max_fruits = max(max_fruits, curr_fruits)
         return max_fruits
+
+    def longestSubstringWithoutRepeatingCharacters3(self, s: str) -> int:
+        """
+        Given a string, find the length of the longest substring without repeating characters.
+
+        Args:
+            s (str): The input string.
+
+        Returns:
+            int: The length of the longest substring without repeating characters.
+        
+        TC: O(n)
+        SC: O(min(n, m)) where m is the size of the character set
+        """
+        left = 0
+        max_length = 0
+        index_lookup = {}
+        for right in range(len(s)):
+            if s[right] in index_lookup:
+                left = max(left, index_lookup[s[right]] + 1)
+                # index_lookup[s[right]] is the index of the previous occurrence of the character.
+                # Must move one character past it, hence the +1.
+            index_lookup[s[right]] = right
+            max_length = max(max_length, right - left + 1)
+        return max_length

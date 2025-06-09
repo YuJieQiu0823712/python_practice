@@ -179,3 +179,34 @@ class MediumSolution:
             index_lookup[s[right]] = right
             max_length = max(max_length, right - left + 1)
         return max_length
+
+    def longestRepeatingCharacterReplacement424(self, s: str, k: int) -> int:
+        """
+        Given a string s and an integer k, find the length of the longest substring that can be obtained
+        by replacing at most k characters in the string with any character.
+
+        Args:
+            s (str): The input string.
+            k (int): The maximum number of characters that can be replaced.
+
+        Returns:
+            int: The length of the longest substring after replacements.
+        
+        TC: O(n)
+        SC: O(1)
+        """
+        max_length = 0
+        max_repeat = 0
+        start = 0
+        lookup = {}
+
+        for end in range(len(s)):
+            lookup[s[end]] = lookup.get(s[end], 0) + 1
+            max_repeat = max(max_repeat, lookup[s[end]])
+            if (end - start + 1 - max_repeat) > k:
+                lookup[s[start]] -= 1
+                start += 1
+            max_length = max(max_length, end - start + 1)
+        return max_length
+
+

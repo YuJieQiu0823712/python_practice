@@ -31,11 +31,11 @@ def test_longestSubstringWithAtMostKDistinctCharacters340(string, k, expected):
     ([0,1,2,2], 3), # [0,1,2]
     ([1,2,3,2,2], 4) # [1,2,3,2]
 ])
+
 def test_fruitIntoBaskets904(fruits, expected):
     m = MediumSolution()
     result = m.fruitIntoBaskets904(fruits)
     assert result == expected
-
 
 
 @pytest.mark.parametrize("string, expected", [
@@ -49,4 +49,14 @@ def test_fruitIntoBaskets904(fruits, expected):
 def test_longestSubstringWithoutRepeatingCharacters3(string, expected):
     m = MediumSolution()
     result = m.longestSubstringWithoutRepeatingCharacters3(string)
+    assert result == expected
+
+@pytest.mark.parametrize("string, k, expected", [
+    ("abab", 2, 4), # "aaaa" or "bbbb"
+    ("aababba", 1,4) # "aaaa" or "bbbb"
+])
+
+def test_longestRepeatingCharacterReplacement424(string, k, expected):
+    m = MediumSolution()
+    result = m.longestRepeatingCharacterReplacement424(string, k)
     assert result == expected

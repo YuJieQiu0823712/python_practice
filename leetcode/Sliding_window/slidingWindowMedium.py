@@ -203,10 +203,43 @@ class MediumSolution:
         for end in range(len(s)):
             lookup[s[end]] = lookup.get(s[end], 0) + 1
             max_repeat = max(max_repeat, lookup[s[end]])
-            if (end - start + 1 - max_repeat) > k:
+            if (end - start + 1 - max_repeat) > k: #
                 lookup[s[start]] -= 1
                 start += 1
             max_length = max(max_length, end - start + 1)
         return max_length
 
+    
+    def maxConsecutiveOnesIII1004(self, nums: list[int], k: int) -> int:
+        """
+        Returns the length of the longest subarray containing only 1s after flipping at most `k` 0s to 1s.
+
+        This function uses the sliding window technique to find the maximum number of consecutive 1s
+        in the binary array `nums`, allowing up to `k` zeros to be flipped to 1s.
+
+        Args:
+            nums (list[int]): A list of integers consisting only of 0s and 1s.
+            k (int): The maximum number of 0s allowed to be flipped.
+
+        Returns:
+            int: The maximum length of a subarray with only 1s after flipping at most `k` zeros.
+
+        TC: O(n)
+        SC: O(1)
+        """
+        start = 0
+        max_length = 0
+        zero = 0
+        for end in range(len(nums)):
+            if nums[end] == 0:
+                zero += 1
+            while zero > k:
+                if nums[start] == 0:
+                    zero -= 1
+                start += 1
+                max_length = max(max_length, end - start + 1)
+        return max_length
+
+
+        
 

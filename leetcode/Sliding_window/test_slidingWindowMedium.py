@@ -60,3 +60,14 @@ def test_longestRepeatingCharacterReplacement424(string, k, expected):
     m = MediumSolution()
     result = m.longestRepeatingCharacterReplacement424(string, k)
     assert result == expected
+
+
+@pytest.mark.parametrize("nums, k, expected", [
+    ([1,1,1,0,0,0,1,1,1,1,0], 2, 6),
+    ([0,0,1,1,1,0,0], 0, 3)
+])
+
+def test_maxConsecutiveOnesIII1004(nums, k, expected):
+    m = MediumSolution()
+    result = m.maxConsecutiveOnesIII1004(nums, k)
+    assert result == expected

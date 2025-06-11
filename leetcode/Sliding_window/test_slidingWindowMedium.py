@@ -71,3 +71,14 @@ def test_maxConsecutiveOnesIII1004(nums, k, expected):
     m = MediumSolution()
     result = m.maxConsecutiveOnesIII1004(nums, k)
     assert result == expected
+
+
+@pytest.mark.parametrize("string, pattern, expected", [
+    ("ab", "eidbaooo", True),       # "ba" is a permutation of "ab"
+    ("ab", "eidboaoo", False)      # no permutation of "ab"
+])
+
+def test_permutationInString567(string, pattern, expected):
+    m = MediumSolution()
+    result = m.permutationInString567(string, pattern)
+    assert result == expected

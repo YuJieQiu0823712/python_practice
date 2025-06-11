@@ -240,6 +240,39 @@ class MediumSolution:
                 max_length = max(max_length, end - start + 1)
         return max_length
 
+    def permutationInString567(self, str: str, pattern: str) -> bool:
+        """
+        Check if one string is a permutation of another string.
 
+        Args:
+            s1 (str): The first string.
+            s2 (str): The second string.
+
+        Returns:
+            bool: True if s2 contains a permutation of s1, False otherwise.
+        
+        TC: O(n)
+        SC: O(n)
+        """
+        start = 0
+        lookup = {}
+        matched = 0
+        for item in pattern:
+            lookup[item] = lookup.get(item, 0) + 1
+        for end in range(len(str)):
+            if str[end] in lookup:
+                lookup[str[end]] -= 1
+                if lookup[str[end]] == 0:
+                    matched += 1
+                if matched == len(lookup):
+                    return True
+                if end >= len(pattern)-1:
+                    if str[start] in lookup:
+                        if lookup[str[start]] == 0:
+                            matched -= 1
+                        lookup[str[start]] += 1
+                    start += 1    
+        return False
+    
         
 

@@ -74,8 +74,8 @@ def test_maxConsecutiveOnesIII1004(nums, k, expected):
 
 
 @pytest.mark.parametrize("string, pattern, expected", [
-    ("ab", "eidbaooo", True),       # "ba" is a permutation of "ab"
-    ("ab", "eidboaoo", False)      # no permutation of "ab"
+    ("eidbaooo", "ab", True),       # "ba" is a permutation of "ab"
+    ("eidboaoo", "ab", False)      # no permutation of "ab"
 ])
 
 def test_permutationInString567(string, pattern, expected):

@@ -82,3 +82,13 @@ def test_permutationInString567(string, pattern, expected):
     m = MediumSolution()
     result = m.permutationInString567(string, pattern)
     assert result == expected
+
+@pytest.mark.parametrize("string, pattern, expected", [
+    ("cbaebabacd", "abc", [0,6]), # "cba" and "bac" are permutations of "abc"
+    ("abab", "ab", [0,1,2]) # "ab", "ba", and "ab" are permutations of "ab"
+])  
+
+def test_findAllAnagramsInAString438(string, pattern, expected):
+    m = MediumSolution()
+    result = m.findAllAnagramsInAString438(string, pattern)
+    assert result == expected

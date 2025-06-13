@@ -242,17 +242,17 @@ class MediumSolution:
 
     def permutationInString567(self, str: str, pattern: str) -> bool:
         """
-        Check if one string is a permutation of another string.
+        Check if pattern string is a permutation of another string.
 
         Args:
-            s1 (str): The first string.
-            s2 (str): The second string.
+            str (str): The first string.
+            pattern (str): The second string.
 
         Returns:
-            bool: True if s2 contains a permutation of s1, False otherwise.
+            bool: True if str contains a permutation of pattern, False otherwise.
         
-        TC: O(n)
-        SC: O(n)
+        TC: O(n), where n is the length of the string
+        SC: O(n), where n is the length of the pattern
         """
         start = 0
         lookup = {}
@@ -275,4 +275,39 @@ class MediumSolution:
         return False
     
         
+    def findAllAnagramsInAString438(self, string: str, pattern: str) -> list[int]:
+        """
+        Find all anagrams of a pattern in a given string.  
+
+        Args:
+            str (str): The input string.
+            pattern (str): The pattern to find anagrams of.
+
+        Returns:
+            list[int]: A list of starting indices of the anagrams of the pattern in the string. 
+        
+        TC: O(n), where n is the length of the string
+        SC: O(n), where n is the length of the pattern
+        """
+        start = 0
+        matched = 0
+        lookup = {}
+        result = []
+        for char in pattern:
+            lookup[char] = lookup.get(char, 0) + 1
+        for end in range(len(string)):
+            if string[end] in lookup:
+                lookup[string[end]] -= 1
+                if lookup[string[end]] == 0:
+                    matched += 1
+            if matched == len(lookup):
+                result.append(start)
+            if end >= len(pattern) - 1:
+                if string[start] in lookup:
+                    if lookup[string[start]] == 0:
+                        matched -= 1
+                    lookup[string[start]] += 1
+                start += 1
+        return result
+            
 

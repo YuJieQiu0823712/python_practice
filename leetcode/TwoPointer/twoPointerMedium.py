@@ -7,8 +7,6 @@ class MediumSolution:
         non-decreasing order, returns the indices of the two numbers such that 
         they add up to the target.
 
-        Assumes exactly one solution exists, and the same element cannot be used twice.
-
         Args:
             numbers (List[int]): A list of integers sorted in ascending order.
             target (int): The target sum to find.
@@ -16,6 +14,7 @@ class MediumSolution:
         Returns:
             List[int]: A list containing the 1-based indices of the two numbers 
                        that add up to the target. Returns [-1, -1] if no such pair exists.
+
         """
         point_a = 0
         point_b = len(numbers) - 1
@@ -30,3 +29,45 @@ class MediumSolution:
             else:
                 point_b -= 1
         return [-1, -1]
+
+
+    def threeSum15(self, nums: list[int]) -> list[list[int]]:
+        """
+        Finds all unique triplets in the array that sum up to zero.
+
+        Args:
+            nums (List[int]): A list of integers.
+
+        Returns:
+            List[List[int]]: A list of lists, where each inner list contains three integers
+                             that sum to zero. The result does not contain duplicate triplets.
+
+        TC: O(n log n) + O(n^2) = O(n^2)
+        SC: O(n), because python sort needs use space of N                   
+        """
+        res = []
+        length = len(nums)
+        nums.sort() #O(n log n)
+
+        for i in range(length - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            left = i + 1
+            right = length - 1
+            
+            while left < right:
+                total = nums[i] + nums[left] + nums[right]
+
+                if total < 0:
+                    left += 1
+                elif total > 0:
+                    right -= 1
+                else:
+                    res.append(nums[i],nums[left],nums[right])
+
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nms[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+        return res

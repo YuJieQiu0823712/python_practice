@@ -13,3 +13,15 @@ def test_twoSumIIInputArrayIsSorted167(numbers, target, expected):
     result = m.twoSumIIInputArrayIsSorted167(numbers, target)
     assert result == expected
 
+
+@pytest.mark.parametrize("nums, expected", [
+    ([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]]),
+    ([0, 1, 1], []),
+    ([0, 0, 0], [[0, 0, 0]])
+])
+
+def test_three_sum(nums, expected):
+    m = MediumSolution()
+    result = m.threeSum15(nums)
+    # Sort inner lists and outer list for comparison
+    assert sorted([sorted(triplet) for triplet in result]) == sorted([sorted(triplet) for triplet in expected])

@@ -71,3 +71,40 @@ class MediumSolution:
                         right -= 1
                     left += 1
         return res
+    
+    def threeSum16(self, nums: list[int], target: int) -> list[list[int]]:
+        """
+        Finds the sum of three integers in the list `nums` such that the sum is closest to the given `target`.
+        
+        This implementation sorts the list and uses a two-pointer approach to efficiently find the 
+        closest possible sum of any three numbers in the list.
+
+        Args:
+            nums (List[int]): A list of integers.
+            target (int): The target sum to approach.
+
+        Returns:
+            int: The sum of the triplet that is closest to the target.
+
+        TC: O(n^2)
+        SC: O(n)    
+        """
+        nums.sort()
+        diff = math.inf
+
+        for i in range(len(nums) - 2):
+            left = i +1
+            right = len(nums) - 1
+
+            while left < right:
+                curr_sum = nums[i] + nums[left] + nums[right]
+                if abs(target = curr_sum) <abs(diff):
+                    diff = target - curr_sum
+                
+                if diff == 0:
+                    return target
+                if curr_sum < target:
+                    left -= 1
+                else:
+                    right -= 1
+        return target - diff

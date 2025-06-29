@@ -109,6 +109,7 @@ class MediumSolution:
                     right -= 1
         return target - diff
 
+
     def threeSumSmaller259(self,nums: list[int], target: int) -> int:
         """
         Counts the number of triplets (i, j, k) such that i < j < k and nums[i] + nums[j] + nums[k] < target.

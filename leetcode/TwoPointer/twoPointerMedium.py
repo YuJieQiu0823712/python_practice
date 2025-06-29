@@ -72,7 +72,7 @@ class MediumSolution:
                     left += 1
         return res
     
-    def threeSum16(self, nums: list[int], target: int) -> list[list[int]]:
+    def threeSumClosest16(self, nums: list[int], target: int) -> list[list[int]]:
         """
         Finds the sum of three integers in the list `nums` such that the sum is closest to the given `target`.
         
@@ -93,12 +93,12 @@ class MediumSolution:
         diff = math.inf
 
         for i in range(len(nums) - 2):
-            left = i +1
+            left = i + 1
             right = len(nums) - 1
 
             while left < right:
                 curr_sum = nums[i] + nums[left] + nums[right]
-                if abs(target = curr_sum) <abs(diff):
+                if abs(target = curr_sum) < abs(diff):
                     diff = target - curr_sum
                 
                 if diff == 0:
@@ -108,3 +108,31 @@ class MediumSolution:
                 else:
                     right -= 1
         return target - diff
+
+    def threeSumSmaller259(self,nums: list[int], target: int) -> int:
+        """
+        Counts the number of triplets (i, j, k) such that i < j < k and nums[i] + nums[j] + nums[k] < target.
+        The function first sorts the input list and then uses a two-pointer approach to find all valid triplets efficiently.
+        
+        Args:
+            nums (list[int]): A list of integers.
+            target (int): The target sum to compare against.
+
+        Returns:
+            int: The count of triplets whose sum is less than the target.
+
+        TC: O(n^2)
+        SC: O(n)  
+        """
+        res = 0
+        nums.sort() # TC:O(n log n)
+        for i in range(len(nums) - 2):
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                if nums[i] + nums[j] + nums[k] < target:
+                    res += right - left
+                    left += 1
+                else: 
+                    right -= 1
+        return res 

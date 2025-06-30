@@ -1,3 +1,5 @@
+import math
+
 class MediumSolution:
     def twoSumIIInputArrayIsSorted167(self, numbers:list[int], target: int) -> list[int]:
         """
@@ -98,13 +100,13 @@ class MediumSolution:
 
             while left < right:
                 curr_sum = nums[i] + nums[left] + nums[right]
-                if abs(target = curr_sum) < abs(diff):
+                if abs(target - curr_sum) < abs(diff):
                     diff = target - curr_sum
                 
                 if diff == 0:
                     return target
                 if curr_sum < target:
-                    left -= 1
+                    left += 1
                 else:
                     right -= 1
         return target - diff
@@ -131,7 +133,7 @@ class MediumSolution:
             left = i + 1
             right = len(nums) - 1
             while left < right:
-                if nums[i] + nums[j] + nums[k] < target:
+                if nums[i] + nums[left] + nums[right] < target:
                     res += right - left
                     left += 1
                 else: 

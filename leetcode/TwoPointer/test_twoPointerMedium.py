@@ -20,8 +20,29 @@ def test_twoSumIIInputArrayIsSorted167(numbers, target, expected):
     ([0, 0, 0], [[0, 0, 0]])
 ])
 
-def test_three_sum(nums, expected):
+def test_threeSum15(nums, expected):
     m = MediumSolution()
     result = m.threeSum15(nums)
     # Sort inner lists and outer list for comparison
     assert sorted([sorted(triplet) for triplet in result]) == sorted([sorted(triplet) for triplet in expected])
+
+
+@pytest.mark.parametrize("nums, target, expected", [
+    ([-1,2,1,-4], 1, 2), # The closest sum is -1 + 2 + 1 = 2
+    ([0,0,0], 1, 0) # The closest sum is 0 + 0 + 0 = 0
+])
+
+def test_threeSumClosest16(nums, target, expected):
+    m = MediumSolution()
+    result = m.threeSumClosest16(nums, target)
+    assert result == expected
+
+
+@pytest.mark.parametrize("nums, target, expected", [
+     ([-2, 0, 1, 3], 2, 2) # [-2,0,1] and [-2,0,3]
+])
+
+def test_threeSumSmaller259(nums, target, expected):
+    m = MediumSolution()
+    result = m.threeSumSmaller259(nums, target)
+    assert result == expected

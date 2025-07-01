@@ -139,3 +139,29 @@ class MediumSolution:
                 else: 
                     right -= 1
         return res 
+
+    def SubarrayProductLessThanK713(self, nums: list[int], target: int) -> int:
+        """
+        Returns the number of contiguous subarrays where the product of all elements is less than target.
+
+        Args:
+            nums (List[int]): A list of positive integers.
+            target (int): The product threshold.
+
+        Returns:
+            int: The number of contiguous subarrays with product less than target.
+
+        TC: O(n)
+        SC: O(1) 
+        """
+        left = 0
+        count = 0
+        product = 1
+
+        for right in range(len(nums)):
+            product *= nums[right]
+            while product >= target and left <= right:
+                product /= nums[left]
+                left += 1
+            count += right - left + 1
+        return count

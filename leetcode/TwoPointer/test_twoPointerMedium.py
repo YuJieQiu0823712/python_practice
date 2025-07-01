@@ -46,3 +46,14 @@ def test_threeSumSmaller259(nums, target, expected):
     m = MediumSolution()
     result = m.threeSumSmaller259(nums, target)
     assert result == expected
+
+
+@pytest.mark.parametrize("nums, target, expected", [
+    ([10, 5, 2, 6], 100, 8)
+    # [10], [5], [2], [6], [10, 5], [5, 2], [2, 6], [5, 2, 6]   
+])
+
+def test_SubarrayProductLessThanK713(nums, target, expected):
+    m = MediumSolution()
+    result = m.SubarrayProductLessThanK713(nums, target)
+    assert result == expected

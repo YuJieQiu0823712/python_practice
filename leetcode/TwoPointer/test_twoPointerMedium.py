@@ -57,3 +57,13 @@ def test_SubarrayProductLessThanK713(nums, target, expected):
     m = MediumSolution()
     result = m.SubarrayProductLessThanK713(nums, target)
     assert result == expected
+
+
+@pytest.mark.parametrize("input_list,expected", [
+    ([2, 0, 2, 1, 1, 0], [0, 0, 1, 1, 2, 2])
+])
+
+def test_sortNumbers75(input_list, expected):
+    m = MediumSolution()
+    result = m.sortNumbers75(input_list)
+    assert result == expected

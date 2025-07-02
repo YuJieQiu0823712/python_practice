@@ -165,3 +165,33 @@ class MediumSolution:
                 left += 1
             count += right - left + 1
         return count
+
+    
+    def sortNumbers75(self, nums: list[int]) -> None:
+        """
+        Sorts a list of integers containing only 0s, 1s, and 2s in-place 
+        such that all 0s come first, followed by 1s, then 2s.
+
+        Args:
+            nums (List[int]): A list of integers where each element is 0, 1, or 2.
+        
+        Returns:
+            None
+        
+        TC: O(n)
+        SC: O(1)
+        """
+        i = 0
+        left = 0
+        right = len(nums) - 1
+        while i <= right:
+            if nums[i] == 0:
+                nums[left], nums[i] = nums[i], nums[left]
+                i += 1
+                left += 1
+            elif nums[i] == 2:
+                nums[right], nums[i] = nums[i], nums[right]
+                right -= 1
+            else:
+                i += 1
+        return nums

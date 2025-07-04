@@ -211,7 +211,7 @@ class MediumSolution:
         TC: O(n^3)
         SC: O(n) 
         """
-        nums.sort()
+        nums.sort() # O(n log n)
         res = []
         length = len(nums)
 

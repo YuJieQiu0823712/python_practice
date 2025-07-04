@@ -67,3 +67,15 @@ def test_sortNumbers75(input_list, expected):
     m = MediumSolution()
     result = m.sortNumbers75(input_list)
     assert result == expected
+
+
+@pytest.mark.parametrize("nums, target, expected", [
+    ([1, 0, -1, 0, -2, 2], 0, sorted([[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]])),
+    ([], 0, []) # Empty list
+
+])
+
+def test_fourSum18(nums, target, expected):
+    m = MediumSolution()
+    result = m.fourSum18(nums, target)
+    assert sorted(result) == sorted(expected)

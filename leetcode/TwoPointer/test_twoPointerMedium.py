@@ -79,3 +79,15 @@ def test_fourSum18(nums, target, expected):
     m = MediumSolution()
     result = m.fourSum18(nums, target)
     assert sorted(result) == sorted(expected)
+
+
+@pytest.mark.parametrize("nums, expected", [
+    ([2,6,4,8,10,9,15], 5), # The unsorted subarray is [6,4,8,10,9]
+    ([1,2,3,4], 0), # Already sorted
+    ([1], 0)
+])
+
+def test_shortestUnsortedContinuousSubarray581(nums, expected):
+    m = MediumSolution()
+    result = m.shortestUnsortedContinuousSubarray581(nums)
+    assert result == expected

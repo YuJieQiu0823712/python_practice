@@ -243,3 +243,24 @@ class MediumSolution:
                         left += 1
                         right -= 1
         return res
+
+    def shortestUnsortedContinuousSubarray581(self,nums: list[int]) -> int:
+        left = 0
+        right = len(nums) - 1
+        subarr_min = float('inf')
+        subarr_max = float('-inf')
+
+        while left < right and nums[left] < nums[left + 1]:
+            left += 1
+        if left == right:
+            return 0
+        while right > left and nums[right] > nums[right - 1]:
+            right -= 1
+        for i in range(left, right + 1):
+            subarr_min = min(subarr_min, nums[left])
+            subarr_max = max(subarr_max, nums[right])
+        while left > 0 and nums[left - 1] > subarr_min:
+            left -= 1
+        while right < len(nums) - 1 and nums[right + 1] < subarr_max:
+            right += 1
+        return right  - left + 1

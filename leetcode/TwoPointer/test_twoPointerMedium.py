@@ -91,3 +91,16 @@ def test_shortestUnsortedContinuousSubarray581(nums, expected):
     m = MediumSolution()
     result = m.shortestUnsortedContinuousSubarray581(nums)
     assert result == expected
+
+
+@pytest.mark.parametrize("s, expected", [
+    ("A man, a plan, a canal: Panama", True), # Palindrome ignoring punctuation and spaces
+    ("race a car", False), # Not a palindrome
+    (" ", True), # s is an empty string "" after removing non-alphanumeric characters.
+                 # Since an empty string reads the same forward and backward, it is a palindrome.
+])
+
+def test_validPalindrome125(s, expected):
+    m = MediumSolution()
+    result = m.validPalindrome125(s)
+    assert result == expected

@@ -250,17 +250,48 @@ class MediumSolution:
         subarr_min = float('inf')
         subarr_max = float('-inf')
 
-        while left < right and nums[left] < nums[left + 1]:
+        while left < right and nums[left] <= nums[left + 1]:
             left += 1
+
+        # edge check    
         if left == right:
             return 0
-        while right > left and nums[right] > nums[right - 1]:
+
+        while right > 0 and nums[right] >= nums[right - 1]:
             right -= 1
         for i in range(left, right + 1):
-            subarr_min = min(subarr_min, nums[left])
-            subarr_max = max(subarr_max, nums[right])
+            subarr_min = min(subarr_min, nums[i])
+            subarr_max = max(subarr_max, nums[i])
         while left > 0 and nums[left - 1] > subarr_min:
             left -= 1
         while right < len(nums) - 1 and nums[right + 1] < subarr_max:
             right += 1
         return right  - left + 1
+
+    def validPalindrome125(self, s: str) -> bool:
+        """
+        Checks if the given string is a valid palindrome, considering only alphanumeric characters and ignoring case.
+
+        Args:
+            s (str): The input string to check.
+
+        Returns:
+            bool: True if the string is a valid palindrome, False otherwise.
+        """
+        left = 0
+        right = len(s) -1
+        s = s.lower()
+
+        while left < right:
+            while left < right and not s[left].isalnum():
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True
+
+    
+    

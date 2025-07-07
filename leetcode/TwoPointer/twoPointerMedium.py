@@ -245,6 +245,23 @@ class MediumSolution:
         return res
 
     def shortestUnsortedContinuousSubarray581(self,nums: list[int]) -> int:
+        """
+        Finds the length of the shortest continuous subarray that, if sorted, results in the entire array being sorted.
+
+        The function identifies the smallest window in the array such that sorting only that window would make the entire array sorted in ascending order.
+        It uses two pointers to find the initial unsorted region and expands the boundaries if needed based on the min/max values within the subarray.
+
+        Args:
+            nums (list[int]): The input array of integers.
+
+        Returns:
+            int: The length of the shortest unsorted continuous subarray.
+                Returns 0 if the array is already fully sorted.
+             
+        TC: O(n)
+        SC: O(1)
+        """
+
         left = 0
         right = len(nums) - 1
         subarr_min = float('inf')
@@ -268,30 +285,6 @@ class MediumSolution:
             right += 1
         return right  - left + 1
 
-    def validPalindrome125(self, s: str) -> bool:
-        """
-        Checks if the given string is a valid palindrome, considering only alphanumeric characters and ignoring case.
-
-        Args:
-            s (str): The input string to check.
-
-        Returns:
-            bool: True if the string is a valid palindrome, False otherwise.
-        """
-        left = 0
-        right = len(s) -1
-        s = s.lower()
-
-        while left < right:
-            while left < right and not s[left].isalnum():
-                left += 1
-            while left < right and not s[right].isalnum():
-                right -= 1
-            if s[left] != s[right]:
-                return False
-            left += 1
-            right -= 1
-        return True
 
     
     

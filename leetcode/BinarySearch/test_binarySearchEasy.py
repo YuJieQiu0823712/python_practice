@@ -23,6 +23,7 @@ def insert_into_bst(root, val):
         else:
             root.right = TreeNode(val)
 
+
 @pytest.mark.parametrize("bst_vals, target, expected", [
     ([4, 2, 5, 1, 3], 3.71, 4),
     ([1], 4.42, 1)
@@ -33,3 +34,21 @@ def test_closestBinarySearchTreeValue270(bst_vals, target, expected):
     root = build_bst_from_list(bst_vals)
     result = e.closestBinarySearchTreeValue270(root, target)
     assert result == expected
+
+
+@pytest.mark.parametrize("n, bad, expected", [
+    (5, 4, 4),
+    (1, 1, 1)
+])
+
+def test_firstBadVersion278(monkeypatch, n, bad, expected):
+    def mock_isBadVersion(self, version):
+        return version >= bad
+
+    # During this test, whenever firstBadVersion278 in the solution module calls isBadVersion, use mock_isBadVersion instead.
+    monkeypatch.setattr(EasySolution, 'isBadVersion', mock_isBadVersion)
+    
+    e = EasySolution()
+    result = e.firstBadVersion278(n)
+    assert result == expected
+

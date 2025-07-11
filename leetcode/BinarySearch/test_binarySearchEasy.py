@@ -52,3 +52,13 @@ def test_firstBadVersion278(monkeypatch, n, bad, expected):
     result = e.firstBadVersion278(n)
     assert result == expected
 
+
+@pytest.mark.parametrize("nums1, nums2, expected",[
+    ([4,9,5], [9,4,9,8,4], [4,9])
+])
+
+def test_intersectionOfTwoArrays349(nums1, nums2, expected):
+    e = EasySolution()
+    result = e.intersectionOfTwoArrays349(nums1, nums2)
+    assert sorted(result) == sorted(expected)
+

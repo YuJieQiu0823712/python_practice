@@ -85,12 +85,12 @@ class EasySolution:
         res = []
         for num in nums1:
             low = 0
-            hight = len(nums2) - 1
+            high = len(nums2) - 1
 
             while low <= high:
                 mid = (high - low) // 2 + low
 
-                if num == nums[mid] and num not in res:
+                if num == nums2[mid] and num not in res:
                     res.append(num)
                 elif nums2[mid] > num:
                     high = mid - 1

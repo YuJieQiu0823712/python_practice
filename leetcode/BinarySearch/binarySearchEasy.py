@@ -98,6 +98,44 @@ class EasySolution:
                     low = mid + 1
         return res
 
+    
+    def findFirstAndLastPositionOfElementInSortedArray34(self, nums: list[int], target: int) -> list[int]:
+        """
+        Finds the first and last position of a target value in a sorted array.
+
+        Args:
+            nums (list[int]): The sorted array.
+            target (int): The target value to find.
+
+        Returns:
+            list[int]: A list containing the first and last positions of the target.
+        
+        TC: O(log n)
+        SC: O(1)
+        """
+        def binary_search(nums, target, look_for_right_most):
+            low = 0
+            high = len(nums) - 1
+            target_idx = -1
+            while low <= high:
+                mid = (high - low) // 2 + low
+                if nums[mid] < target:
+                    low = mid +1
+                elif nums[mid] > target:
+                    high = mid - 1
+                else:
+                    target_idx = mid
+                    if look_for_right_most:
+                        low = mid + 1
+                    else:
+                        high = mid - 1
+            return target_idx
+        
+        left = binary_search(nums, target, False)
+        right = binary_search(nums, target, True)
+        return [left, right]
+           
+
 
 
     

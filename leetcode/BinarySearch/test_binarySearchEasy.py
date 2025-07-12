@@ -62,3 +62,13 @@ def test_intersectionOfTwoArrays349(nums1, nums2, expected):
     result = e.intersectionOfTwoArrays349(nums1, nums2)
     assert sorted(result) == sorted(expected)
 
+
+@pytest.mark.parametrize("nums,target,expected", [
+        ([5, 7, 7, 8, 8, 10], 8, [3, 4]),
+        ([2, 2, 2, 2], 2, [0, 3])
+])
+
+def test_findFirstAndLastPositionOfElementInSortedArray34(nums, target, expected):
+    e = EasySolution()
+    result = e.findFirstAndLastPositionOfElementInSortedArray34(nums, target)
+    assert result == expected

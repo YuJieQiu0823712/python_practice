@@ -134,6 +134,45 @@ class EasySolution:
         left = binary_search(nums, target, False)
         right = binary_search(nums, target, True)
         return [left, right]
+
+    
+    def searchInRotatedSortedArray33(self, nums: list[int], target: int) -> int:
+        """
+        Searches for a target value in a rotated sorted array.
+
+        Args:
+            nums (list[int]): The rotated sorted array.
+            target (int): The target value to search for.
+
+        Returns:
+            int: The index of the target value if found, otherwise -1.
+        
+        TC: O(log n)
+        SC: O(1)
+        """
+        low = 0
+        high = len(nums) - 1
+        while low <= high:
+            mid = (high - low) // 2 + low
+
+            if nums[mid] == target:
+                return mid
+                
+            elif nums[low] < nums[mid]:
+                if nums[low] == target:
+                    return low
+                elif nums[low] < target and target < nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            else:
+                if nums[high] == target:
+                    return high
+                elif nums[mid] < target and target < nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+        return -1 
            
 
 

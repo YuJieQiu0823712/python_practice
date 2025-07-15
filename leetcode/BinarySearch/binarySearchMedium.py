@@ -120,6 +120,54 @@ class MediumSolution:
         dfs_inorder(root)
         return _balance_bs_tree(0, len(nodes) - 1)
             
+
+    def missingElementInSortedArray1060(self, nums: list[int], k: int) -> int:
+        """
+        Finds the kth missing element in a sorted array.
+
+        Strategy:
+            This solution uses **binary search** to find the smallest index `left`
+            such that the number of missing integers up to `nums[left]` is
+            greater than or equal to `k`.
+
+            The number of missing elements before index `i` is calculated as:
+                missing_count(i) = nums[i] - nums[0] - i
+
+            This formula works because in a perfect sequence starting from `nums[0]`,
+            the value at index `i` should be `nums[0] + i`. The difference between
+            this expected value and the actual value `nums[i]` reveals how many
+            values are missing up to that point.
+
+            After binary search:
+            - `left` is the index where the k-th missing number would be inserted.
+            - The final result is computed using:
+                nums[0] + k + left - 1
+
+            This formula adds the total number of missing elements to the starting
+            value, adjusted by the number of known values scanned (`left`), and
+            corrected for zero-based indexing.
+            
+        Args:
+            nums (list[int]): The sorted array.
+            k (int): The kth missing element to find.
+
+        Returns:
+            int: The kth missing element.
+        
+        TC: O(log n)
+        SC: O(1)
+        """
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            mid = (right + left) // 2
+            missing_count= nums[mid] - nums[0] - mid
+            if missing_count < k:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return nums[0] + k + left -1 
+        # index start from 0, so we need to adjust the index by subtracting 1
     
 
 

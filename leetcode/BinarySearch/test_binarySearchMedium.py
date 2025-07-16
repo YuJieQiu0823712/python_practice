@@ -66,3 +66,15 @@ def test_balanceABinarySearchTree1382(input_list, expected):
     balanced_root = m.balanceABinarySearchTree1382(root)
     result = tree_to_level_order_list(balanced_root)
     assert result == expected
+
+
+@pytest.mark.parametrize("nums, k, expected", [
+    ([4, 7, 9, 10], 1, 5),
+    ([4, 7, 9, 10], 3, 8),
+    ([1, 2, 4], 3, 6)
+])
+
+def test_missingElementInSortedArray1060(nums, k, expected):
+    m = MediumSolution()
+    result = m.missingElementInSortedArray1060(nums, k)
+    assert result == expected

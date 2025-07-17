@@ -160,14 +160,40 @@ class MediumSolution:
         left = 0
         right = len(nums) - 1
         while left <= right:
-            mid = (right + left) // 2
-            missing_count= nums[mid] - nums[0] - mid
+            mid = (right + left) // 2 #
+            missing_count= nums[mid] - nums[0] - mid #
             if missing_count < k:
                 left = mid + 1
             else:
                 right = mid - 1
-        return nums[0] + k + left -1 
+        return nums[0] + k + left -1 #
         # index start from 0, so we need to adjust the index by subtracting 1
+
+    def findPeakElement162(self, nums: list[int]) -> int:
+        """
+        Finds a peak element in an array where a peak is defined as an element
+        that is greater than its neighbors.
+
+        Args:
+            nums (list[int]): The input array.
+
+        Returns:
+            int: The index of a peak element.
+        
+        TC: O(log n)
+        SC: O(1)
+        """
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > nums[mid + 1] and nums[mid] > nums[mid - 1]:
+                return mid
+            elif nums[mid] < nums[mid + 1]:    
+                left = mid
+            else:
+                right = mid
+        return left
     
 
 

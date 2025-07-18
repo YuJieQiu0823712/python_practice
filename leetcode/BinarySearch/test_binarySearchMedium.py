@@ -78,3 +78,14 @@ def test_missingElementInSortedArray1060(nums, k, expected):
     m = MediumSolution()
     result = m.missingElementInSortedArray1060(nums, k)
     assert result == expected
+
+
+@pytest.mark.parametrize("nums, expected_peaks", [
+    ([1, 2, 3, 1], [2]),
+    ([1, 2, 1, 3, 5, 6, 4], [1, 5])
+])
+
+def test_findPeakElement162(nums, expected_peaks):
+    m = MediumSolution() 
+    result = m.findPeakElement162(nums)
+    assert result in expected_peaks

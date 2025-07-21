@@ -1,6 +1,41 @@
 import heapq
 import collections
 
+
+class FindMedianFromDataStream295:
+    """
+    Maintains a data stream and supports finding the median efficiently.
+
+    This class uses a max-heap for the lower half of numbers and a min-heap
+    for the upper half, keeping the heaps balanced to allow O(log n) insertion
+    and O(1) median retrieval.
+
+    TC: O(log n) for addNum, O(1) for findMedian.
+    SC: O(n) for storing the numbers in heaps.
+    """
+    def __init__(self):
+        self.max_heap = []
+        self.min_heap = []
+    
+    def addNum(self, num: int) -> None:
+        if not self.max_heap or -self.max_heap[0] > num:
+            heapq.heappush(self.max_heap, -num)
+        else:
+            heapq.heappush(self.min_heap, num)
+
+        if len(self.max_heap) > len(self.min_heap) + 1:
+            heapq.heappush(self.min_heap, -heapq.heappop(self.max_heap))
+        elif len(self.max_heap) < len(self.min_heap):
+            heapq.heappush(self.max_heap, -heapq.heappop(self.min_heap))
+    
+    def findMedian(self) -> float:
+        if len(self.max_heap) == len(self.min_heap):
+            return (-self.max_heap[0] + self.min_heap[0]) / 2
+        return -self.max_heap[0]
+
+
+
+
 class MediumSolution:
     def kthLargestElementInAnArray215(self, nums: list[int], k: int) -> int:
         """
@@ -19,7 +54,8 @@ class MediumSolution:
         min_heap = []
         for num in nums:
             if len(min_heap) < k:
-                heapq.heappush(min_heap, num) # sorted order in min-heap
+                heapq.heappush(min_heap, num) 
+                # Default heap in Python is a min-heap, so the smallest element is always at heap[0].
             else:
                 heapq.heappushpop(min_heap, num)
         return min_heap[0]
@@ -57,7 +93,8 @@ class MediumSolution:
                 count += 1
                 
                 if max_heap:
-                    curr_tasks_value = - heapq.heappop(max_heap)
+                    curr_tasks_value = -heapq.heappop(max_heap)
+                    # Pop the largest task count (most frequent task)
                     if curr_tasks_value - 1 > 0:
                         remain_tasks.append(curr_tasks_value - 1)
                 if not max_heap and not remain_tasks:
@@ -65,4 +102,8 @@ class MediumSolution:
             
             for task in remain_tasks:
                 heapq.heappush(max_heap, -task)
+
+    
+        
+
 

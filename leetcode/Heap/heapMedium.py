@@ -1,41 +1,6 @@
 import heapq
 import collections
 
-
-class FindMedianFromDataStream295:
-    """
-    Maintains a data stream and supports finding the median efficiently.
-
-    This class uses a max-heap for the lower half of numbers and a min-heap
-    for the upper half, keeping the heaps balanced to allow O(log n) insertion
-    and O(1) median retrieval.
-
-    TC: O(log n) for addNum, O(1) for findMedian.
-    SC: O(n) for storing the numbers in heaps.
-    """
-    def __init__(self):
-        self.max_heap = []
-        self.min_heap = []
-    
-    def addNum(self, num: int) -> None:
-        if not self.max_heap or -self.max_heap[0] > num:
-            heapq.heappush(self.max_heap, -num)
-        else:
-            heapq.heappush(self.min_heap, num)
-
-        if len(self.max_heap) > len(self.min_heap) + 1:
-            heapq.heappush(self.min_heap, -heapq.heappop(self.max_heap))
-        elif len(self.max_heap) < len(self.min_heap):
-            heapq.heappush(self.max_heap, -heapq.heappop(self.min_heap))
-    
-    def findMedian(self) -> float:
-        if len(self.max_heap) == len(self.min_heap):
-            return (-self.max_heap[0] + self.min_heap[0]) / 2
-        return -self.max_heap[0]
-
-
-
-
 class MediumSolution:
     def kthLargestElementInAnArray215(self, nums: list[int], k: int) -> int:
         """
@@ -79,7 +44,7 @@ class MediumSolution:
         SC: O(k), where k is the number of unique tasks.   
         """
     
-        tasks_count = collections.Counter(tasks).values()
+        tasks_count = collections.Counter(tasks).values() # Count the frequency of each task
         max_heap = []
         count = 0
 

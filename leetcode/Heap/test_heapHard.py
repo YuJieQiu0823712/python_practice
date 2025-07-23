@@ -1,4 +1,4 @@
-from heapHard import HardSolution, FindMedianFromDataStream295
+from heapHard import FindMedianFromDataStream295, SlidingWindowMedian480
 import pytest
 
 
@@ -17,3 +17,12 @@ def test_FindMedianFromDataStream295(sequence, expected_medians):
     assert result == expected_medians
 
 
+@pytest.mark.parametrize("nums, k, expected", [
+    ([1, 3, -1, -3, 5, 3, 6, 7], 3, [1.0, -1.0, -1.0, 3.0, 5.0, 6.0])
+])
+
+def test_median_sliding_window(nums, k, expected):
+    solver = SlidingWindowMedian480()
+    output = solver.medianSlidingWindow(nums, k)
+    assert output == pytest.approx(expected, rel=1e-9)  # Use approx to handle float comparison
+    

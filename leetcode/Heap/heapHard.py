@@ -89,3 +89,44 @@ class SlidingWindowMedian480:
                 rebalance_heap()
 
         return result
+
+    
+class HardSolution:
+    def minPushBox(self, grid: List[List[str]]) -> int:
+        player = None
+        box = None
+        target = None
+        graph = set()
+        visited = set()
+
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if grid[r][c] == "#":
+                    continue
+                if grid[r][c] == "S":
+                    player = (r, c)
+                if grid[r][c] == "B":
+                    box = (r, c)
+                if grid[r][c] == "T":
+                    target = (r, c)
+                graph.add((r, c))
+        
+        min_heap = [(0, *player, *box)]
+
+        while min_heap:
+            pushes, curr_player_row, curr_player_col, curr_box_row, curr_box_col = heapq.heappop(min_heap)
+            if (curr_box_row, curr_box_col) == target:
+                return pushes
+            if (curr_player_row, curr_player_col, curr_box_row, curr_box_col) in visited:
+                continue
+            visited.add((curr_player_row, curr_player_col, curr_box_row, curr_box_col))
+            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+            for row, col in directions:
+                next_player_pos = (curr_player_row + row, curr_player_col + col)
+                next_box_pos = (curr_box_row + row, curr_box_col + col)
+                if next_player_pos == (curr_box_row, curr_box_col) and next_box_pos in graph:
+                   heapq.heappush(min_heap, (pushes + 1, *next_player_pos, *next_box_pos))
+                elif next_player_pos != (curr_box_row, curr_box_col) and next_player_pos in graph:
+                    heapq.heappush(min_heap, (pushes, *next_player_pos, curr_box_row, curr_box_col)) 
+        return -1
+            

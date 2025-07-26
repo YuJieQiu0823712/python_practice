@@ -92,7 +92,7 @@ class SlidingWindowMedian480:
 
     
 class HardSolution:
-    def minPushBox(self, grid: List[List[str]]) -> int:
+    def minPushBox1263(self, grid: list[list[str]]) -> int:
         player = None
         box = None
         target = None

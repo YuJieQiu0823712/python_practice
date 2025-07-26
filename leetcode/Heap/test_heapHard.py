@@ -1,4 +1,4 @@
-from heapHard import FindMedianFromDataStream295, SlidingWindowMedian480
+from heapHard import HardSolution, FindMedianFromDataStream295, SlidingWindowMedian480
 import pytest
 
 
@@ -26,3 +26,33 @@ def test_median_sliding_window(nums, k, expected):
     output = solver.medianSlidingWindow(nums, k)
     assert output == pytest.approx(expected, rel=1e-9)  # Use approx to handle float comparison
     
+
+@pytest.mark.parametrize("grid, expected", [
+    (
+        [
+            ["#", "#", "#", "#", "#", "#"],
+            ["#", "T", "#", "#", "#", "#"],
+            ["#", ".", ".", "B", ".", "#"],
+            ["#", ".", "#", "#", ".", "#"],
+            ["#", ".", ".", ".", "S", "#"],
+            ["#", "#", "#", "#", "#", "#"]
+        ],
+        3
+    ),
+    (
+        [
+            ["#", "#", "#", "#", "#", "#"],
+            ["#", "T", "#", "#", "#", "#"],
+            ["#", ".", ".", "B", ".", "#"],
+            ["#", "#", "#", "#", ".", "#"],
+            ["#", ".", ".", ".", "S", "#"],
+            ["#", "#", "#", "#", "#", "#"]
+        ],
+        -1
+    ),
+])
+
+def test_MinPushBox1263(grid, expected):
+    h = HardSolution()
+    result = h.minPushBox1263(grid)
+    assert result == expected

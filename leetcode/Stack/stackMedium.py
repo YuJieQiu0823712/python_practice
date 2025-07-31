@@ -26,3 +26,15 @@ class BinarySearchTreeIterator173:
 
     def hasNext(self) -> bool:
         return len(self.stack) > 0
+
+
+class EasySolution:
+    def validateStackSequences946(self, pushed: list[int], popped: list[int]) -> bool:
+        pop_idx = 0
+        stack = []
+        for value in pushed:
+            stack.append(value)
+            while stack and stack[-1] == popped[pop_idx]:
+                stack.pop()
+                pop_idx += 1
+        return not stack

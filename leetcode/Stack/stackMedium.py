@@ -28,7 +28,7 @@ class BinarySearchTreeIterator173:
         return len(self.stack) > 0
 
 
-class EasySolution:
+class MediumSolution:
     def validateStackSequences946(self, pushed: list[int], popped: list[int]) -> bool:
         pop_idx = 0
         stack = []

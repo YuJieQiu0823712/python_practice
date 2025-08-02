@@ -1,5 +1,5 @@
 import pytest
-from stackMedium import TreeNode, BinarySearchTreeIterator173
+from stackMedium import MediumSolution, TreeNode, BinarySearchTreeIterator173
 
 # Helper to build BST from level-order list
 def build_bst_from_level_order(values):
@@ -25,7 +25,7 @@ def build_bst_from_level_order(values):
     )
 ])
 
-def test_bst_iterator(commands, arguments, expected):
+def test_bst_iterator173(commands, arguments, expected):
     results = []
     bst_iterator = None
 
@@ -40,3 +40,14 @@ def test_bst_iterator(commands, arguments, expected):
             results.append(bst_iterator.hasNext())
 
     assert results == expected
+
+
+@pytest.mark.parametrize("pushed, popped, expected", [
+        ([1, 2, 3, 4, 5], [4, 5, 3, 2, 1], True),
+        ([1, 2, 3, 4, 5], [4, 3, 5, 1, 2], False)
+])
+
+def test_validateStackSequences946(pushed, popped, expected):
+    m = MediumSolution()
+    result = m.validateStackSequences946(pushed, popped)
+    assert result == expected

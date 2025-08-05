@@ -29,6 +29,51 @@ class BinarySearchTreeIterator173:
     def hasNext(self) -> bool:
         return len(self.stack) > 0
 
+class constructBinaryTreeFromString536:
+    def str2tree(self, s:str) -> Optional[TreeNode]:
+        """
+        TC: O(n)
+        SC: O(n)
+        """
+        if not s:
+            return None
+        
+        stack = []
+        length = len(s)
+        i = 0
+
+        while i<length:
+            if s[i] == "-":
+                i, stack = self.build_stack(True, i + 1, stack, length, s)
+            elif s[i].isdigit():
+                i, stack = self.build_stack(False, i, stack, length, s)
+            elif s[i] == ")":
+                curr_node = stack.pop()
+                parent_node = stack[-1]
+                if not parent_node.left:
+                    parent_node.left = curr_node
+                else:
+                    parent+node.right = curr_node
+            i += 1
+        return stacck[0]
+    
+    def build_stack(self, negative, i, stack, length, s):
+        curr_num = 0
+        while i < length:
+            if s[i].isdigit():
+                curr_num = curr_num * 10 + (ord(s[i]) - ord("0"))
+                i += 1
+            else:
+                break
+
+        if negative:
+            curr_num = -curr_num
+        stack.append(TreeNode(curr_num))
+        return (i - 1, stack)
+
+            
+
+
 
 class MediumSolution:
     def validateStackSequences946(self, pushed: list[int], popped: list[int]) -> bool:
@@ -78,13 +123,17 @@ class MediumSolution:
         return sum(stack)
 
     def asteroidCollision735(self, asteroids: List[int]) -> List[int]:
+        """
+        TC: O(n)
+        SC: O(n)
+        """
         stack = []
         for asteroid in asteroids:
             while stack and asteroid < 0 and stack[-1] > 0:
                 prev_asteroid = stack.pop()
                 if prev_asteroid > -asteroid:
                     asteroid = prev_asteroid
-                elif prev_asteroid == - asteroid:
+                elif prev_asteroid == -asteroid:
                     asteroid = 0
             if asteroid != 0:
                 stack.append(asteroid)

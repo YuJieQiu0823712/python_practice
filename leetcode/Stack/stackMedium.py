@@ -53,19 +53,15 @@ class constructBinaryTreeFromString536:
                 if not parent_node.left:
                     parent_node.left = curr_node
                 else:
-                    parent+node.right = curr_node
+                    parent_node.right = curr_node
             i += 1
-        return stacck[0]
+        return stack[0]
     
     def build_stack(self, negative, i, stack, length, s):
         curr_num = 0
-        while i < length:
-            if s[i].isdigit():
-                curr_num = curr_num * 10 + (ord(s[i]) - ord("0"))
-                i += 1
-            else:
-                break
-
+        while i < length and s[i].isdigit():
+            curr_num = curr_num * 10 + (ord(s[i]) - ord("0"))
+            i += 1
         if negative:
             curr_num = -curr_num
         stack.append(TreeNode(curr_num))
@@ -118,11 +114,11 @@ class MediumSolution:
                 else:
                     temp_num = stack.pop()
                     stack.append(int(temp_num / curr_num))
-                curr = 0
+                curr_num = 0
                 operator = char
         return sum(stack)
 
-    def asteroidCollision735(self, asteroids: List[int]) -> List[int]:
+    def asteroidCollision735(self, asteroids: list[int]) -> list[int]:
         """
         TC: O(n)
         SC: O(n)

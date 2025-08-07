@@ -134,4 +134,20 @@ class MediumSolution:
             if asteroid != 0:
                 stack.append(asteroid)
         return stack
-        
+
+    def simplifyPath71(self, path: str) -> str:
+        """
+        TC: O(n)
+        SC: O(2n)
+        """
+        stack = [] # n
+        for part in path.split("/"): # n
+            if part == "..":
+                if stack:
+                    stack.pop()
+            elif part == "." or part == "":
+                continue
+            else:
+                stack.append(part)
+        return "/" + "/".join(stack)
+ 

@@ -99,3 +99,11 @@ def test_asteroidCollision735(asteroids, expected):
     assert result == expected
 
 
+@pytest.mark.parametrize("input_path, expected", [
+        ("/home//foo/", "/home/foo"),
+        ("/a/./b/../../c/", "/c")
+])
+def test_simplifyPath71(input_path, expected):
+    m = MediumSolution()  
+    result = m.simplifyPath71(input_path)
+    assert result == expected

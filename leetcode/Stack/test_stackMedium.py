@@ -107,3 +107,15 @@ def test_simplifyPath71(input_path, expected):
     m = MediumSolution()  
     result = m.simplifyPath71(input_path)
     assert result == expected
+
+
+@pytest.mark.parametrize("input, expected", [
+        ("3[a]2[bc]", "aaabcbc"),
+        ("3[a2[c]]", "accaccacc"),
+        ("2[abc]3[cd]ef", "abcabccdcdcdef")
+])
+def test_decodeString394(input, expected):
+    m = MediumSolution()  
+    result = m.decodeString394(input)
+    assert result == expected
+

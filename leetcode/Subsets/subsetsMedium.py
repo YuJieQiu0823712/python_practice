@@ -13,7 +13,7 @@ class mediumSolution:
                 subset.append(copy_set)
         return subset
 
-    def subsetsWithDup90(self, nums: List[int]) -> List[List[int]]:
+    def subsetsWithDup90(self, nums: list[int]) -> list[list[int]]:
        nums.sort()
        subsets = []
        subsets.append([])
@@ -23,7 +23,7 @@ class mediumSolution:
        for i in range(len(nums)):
         start_index = 0
 
-        for i in ramge(len(nums)):
+        for i in range(len(nums)):
             start_index = 0
             if i > 0 and nums[i] == nums[i - 1]:
                 start_index = end_index + 1

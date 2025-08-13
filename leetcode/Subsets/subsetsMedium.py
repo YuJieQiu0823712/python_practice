@@ -14,22 +14,41 @@ class mediumSolution:
         return subset
 
     def subsetsWithDup90(self, nums: list[int]) -> list[list[int]]:
-       nums.sort()
-       subsets = []
-       subsets.append([])
-       start_index = 0
-       end_index = 0
-
-       for i in range(len(nums)):
+        """
+        TC: O(n * 2^n), n is the length of s
+        SC: O(n * 2^n)
+        """
+        nums.sort()
+        subsets = []
+        subsets.append([])
         start_index = 0
+        end_index = 0
 
         for i in range(len(nums)):
             start_index = 0
-            if i > 0 and nums[i] == nums[i - 1]:
-                start_index = end_index + 1
-            end_index = len(subsets) - 1
-            for j in range(start_index, end_index + 1):
-                new_subset = list(subsets[j])
-                new_subset.append(nums[i])
-                subsets.append(new_subset)
-        return subsets
+
+            for i in range(len(nums)):
+                start_index = 0
+                if i > 0 and nums[i] == nums[i - 1]:
+                    start_index = end_index + 1
+                end_index = len(subsets) - 1
+                for j in range(start_index, end_index + 1):
+                    new_subset = list(subsets[j])
+                    new_subset.append(nums[i])
+                    subsets.append(new_subset)
+            return subsets
+
+    def letterCasePermutation784(self, s: str) -> list[str]:
+        """
+        TC: O(2^n), n is the length of s
+        SC: O(2^n)
+        """
+        permutation = []
+        permutation.append(s)
+        for i in range(len(S)):
+            if S[i].isalpha():
+                for j in rnage(len(permutation)):
+                    chars = list(permutation[j])
+                    chars[i] = chars[i].swapcase()
+                    permutation.append("".join(chars))
+        return permutation

@@ -45,9 +45,9 @@ class mediumSolution:
         """
         permutation = []
         permutation.append(s)
-        for i in range(len(S)):
-            if S[i].isalpha():
-                for j in rnage(len(permutation)):
+        for i in range(len(s)):
+            if s[i].isalpha():
+                for j in range(len(permutation)):
                     chars = list(permutation[j])
                     chars[i] = chars[i].swapcase()
                     permutation.append("".join(chars))

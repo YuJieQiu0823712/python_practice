@@ -19,3 +19,13 @@ def test_subsetsWithDup90(nums, expected):
     m = mediumSolution()
     result = m.subsetsWithDup90(nums)
     assert result == expected
+
+
+@pytest.mark.parametrize("input_str,expected", [
+        ("a1b2", ["a1b2", "A1b2", "a1B2", "A1B2"]),
+        ("3z4", ["3z4", "3Z4"])
+])
+def test_letterCasePermutation784(input_str, expected):
+    m = mediumSolution()
+    result = m.letterCasePermutation784(input_str)
+    assert result == expected

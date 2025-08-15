@@ -52,3 +52,22 @@ class mediumSolution:
                     chars[i] = chars[i].swapcase()
                     permutation.append("".join(chars))
         return permutation
+
+    
+    def generateParentheses22(self, n: int) -> list[str]:
+        """
+        TC: O(n!)
+        SC: O(n!)
+        """
+        res = []
+
+        def backtrack(s, left, right):
+            if len(s) == n * 2:
+                res.append(s)
+            else:
+                if left > right:
+                    backtrack(s + ")", left, right + 1)
+                if left < n:
+                    backtrack(s + "(", left + 1, right)
+        backtrack("", 0, 0)
+        return res

@@ -29,3 +29,12 @@ def test_letterCasePermutation784(input_str, expected):
     m = mediumSolution()
     result = m.letterCasePermutation784(input_str)
     assert result == expected
+
+@pytest.mark.parametrize("n, expected", [
+        (3, ["((()))","(()())","(())()","()(())","()()()"]),
+        (1, ["()"])
+])
+def test_generateParentheses22(n, expected):
+    m = mediumSolution()
+    result = m.generateParentheses22(n)
+    assert sorted(result) == sorted(expected)

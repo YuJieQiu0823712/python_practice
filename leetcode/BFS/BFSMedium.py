@@ -5,7 +5,7 @@ class TreeNode:
         self.right = right
 
 class mediumSolution:
-    def levelOrder(self, root: TreeNode) -> list[list[int]]:
+    def levelOrder102(self, root: TreeNode) -> list[list[int]]:
         """
         TC: O(n), n is the number of nodes in the tree
         SC: O(n)

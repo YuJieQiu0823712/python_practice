@@ -93,6 +93,42 @@ class SlidingWindowMedian480:
     
 class HardSolution:
     def minPushBox1263(self, grid: list[list[str]]) -> int:
+        """
+        Finds the minimum pushes required to move the box to the target.
+
+        The grid consists of walls (`#`), empty spaces (`.`), the player (`S`), 
+        the box (`B`), and the target (`T`). The player can move freely in empty 
+        spaces and can push the box if standing next to it. The goal is to 
+        determine the minimum number of pushes needed to move the box to the target.
+
+        This implementation uses BFS + Dijkstra (priority queue). States are 
+        represented as a tuple: (push_count, player_row, player_col, box_row, box_col).
+
+        Args:
+            grid (list[list[str]]): 2D grid containing the map of the problem.
+                - "#" = wall
+                - "." = empty cell
+                - "S" = player
+                - "B" = box
+                - "T" = target
+
+        Returns:
+            int: Minimum number of pushes required to move the box to the target.
+            Returns -1 if it is impossible.
+
+        TC:
+            O(M^2 * N^2 * log(MN)), where M = number of rows and N = number of columns.
+            - Each state is defined by (player, box), so total states = O(M^2 * N^2).
+            - For each state, we expand 4 possible moves.
+            - Heap operations take O(log(MN)).
+
+        SC:
+            O(M^2 * N^2).
+            - Graph storage: O(MN).
+            - Visited states: O(M^2 * N^2).
+            - Heap may also store up to O(M^2 * N^2) states.
+        """
+        
         player = None
         box = None
         target = None
@@ -111,7 +147,7 @@ class HardSolution:
                     target = (r, c)
                 graph.add((r, c))
         
-        min_heap = [(0, *player, *box)]
+        min_heap = [(0, *player, *box)] # * pass tuple elements as separate arguments
 
         while min_heap:
             pushes, curr_player_row, curr_player_col, curr_box_row, curr_box_col = heapq.heappop(min_heap)

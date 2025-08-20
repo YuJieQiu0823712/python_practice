@@ -35,3 +35,25 @@ class mediumSolution:
             res.append(curr_list)
 
         return res
+    
+    def levelOrderBottom(self, root: TreeNode) -> list[list[int]]:
+        if not root:
+            return []
+        
+        res = collections.deque()
+        queue = collections.deque()
+        queue.append(root)
+
+        while queue:
+            curr_list = []
+            queue_len = len(queue)
+            for _ in range(queue_len):
+                node = queue.popleft()
+                curr_list.append(node.val)
+
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.appendleft(curr_list)
+        return res

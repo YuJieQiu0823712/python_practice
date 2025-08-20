@@ -3,7 +3,6 @@ from collections import deque
 from BFSMedium import TreeNode, mediumSolution
  
 def build_tree(values):
-    """Build binary tree from list (level-order)."""
     if not values:
         return None
 

@@ -36,12 +36,12 @@ class mediumSolution:
 
         return res
     
-    def levelOrderBottom(self, root: TreeNode) -> list[list[int]]:
+    def levelOrderBottom107(self, root: TreeNode) -> list[list[int]]:
         if not root:
             return []
         
-        res = collections.deque()
-        queue = collections.deque()
+        res = deque()
+        queue = deque()
         queue.append(root)
 
         while queue:
@@ -56,4 +56,4 @@ class mediumSolution:
                 if node.right:
                     queue.append(node.right)
             res.appendleft(curr_list)
-        return res
+        return list(res) # convert deque to list

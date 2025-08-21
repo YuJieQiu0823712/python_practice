@@ -36,3 +36,15 @@ def test_levelOrder102(root_list, expected):
     m = mediumSolution()
     result = m.levelOrder102(root)
     assert result == expected
+
+
+@pytest.mark.parametrize("root_list, expected", [
+        ([3, 9, 20, None, None, 15, 7], [[15,7],[9,20],[3]]),
+        ([1], [[1]]),
+        ([], [])
+])
+def test_levelOrderBottom107(root_list, expected):
+    root = build_tree(root_list)
+    m = mediumSolution()
+    result = m.levelOrderBottom107(root)
+    assert result == expected

@@ -57,3 +57,32 @@ class mediumSolution:
                     queue.append(node.right)
             res.appendleft(curr_list)
         return list(res) # convert deque to list
+
+    
+    def zigzagLevelOrder103(self, root: TreeNode) -> list[list[int]]:
+        if not root:
+            return []
+        res = []
+        queue = deque()
+        queue.append(root)
+        normal_append = True
+
+        while queue:
+            queue_len = len(queue)
+            curr_list = deque()
+
+            for _ in range(queue_len):
+                node = queue.popleft()
+
+                if normal_append:
+                    curr_list.append(node.val)
+                else:
+                    curr_list.appendleft(node.val)
+
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            res.append(list(curr_list))
+            normal_append = not normal_append
+        return res

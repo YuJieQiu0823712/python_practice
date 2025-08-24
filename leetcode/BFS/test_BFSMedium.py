@@ -48,3 +48,15 @@ def test_levelOrderBottom107(root_list, expected):
     m = mediumSolution()
     result = m.levelOrderBottom107(root)
     assert result == expected
+
+
+@pytest.mark.parametrize("root_list, expected", [
+    ([3, 9, 20, None, None, 15, 7], [[3],[20,9],[15,7]]),
+    ([1], [[1]]),
+    ([], [])
+])
+def test_zigzagLevelOrder103(root_list, expected):
+    root = build_tree(root_list)
+    m = mediumSolution()
+    result = m.zigzagLevelOrder103(root)
+    assert result == expected  

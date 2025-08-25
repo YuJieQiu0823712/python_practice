@@ -130,7 +130,7 @@ class mediumSolution(object):
         
         for num in nums:
             lookup[num]  = lookup.get(num,0) + 1 # if num is [], give 0, otherwise + 1
-        # lookup = collection.Counter(nums)
+        # lookup = collections.Counter(nums)
 
         for num, count in lookup.items():
             bucket[count].append(num)

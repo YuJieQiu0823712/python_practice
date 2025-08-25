@@ -37,6 +37,10 @@ class mediumSolution:
         return res
     
     def levelOrderBottom107(self, root: TreeNode) -> list[list[int]]:
+        """
+        TC: O(n), n is the number of nodes in the tree
+        SC: O(n)
+        """
         if not root:
             return []
         

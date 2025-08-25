@@ -61,7 +61,7 @@ class EasySolution:
             if self.isBadVersion(mid):
                 high = mid - 1
             else:
-                low = mid + 1
+                 low = mid + 1
         return low
 
     
@@ -120,7 +120,7 @@ class EasySolution:
             while low <= high:
                 mid = (high - low) // 2 + low
                 if nums[mid] < target:
-                    low = mid +1
+                    low = mid + 1
                 elif nums[mid] > target:
                     high = mid - 1
                 else:

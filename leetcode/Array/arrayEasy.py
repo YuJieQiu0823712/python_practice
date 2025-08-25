@@ -22,8 +22,8 @@ class EasySolution(object):
    
     def mergSortedArray88(self, num1: array, num2: array) -> array:
         # compare A to B 
-        # if A>B => A put in C
-        # else => B put in C
+        # if A > B => A put in Last
+        # else => B put in Last
         # (pointer start from the last: ptr_a->num1 last / ptr_b->num2 last / ptr_c->last)
         # pointer-=1
 
@@ -43,8 +43,9 @@ class EasySolution(object):
                 num1[last] = num2[ptr_b]
                 ptr_b-=1
                 last-=1
-        
-        
+
+        # num1 = [5,6,0,0,0]
+        # num2 = [1,2,3]
         while ptr_b>=0:
             num1[last] = num2[ptr_b]
             ptr_b-=1
@@ -86,6 +87,7 @@ class EasySolution(object):
     # Output: 5 => Because nums = [0,1,2,3,4]
     # TC: O(n)
     # SC: O(1)
+    
 
     def checkIfNAndItsDoubleExist1346(self, nums: array) -> bool:
         # First index i multiply or divide by index j
@@ -175,9 +177,8 @@ class EasySolution(object):
                 left_ptr += 1
             else:
                 newArray.append(input[right_ptr]**2)
-                right_ptr -= 1
-        reversed_Array = reversed(newArray)        
-        return list(reversed_Array)
+                right_ptr -= 1        
+        return reversed(newArray)
     # Input: nums = [-4,-1,0,3,10]
     # Output: [0,1,9,16,100]
     # TC: O(n)

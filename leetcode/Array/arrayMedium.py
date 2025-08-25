@@ -27,7 +27,6 @@ class MediumSolution(object):
     # TC: O(n log n) => Sorting a list of length n takes O(n log n) time.
     # SC: O(1) => in-place sorting
 
-
     def bestTimeToBuyAndSellStockII122(self, prices:array) -> int:
         profit = 0
         for i in range(1,len(prices)):

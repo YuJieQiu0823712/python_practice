@@ -64,6 +64,10 @@ class mediumSolution:
 
     
     def zigzagLevelOrder103(self, root: TreeNode) -> list[list[int]]:
+        """
+        TC: O(n), n is the number of nodes in the tree
+        SC: O(n)
+        """
         if not root:
             return []
         res = []

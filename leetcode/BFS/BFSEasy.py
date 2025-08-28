@@ -36,7 +36,7 @@ class EasySolution:
         
         return res
 
-    def minDepth111(self, root: Optional[TreeNode]) -> int:
+    def minDepth111(self, root: TreeNode) -> int:
         """
         TC: O(n), n is the number of nodes in the tree
         SC: O(n)

@@ -34,3 +34,13 @@ def test_averageOfLevels637(root_list, expected):
     e = EasySolution()
     result = e.averageOfLevels637(root)
     assert result == expected
+
+@pytest.mark.parametrize("root_list, expected",[
+    ([3, 9, 20, None, None, 15, 7], 2)
+])
+
+def test_minDepth111(root_list, expected):
+    root = build_tree(root_list)
+    e = EasySolution()
+    result = e.minDepth111(root)
+    assert result == expected    

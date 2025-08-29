@@ -94,3 +94,33 @@ class mediumSolution:
             res.append(list(curr_list))
             normal_append = not normal_append
         return res
+
+
+    def maxLevelSum1161(self, root: TreeNode) -> int:
+        """
+        TC: O(n), n is the number of nodes in the tree
+        SC: O(n)
+        """
+        if not root:
+            return 0
+        res = [0, float("-inf")]
+        level = 0
+        queue = deque()
+        queue.append(root)
+        
+        while queue:
+            level += 1
+            curr_sum = 0
+            queue_len = len(queue)
+            for _ in range(queue_len):
+                node = queue.popleft()
+                curr_sum += node.val
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            if curr_sum > res[1]:
+                res[0] = level
+                res[1] = curr_sum
+        return res[0]
+

@@ -60,3 +60,14 @@ def test_zigzagLevelOrder103(root_list, expected):
     m = mediumSolution()
     result = m.zigzagLevelOrder103(root)
     assert result == expected  
+
+
+@pytest.mark.parametrize("root_list, expected", [
+    ([1,7,0,7,-8,None,None], 2),
+
+])
+def test_maxLevelSum1161(root_list, expected):
+    root = build_tree(root_list)
+    m = mediumSolution()
+    result = m.maxLevelSum1161(root)
+    assert result == expected  

@@ -6,6 +6,13 @@ class TreeNode:
         self.left = left
         self.right = right
 
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next        
+
 class mediumSolution:
     def levelOrder102(self, root: TreeNode) -> list[list[int]]:
         """
@@ -124,3 +131,29 @@ class mediumSolution:
                 res[1] = curr_sum
         return res[0]
 
+
+    def connect116(self, root: Node) -> Node:
+        """
+        TC: O(n), n is the number of nodes in the tree
+        SC: O(1)
+        """
+        if not root:
+            return None
+        
+       queue = deque()
+       queue.append(root)
+
+       while queue:
+        prev_node = None
+        queue_len = len(queue)
+        for _ in range(queue_len):
+            curr_node = queue.popleft()
+            if prev_node:
+                prev_node.next = curr_node
+            prev_node = curr_node
+
+            if curr_node.left:
+                queue.append(curr_node.left)
+            if curr_node.right:
+                queue.append(curr_node.right)
+        return root

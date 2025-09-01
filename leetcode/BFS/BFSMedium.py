@@ -132,28 +132,27 @@ class mediumSolution:
         return res[0]
 
 
-    def connect116(self, root: Node) -> Node:
+    def populatingNextRightPointersinEachNode116(self, root: Node) -> Node:
         """
         TC: O(n), n is the number of nodes in the tree
-        SC: O(1)
+        SC: O(n)
         """
         if not root:
             return None
-        
-       queue = deque()
-       queue.append(root)
+        queue = deque()
+        queue.append(root)
 
-       while queue:
-        prev_node = None
-        queue_len = len(queue)
-        for _ in range(queue_len):
-            curr_node = queue.popleft()
-            if prev_node:
-                prev_node.next = curr_node
-            prev_node = curr_node
+        while queue:
+            prev_node = None
+            queue_len = len(queue)
+            for _ in range(queue_len):
+                curr_node = queue.popleft()
+                if prev_node:
+                    prev_node.next = curr_node
+                prev_node = curr_node
 
-            if curr_node.left:
-                queue.append(curr_node.left)
-            if curr_node.right:
-                queue.append(curr_node.right)
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
         return root

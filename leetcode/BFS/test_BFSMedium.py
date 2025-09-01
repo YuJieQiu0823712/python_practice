@@ -1,6 +1,6 @@
 import pytest
 from collections import deque
-from BFSMedium import TreeNode, mediumSolution
+from BFSMedium import TreeNode, Node, mediumSolution
  
 def build_tree(values):
     if not values:
@@ -24,6 +24,22 @@ def build_tree(values):
         i += 1
 
     return root
+
+def serialize_with_next(root):
+    """Serialize using next pointers, with '#' marking end of each level."""
+    if not root:
+        return []
+
+    output = []
+    leftmost = root
+    while leftmost:
+        curr = leftmost
+        while curr:
+            output.append(curr.val)
+            curr = curr.next
+        output.append("#")
+        leftmost = leftmost.left
+    return output
 
 
 @pytest.mark.parametrize("root_list, expected", [
@@ -71,3 +87,23 @@ def test_maxLevelSum1161(root_list, expected):
     m = mediumSolution()
     result = m.maxLevelSum1161(root)
     assert result == expected  
+
+
+@pytest.mark.parametrize("tree_builder, expected",  [
+        (
+            lambda: Node(1,
+                         left=Node(2, left=Node(4), right=Node(5)),
+                         right=Node(3, left=Node(6), right=Node(7))),
+            [1, "#", 2, 3, "#", 4, 5, 6, 7, "#"]
+        ),
+        (
+            lambda: None,
+            []
+        ),
+])
+def test_populatingNextRightPointersinEachNode116(tree_builder, expected):
+    tree = tree_builder() # lambda: ... is the tree_builder.
+    m = mediumSolution()
+    root = m.populatingNextRightPointersinEachNode116(tree)
+    result = serialize_with_next(root)
+    assert result == expected

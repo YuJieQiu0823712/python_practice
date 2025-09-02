@@ -156,3 +156,27 @@ class mediumSolution:
                 if curr_node.right:
                     queue.append(curr_node.right)
         return root
+
+    def rightSideView199(self, root: TreeNode) -> list[int]:
+        """
+        TC: O(n), n is the number of nodes in the tree
+        SC: O(n)
+        """
+        if not root:
+            return None
+        res = []
+        queue = deque()
+        queue.append(root)
+
+        while queue:
+            queue_len = len(queue)
+            for i in range(queue_len):
+                curr_node = queue.popleft()
+                if i == queue_len -1:
+                    res.append(curr_node.val)
+
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
+        return res

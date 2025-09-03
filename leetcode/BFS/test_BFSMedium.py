@@ -107,3 +107,17 @@ def test_populatingNextRightPointersinEachNode116(tree_builder, expected):
     root = m.populatingNextRightPointersinEachNode116(tree)
     result = serialize_with_next(root)
     assert result == expected
+
+
+@pytest.mark.parametrize("root_list, expected", [
+        ([1,2,3,None,5,None,4], [1,3,4]),
+        ([1,2,3,4,None,None,None,5], [1,3,4,5]),
+        ([1,None,3], [1,3]), 
+        ([], []), 
+])
+def test_rightSideView199(root_list, expected):
+    # root = build_tree_from_list(values)
+    root = build_tree(root_list)
+    m = mediumSolution()
+    result= m.rightSideView199(root)
+    assert result == expected

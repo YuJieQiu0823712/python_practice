@@ -138,7 +138,7 @@ class mediumSolution:
         SC: O(n)
         """
         if not root:
-            return None
+            return []
         queue = deque()
         queue.append(root)
 
@@ -163,10 +163,10 @@ class mediumSolution:
         SC: O(n)
         """
         if not root:
-            return None
-        res = []
+            return []
         queue = deque()
         queue.append(root)
+        res = []
 
         while queue:
             queue_len = len(queue)

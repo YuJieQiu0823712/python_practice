@@ -116,7 +116,6 @@ def test_populatingNextRightPointersinEachNode116(tree_builder, expected):
         ([], []), 
 ])
 def test_rightSideView199(root_list, expected):
-    # root = build_tree_from_list(values)
     root = build_tree(root_list)
     m = mediumSolution()
     result= m.rightSideView199(root)

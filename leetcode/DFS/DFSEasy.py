@@ -21,4 +21,21 @@ class EasySolution:
         return self.hasPathSum112(root.left, targetSum - root.val) or self.hasPathSum112(root.right, targetSum - root.val)
 
 
-    
+    def binaryTreePaths257(self, root: TreeNode) -> list[str]:
+        """
+        TC: O(n)
+        SC: O(n)
+        """
+        def find_path(node, paths, all_path):
+            if not node:
+                return
+            paths.append(str(node.val))
+
+            if not node.left and not node.right:
+                all_path.append("->".join(paths))
+            find_path(node.left, paths, all_path)
+            find_path(node.right, paths, all_path)
+            path.pop()
+        all_path = []
+        find_path(root, [], all_path)
+        return all_path

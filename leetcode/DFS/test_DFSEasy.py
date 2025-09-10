@@ -35,3 +35,14 @@ def test_hasPathSum112(root_list, targetSum, expected):
     root = build_tree(root_list)
     result = e.hasPathSum112(root, targetSum)
     assert result == expected
+
+@pytest.mark.parametrize("root_list, expected", [
+        ([1, 2, 3, None, 5], ["1->2->5", "1->3"]),
+        ([1], ["1"]),
+        ([], []),
+])
+def test_binaryTreePaths257(root_list, expected):
+    e = EasySolution()
+    root = build_tree(root_list)
+    result = e.binaryTreePaths257(root)
+    assert result == expected

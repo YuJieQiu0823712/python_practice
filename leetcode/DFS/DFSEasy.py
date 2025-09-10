@@ -24,7 +24,7 @@ class EasySolution:
     def binaryTreePaths257(self, root: TreeNode) -> list[str]:
         """
         TC: O(n)
-        SC: O(n)
+        SC: O(n), if balanced tree => O(log n)
         """
         def find_path(node, paths, all_path):
             if not node:
@@ -35,7 +35,7 @@ class EasySolution:
                 all_path.append("->".join(paths))
             find_path(node.left, paths, all_path)
             find_path(node.right, paths, all_path)
-            path.pop()
+            paths.pop()
         all_path = []
         find_path(root, [], all_path)
         return all_path

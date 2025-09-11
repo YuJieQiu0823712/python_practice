@@ -5,7 +5,7 @@ class TreeNode:
         self.right = right
 
 class MediumSolution:    
-    def pathSum113(self, root: TreeNode, targetSum: int) -> list[list[int]]:
+    def pathSumII113(self, root: TreeNode, targetSum: int) -> list[list[int]]:
         """
         TC: O(n^2)
         SC: O(n)
@@ -33,3 +33,29 @@ class MediumSolution:
         all_paths = []
         find_path(root, targetSum, [], all_paths)
         return all_paths
+    
+    def pathSumIII437(self, root: TreeNode, targetSum: int) -> int:
+        """
+        TC: O(n^2)
+        SC: O(n)
+        """
+        def find_path(curr_node, target_sum, curr_path):
+            if not curr_node:
+                return 0
+
+            curr_path.append(curr_node.val)
+            path_count = 0
+            path_sum = 0
+
+            for i in range(len(curr_path)-1, -1, -1):
+                path_sum += curr_path[i]
+                if path_sum == target_sum:
+                    path_count += 1
+
+            path_count += find_path(curr_node.left, target_sum, curr_path)
+            path_count += find_path(curr_node.right, target_sum, curr_path)
+
+            curr_path.pop()
+            return path_count
+
+        return find_path(root, targetSum, [])

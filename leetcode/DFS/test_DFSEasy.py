@@ -30,10 +30,10 @@ def build_tree(values):
         ([1,2,3], 5, False),
         ([], 0, False)
 ])
-def test_hasPathSum112(root_list, targetSum, expected):
+def test_PathSumI112(root_list, targetSum, expected):
     e = EasySolution()
     root = build_tree(root_list)
-    result = e.hasPathSum112(root, targetSum)
+    result = e.PathSumI112(root, targetSum)
     assert result == expected
 
 @pytest.mark.parametrize("root_list, expected", [

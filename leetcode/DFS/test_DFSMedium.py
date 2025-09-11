@@ -30,8 +30,8 @@ def build_tree(values):
         ([1,2,3], 5, []),
         ([1,2], 0, [])
 ])
-def test_pathSum113(root_list, targetSum, expected):
+def test_pathSumII113(root_list, targetSum, expected):
     m = MediumSolution()
     root = build_tree(root_list)
-    result = m.pathSum113(root, targetSum)
+    result = m.pathSumII113(root, targetSum)
     assert result == expected

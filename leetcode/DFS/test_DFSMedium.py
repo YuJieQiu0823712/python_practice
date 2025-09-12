@@ -25,6 +25,7 @@ def build_tree(values):
 
     return root
 
+
 @pytest.mark.parametrize("root_list, targetSum, expected", [
         ([5,4,8,11,None,13,4,7,2,None,None,5,1], 22, [[5,4,11,2],[5,8,4,5]]),
         ([1,2,3], 5, []),
@@ -34,4 +35,15 @@ def test_pathSumII113(root_list, targetSum, expected):
     m = MediumSolution()
     root = build_tree(root_list)
     result = m.pathSumII113(root, targetSum)
+    assert result == expected
+
+
+@pytest.mark.parametrize("root_list, targetSum, expected", [
+        ([10,5,-3,3,2,None,11,3,-2,None,1], 8, 3),
+        ([5,4,8,11,None,13,4,7,2,None,None,5,1], 22, 3)
+])
+def test_pathSumIII437(root_list, targetSum, expected):
+    m = MediumSolution()
+    root = build_tree(root_list)
+    result = m.pathSumIII437(root, targetSum)
     assert result == expected

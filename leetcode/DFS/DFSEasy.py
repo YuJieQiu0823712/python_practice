@@ -39,3 +39,19 @@ class EasySolution:
         all_path = []
         find_path(root, [], all_path)
         return all_path
+    
+    def diameterOfBinaryTree543(self, root: TreeNode) -> int:
+        """
+        TC: O(n) where n is the number of nodes in the tree
+        SC: O(h) where h is the height of the tree
+        """
+        self.diameter = 0
+        def find_diameter(node):
+            if not node:
+                return 0
+            left = find_diameter(node.left)
+            right = find_diameter(node.rght)
+            self.diameter = max(self.diameter, left + right)
+            return 1 + max(left, right)
+        find_diameter(root)
+        return self.diameter

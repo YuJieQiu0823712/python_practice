@@ -1,4 +1,3 @@
-### 3. Generators ###
 import sys
 
 def mygenerator(n):

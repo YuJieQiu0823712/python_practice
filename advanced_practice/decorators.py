@@ -1,4 +1,3 @@
-### 2. Decorators ###
 def mydecorator(function):
 
     def wrapper(*args, **kwargs):

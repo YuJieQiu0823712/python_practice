@@ -1,4 +1,3 @@
-### 1. Magic Methods and Dunder ###
 class Person:
     def __init__(self, name, age):
         self.name = name

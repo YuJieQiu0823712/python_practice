@@ -1,4 +1,7 @@
 def mydecorator(function):
+    # Dynamically add responsibilities/behaviors to an object without altering its class.
+    # A decorator wraps an object and adds extra functionality while keeping the same interface.
+    # Focus is on extending functionality, not controlling access.
 
     def wrapper(*args, **kwargs):
         print("I am decorating your function")

@@ -46,3 +46,14 @@ def test_binaryTreePaths257(root_list, expected):
     root = build_tree(root_list)
     result = e.binaryTreePaths257(root)
     assert result == expected
+
+
+@pytest.mark.parametrize("root_list, expected", [
+        ([1,2,3,4,5], 3),
+        ([1,2], 1)
+])
+def test_diameterOfBinaryTree543(root_list, expected):
+    e = EasySolution()
+    root = build_tree(root_list)
+    result = e.diameterOfBinaryTree543(root)
+    assert result == expected    

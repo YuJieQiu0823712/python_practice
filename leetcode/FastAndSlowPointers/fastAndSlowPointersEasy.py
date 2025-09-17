@@ -4,7 +4,7 @@ class ListNode:
         self.next = None
 
 class EasySolution:
-    def linkedListCycle141(head):
+    def linkedListCycle141(self, head):
         slow = fast = head
         # slow = head
         # fast = head

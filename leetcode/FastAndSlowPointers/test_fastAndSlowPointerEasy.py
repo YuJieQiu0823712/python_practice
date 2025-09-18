@@ -25,3 +25,5 @@ def test_linkedListCycle141(values, pos, expected):
     e = EasySolution()
     result = e.linkedListCycle141(head)
     assert result == expected
+
+

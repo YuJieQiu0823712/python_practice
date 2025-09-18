@@ -5,6 +5,10 @@ class ListNode:
 
 class EasySolution:
     def linkedListCycle141(self, head):
+        """
+        TC: O(n)
+        SC: O(1)
+        """
         slow = fast = head
         # slow = head
         # fast = head

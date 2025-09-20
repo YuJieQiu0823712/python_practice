@@ -18,7 +18,7 @@ def create_linked_list(values, pos):
         ([1, 2], 0, 0),         # cycle starts at head
         ([1], -1, None),        # no cycle
 ])
-def test_linked_list_cycle(values, pos, expected_index):
+def test_linkedListCycleII142(values, pos, expected_index):
     head, nodes = create_linked_list(values, pos)
     m = MediumSolution()
     result = m.linkedListCycleII142(head)

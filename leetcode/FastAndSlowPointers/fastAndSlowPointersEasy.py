@@ -20,3 +20,10 @@ class EasySolution:
             if slow == fast:
                 return True
         return False
+    
+    def middleOfTheLinkedList876(self, head: ListNode) -> ListNode:
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        return slow

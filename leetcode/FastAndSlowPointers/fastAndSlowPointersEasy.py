@@ -27,3 +27,24 @@ class EasySolution:
             fast = fast.next.next
             slow = slow.next
         return slow
+    
+    def isHappy(self, n: int) -> bool:
+        def find_square_sum(num: int) -> int:
+            _curr_sum = 0
+
+            while num > 0:
+                digit = num % 10
+                _curr_sum += digit ** 2
+                num //= 10
+            return _curr_sum
+        
+        slow = fast = n
+
+        while True:
+            slow = find_square_sum(slow)
+            fast = find_square_sum(find_square_sum(fast))
+
+            if slow == fast:
+                break
+        
+        return slow == 1

@@ -28,7 +28,7 @@ class EasySolution:
             slow = slow.next
         return slow
     
-    def isHappy(self, n: int) -> bool:
+    def isHappy202(self, n: int) -> bool:
         def find_square_sum(num: int) -> int:
             _curr_sum = 0
 

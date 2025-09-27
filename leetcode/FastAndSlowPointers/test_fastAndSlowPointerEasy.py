@@ -51,3 +51,13 @@ def test_middleOfTheLinkedList876(head_list, expected):
     e = EasySolution()
     result = e.middleOfTheLinkedList876(head)
     assert linked_list_to_list(result) == expected
+
+
+@pytest.mark.parametrize("n, expected", [
+        (19, True), # Example: 19 → happy number
+        (2, False) # 2 → goes into a cycle, not happy
+])
+def test_isHappy202(n, expected):
+    e = EasySolution()
+    result = e.isHappy202(n)
+    assert result == expected

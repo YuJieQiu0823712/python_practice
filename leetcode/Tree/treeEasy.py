@@ -63,7 +63,7 @@ class easySolution:
     #         1
     #       /   \
     #     2       3
-    #    / \       \
+    #    / \       \ 
     #   4   5       8
     #      / \     /
     #     6   7   9
@@ -158,6 +158,7 @@ class easySolution:
     #   5    15
     #  / \     \
     # 3   7     18
+  
 
     def closestBinarySearchTreeValue270(self,root: TreeNode, target: float) -> int:
         res = root.val
@@ -180,7 +181,6 @@ class easySolution:
     #   5    15
     #  / \     \
     # 3   7     18
-      
 
 
 

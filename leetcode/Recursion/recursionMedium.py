@@ -5,7 +5,7 @@ class MediumSolution(object):
         def helper(nums, curr_list):
             # base case
             if len(nums) == len(curr_list):
-                res.append(curr_list[:])
+                res.append(curr_list[:]) # shallow copy, otherwise the curr_list will be modified
                 return
 
             for num in nums:

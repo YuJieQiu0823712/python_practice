@@ -35,6 +35,7 @@ class EasySolutions:
             elif len(stack) == 0 or lookup[stack.pop()] != symbol:
                 return False
                 # ")" => stack=[] => return False
+                # "(]" => False
         # return True
         return len(stack) == 0
         # if stack is empty, all brackets are closed and matched, otherwise return False
@@ -62,7 +63,6 @@ class EasySolutions:
 
         TC: O(max(num1,num2))
         SC: O(1)
-
         """
         num1_ptr = len(num1) - 1
         num2_ptr = len(num2) - 1
@@ -71,7 +71,7 @@ class EasySolutions:
         while num1_ptr >= 0 or num2_ptr >= 0 or carry > 0:
             if num1_ptr >= 0:
                 carry += (ord(num1[num1_ptr]) - ord('0'))
-                # '0' = 48
+                # '0' = 48 ascii
                 num1_ptr -= 1
             if num2_ptr >= 0:
                 carry += (ord(num2[num2_ptr]) - ord('0'))
@@ -146,6 +146,7 @@ class EasySolutions:
             left += 1
             right -= 1
         return True 
+
     
     def validPalindromeII680(self, s:str) -> bool:
         """

@@ -117,7 +117,7 @@ class mediumSolution(object):
     #    15     7
     # TC: O(n) 
     # SC: O(n) 
-
+    
 
     def topKFrequent347(self, nums: list[int], k: int) -> list[int]:
         # 1 initialize hashmap, array (bucket length + 1), and result array
